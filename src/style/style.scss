@@ -44,3 +44,9 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0; 
 }
+
+body {
+    width: 100vh;
+    height: 100vh;
+    background-image: linear-gradient(135deg, #15081a, #29144a);
+}
