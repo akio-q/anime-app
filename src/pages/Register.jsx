@@ -1,4 +1,4 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 
 import addAvatar from '../resources/img/add_avatar.png';
 import '../style/form.scss';
@@ -48,7 +48,7 @@ const Register = () => {
           </Form>
         </Formik>
         <p className='form__redirect'>
-          Don't have an account? Login
+          Already have an account? Login
         </p>
       </div>
     </div>

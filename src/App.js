@@ -1,4 +1,5 @@
-import Register from './pages/Register';
+import Register from "./pages/Register";
+import Login from "./pages/Login";
 
 const App = () => {
   return (
