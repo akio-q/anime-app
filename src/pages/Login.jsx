@@ -1,11 +1,13 @@
 import { Formik, Form, Field } from 'formik';
 
+import luffySticker from '../resources/img/luffy_sticker.png';
 import '../style/form.scss';
 
 const Login = () => {
   return (
     <div className="form">
       <div className="form__wrapper">
+        <img src={luffySticker} className='form__decoration form__decoration_top-83px' alt="Rem" />
         <span className="form__title">Login</span>
         <Formik>
           <Form className='form__form'>

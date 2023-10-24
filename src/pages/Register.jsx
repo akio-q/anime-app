@@ -1,12 +1,14 @@
 import { Formik, Form, Field } from 'formik';
 
 import addAvatar from '../resources/img/add_avatar.png';
+import remSticker from '../resources/img/rem_sticker.png';
 import '../style/form.scss';
 
 const Register = () => {
   return (
     <div className="form">
       <div className="form__wrapper">
+        <img src={remSticker} className='form__decoration' alt="Rem" />
         <span className="form__title">Register</span>
         <Formik>
           <Form className='form__form'>
