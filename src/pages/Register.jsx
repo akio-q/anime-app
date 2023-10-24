@@ -1,46 +1,53 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 
+import addAvatar from '../resources/img/add_avatar.png';
+import '../style/form.scss';
+
 const Register = () => {
   return (
-    <div className="from">
+    <div className="form">
       <div className="form__wrapper">
-        <span className="form__logo">Anime List</span>
         <span className="form__title">Register</span>
         <Formik>
           <Form className='form__form'>
-            <span>How to call you?</span>
             <Field
               id="displayName"
               name="displayName"
               type="text"
+              placeholder="Display name"
+              className="form__form-input"
             />
-            <span>Your email adress</span>
             <Field 
               id="email"
               name="email"
               type="email"
+              placeholder="Email"
+              className="form__form-input"
             />
-            <span>Your password</span>
             <Field 
               id="password"
               name="password"
               type="password"
+              placeholder="Password"
+              className="form__form-input"
             />
-            <span>Your profile picture</span>
             <Field 
               id="avatar"
               name="avatar"
               type="file"
               style={{display: 'none'}}
             />
-            <label htmlFor="avatar">
-              <img src="" alt="avatar" />
-              <span>Add an avatar</span>
+            <label htmlFor="avatar" className='form__form-add-avatar'>
+              <img 
+                src={addAvatar} 
+                className='form__form-add-avatar-img' 
+                alt="avatar" />
+              <span>Add a profile picture</span>
             </label>
             <button className='button button__auth'>Sign up</button>
           </Form>
         </Formik>
-        <p>
+        <p className='form__redirect'>
           Don't have an account? Login
         </p>
       </div>

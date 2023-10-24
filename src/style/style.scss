@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@import './button.scss';
 
 * {
     font-family: "Poppins", sans-serif;
@@ -46,7 +47,5 @@ input::-webkit-inner-spin-button {
 }
 
 body {
-    width: 100vh;
-    height: 100vh;
-    background-image: linear-gradient(135deg, #15081a, #29144a);
+    background-image: linear-gradient(135deg, #1a1a1a, #000000, #330066);
 }
