@@ -16,44 +16,51 @@ const Register = () => {
             email: '',
             password: ''
           }}
-          onSubmit = {values => console.log(JSON.stringify(values, null, 2))}>
-          <Form className='form__form'>
-            <Field
-              id="displayName"
-              name="displayName"
-              type="text"
-              placeholder="Display name"
-              className="form__form-input"
-            />
-            <Field 
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Email"
-              className="form__form-input"
-            />
-            <Field 
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Password"
-              className="form__form-input"
-            />
-            <Field 
-              id="avatar"
-              name="avatar"
-              type="file"
-              style={{display: 'none'}}
-            />
-            <label htmlFor="avatar" className='form__form-add-avatar'>
-              <img 
-                src={addAvatar} 
-                className='form__form-add-avatar-img' 
-                alt="avatar" />
-              <span>Add a profile picture</span>
-            </label>
-            <button className='button button__auth'>Sign up</button>
-          </Form>
+          onSubmit = {values => {
+            console.log(JSON.stringify(values, null, 2))
+            console.log(values.avatar.name);
+          }}>
+          {({setFieldValue}) => (
+            <Form className='form__form'>
+              <Field
+                id="displayName"
+                name="displayName"
+                type="text"
+                placeholder="Display name"
+                className="form__form-input"
+              />
+              <Field 
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Email"
+                className="form__form-input"
+              />
+              <Field 
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Password"
+                className="form__form-input"
+              />
+              <Field 
+                id="avatar"
+                name="avatar"
+                type="file"
+                value={undefined}
+                onChange={e => {setFieldValue('avatar', e.currentTarget.files[0])}}
+                style={{display: 'none'}}
+              />
+              <label htmlFor="avatar" className='form__form-add-avatar'>
+                <img 
+                  src={addAvatar} 
+                  className='form__form-add-avatar-img' 
+                  alt="avatar" />
+                <span>Add a profile picture</span>
+              </label>
+              <button className='button button__auth'>Sign up</button>
+            </Form>
+          )}
         </Formik>
         <p className='form__redirect'>
           Already have an account? Login
