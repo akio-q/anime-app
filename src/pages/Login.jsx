@@ -7,10 +7,15 @@ const Login = () => {
   return (
     <div className="form">
       <div className="form__wrapper">
-        <img src={luffySticker} className='form__decoration form__decoration_top-83px' alt="Rem" />
+        <img src={luffySticker} className="form__decoration form__decoration_top-83px" alt="Rem" />
         <span className="form__title">Login</span>
-        <Formik>
-          <Form className='form__form'>
+        <Formik
+          initialValues={{
+            email: '',
+            password: ''
+          }}
+          onSubmit = {values => console.log(JSON.stringify(values, null, 2))}>
+          <Form className="form__form">
             <Field 
               id="email"
               name="email"
@@ -25,10 +30,10 @@ const Login = () => {
               placeholder="Password"
               className="form__form-input"
             />
-            <button className='button button__auth'>Sign in</button>
+            <button type="submit" className="button button__auth">Sign in</button>
           </Form>
         </Formik>
-        <p className='form__redirect'>
+        <p className="form__redirect">
           Don't have an account? Register
         </p>
       </div>

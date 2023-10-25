@@ -10,7 +10,13 @@ const Register = () => {
       <div className="form__wrapper">
         <img src={remSticker} className='form__decoration' alt="Rem" />
         <span className="form__title">Register</span>
-        <Formik>
+        <Formik
+          initialValues={{
+            displayName: '',
+            email: '',
+            password: ''
+          }}
+          onSubmit = {values => console.log(JSON.stringify(values, null, 2))}>
           <Form className='form__form'>
             <Field
               id="displayName"
