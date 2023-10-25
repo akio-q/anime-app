@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
 
 import addAvatar from '../resources/img/add_avatar.png';
@@ -5,6 +6,8 @@ import remSticker from '../resources/img/rem_sticker.png';
 import '../style/form.scss';
 
 const Register = () => {
+  const [fileName, setFileName] = useState('');
+
   return (
     <div className="form">
       <div className="form__wrapper">
@@ -48,7 +51,11 @@ const Register = () => {
                 name="avatar"
                 type="file"
                 value={undefined}
-                onChange={e => {setFieldValue('avatar', e.currentTarget.files[0])}}
+                onChange={e => {
+                  const file = e.currentTarget.files[0];
+                  setFieldValue('avatar', file);
+                  setFileName(file.name);
+                }}
                 style={{display: 'none'}}
               />
               <label htmlFor="avatar" className='form__form-add-avatar'>
@@ -56,7 +63,9 @@ const Register = () => {
                   src={addAvatar} 
                   className='form__form-add-avatar-img' 
                   alt="avatar" />
-                <span>Add a profile picture</span>
+                <span>{fileName && fileName.length > 15 ? `${fileName.slice(0, 15)}...`
+                        : fileName ? fileName
+                        : 'Add a profile picture'}</span>
               </label>
               <button className='button button__auth'>Sign up</button>
             </Form>
