@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { NavLink } from 'react-router-dom';
+import * as Yup from 'yup';
 
 import addAvatar from '../resources/img/add_avatar.png';
 import remSticker from '../resources/img/rem_sticker.png';
@@ -20,6 +21,17 @@ const Register = () => {
             email: '',
             password: ''
           }}
+          validationSchema = {Yup.object({
+            displayName: Yup.string()
+                            .min(2, 'Minimum two symbols')
+                            .required('Required field'),
+            email: Yup.string()
+                      .email('Wrong email adress')
+                      .required('Required field'),
+            password: Yup.string()
+                        .min(8, 'Password is too short, minimum 8 symbols')
+                        .required('Required field')
+          })}
           onSubmit = {values => {
             console.log(JSON.stringify(values, null, 2))
             console.log(values.avatar.name);
@@ -33,6 +45,7 @@ const Register = () => {
                 placeholder="Display name"
                 className="form__form-input"
               />
+              <ErrorMessage className='form__form-error' name="displayName" component="div" />
               <Field 
                 id="email"
                 name="email"
@@ -40,6 +53,7 @@ const Register = () => {
                 placeholder="Email"
                 className="form__form-input"
               />
+              <ErrorMessage className='form__form-error' name="email" component="div" />
               <Field 
                 id="password"
                 name="password"
@@ -47,6 +61,7 @@ const Register = () => {
                 placeholder="Password"
                 className="form__form-input"
               />
+              <ErrorMessage className='form__form-error' name="password" component="div" />
               <Field 
                 id="avatar"
                 name="avatar"

@@ -67,6 +67,11 @@
         margin-right: 5px;
       }
     }
+    &-error {
+      color: red;
+      font-size: 12px;
+      margin-left: 20px;
+    }
   }
   &__redirect {
     margin-top: 10px;
