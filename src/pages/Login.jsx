@@ -1,5 +1,6 @@
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { NavLink } from 'react-router-dom';
+import * as Yup from 'yup';
 
 import luffySticker from '../resources/img/luffy_sticker.png';
 import '../style/form.scss';
@@ -15,6 +16,14 @@ const Login = () => {
             email: '',
             password: ''
           }}
+          validationSchema = {Yup.object({
+            email: Yup.string()
+                      .email('Wrong email adress')
+                      .required('Required field'),
+            password: Yup.string()
+                        .min(8, 'Password is too short, minimum 8 symbols')
+                        .required('Required field')
+          })}
           onSubmit = {values => console.log(JSON.stringify(values, null, 2))}>
           <Form className="form__form">
             <Field 
@@ -24,6 +33,7 @@ const Login = () => {
               placeholder="Email"
               className="form__form-input"
             />
+            <ErrorMessage className='form__form-error' name="email" component="div" />
             <Field 
               id="password"
               name="password"
@@ -31,6 +41,7 @@ const Login = () => {
               placeholder="Password"
               className="form__form-input"
             />
+            <ErrorMessage className='form__form-error' name="password" component="div" />
             <button type="submit" className="button button__auth">Sign in</button>
           </Form>
         </Formik>
