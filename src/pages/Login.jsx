@@ -1,4 +1,5 @@
 import { Formik, Form, Field } from 'formik';
+import { NavLink } from 'react-router-dom';
 
 import luffySticker from '../resources/img/luffy_sticker.png';
 import '../style/form.scss';
@@ -34,7 +35,11 @@ const Login = () => {
           </Form>
         </Formik>
         <p className="form__redirect">
-          Don't have an account? Register
+          Don't have an account?
+          <NavLink 
+            className="form__redirect-link" 
+            end 
+            to="/register">Register</NavLink>
         </p>
       </div>
     </div>

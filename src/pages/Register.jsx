@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Formik, Form, Field } from 'formik';
+import { NavLink } from 'react-router-dom';
 
 import addAvatar from '../resources/img/add_avatar.png';
 import remSticker from '../resources/img/rem_sticker.png';
@@ -72,7 +73,11 @@ const Register = () => {
           )}
         </Formik>
         <p className='form__redirect'>
-          Already have an account? Login
+          Already have an account?
+          <NavLink 
+            className="form__redirect-link" 
+            end 
+            to="/login">Login</NavLink>
         </p>
       </div>
     </div>

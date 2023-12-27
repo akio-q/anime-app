@@ -69,7 +69,11 @@
     }
   }
   &__redirect {
-    margin-top: 5px;
+    margin-top: 10px;
     font-size: 14px;
+    &-link {
+      margin-left: 4px;
+      color: $text-color;
+    }
   }
 }
