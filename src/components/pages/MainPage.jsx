@@ -1,6 +1,10 @@
+import AppHeader from "../appHeader/AppHeader";
+
 const MainPage = () => {
   return (
-    <div className="main-page">Main page</div>
+    <div className="main-page">
+      <AppHeader />
+    </div>
   )
 }
 

@@ -7,21 +7,29 @@
   &__input {
     width: 100%;
     padding: 10px 45px 10px 15px;
-    border: 1px solid $secondary-text-color;
+    border: none;
     outline: none;
     border-radius: 5px;
     font-size: 13px;
     background: $background-color;
     color: $secondary-text-color;
+    transition: .3s all;
+    &:focus {
+      box-shadow: $shadow-color;
+    }
   }
   &__submit {
     position: absolute;
     right: 10px;
-    top: 10px;
+    top: 7px;
     color: $secondary-text-color;
-    font-size: 16px;
+    font-size: 20px;
     background: transparent;
     border: none;
+    transition: 0.3s all;
     cursor: pointer;
+    &:hover {
+      color: #e5dada;
+    }
   }
 }
