@@ -15,7 +15,7 @@
     border: none;
     transition: .3s all;
     &:hover {
-      box-shadow: 0 2px 15px #8e44ad;
+      box-shadow: 0 2px 15px $secondary-color;
     }
   }
 }
