@@ -1,0 +1,27 @@
+@import '../../style/variables.scss';
+@import '../../fonts/fonts.css';
+
+.search {
+  position: relative;
+  width: 350px;
+  &__input {
+    width: 100%;
+    padding: 10px 45px 10px 15px;
+    border: 1px solid $secondary-text-color;
+    outline: none;
+    border-radius: 5px;
+    font-size: 13px;
+    background: $background-color;
+    color: $secondary-text-color;
+  }
+  &__submit {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: $secondary-text-color;
+    font-size: 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+}
