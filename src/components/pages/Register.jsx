@@ -3,9 +3,9 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { NavLink } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import addAvatar from '../resources/img/add_avatar.png';
-import remSticker from '../resources/img/rem_sticker.png';
-import '../style/form.scss';
+import addAvatar from '../../resources/img/add_avatar.png';
+import remSticker from '../../resources/img/rem_sticker.png';
+import '../../style/form.scss';
 
 const Register = () => {
   const [fileName, setFileName] = useState('');

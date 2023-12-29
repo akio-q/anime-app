@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import MainPage from './pages/MainPage';
-import Register from "./pages/Register";
-import Login from "./pages/Login";
+import MainPage from '../pages/MainPage';
+import Register from "../pages/Register";
+import Login from "../pages/Login";
 
 const App = () => {
   const currentUser = false;

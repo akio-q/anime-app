@@ -2,8 +2,8 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { NavLink } from 'react-router-dom';
 import * as Yup from 'yup';
 
-import luffySticker from '../resources/img/luffy_sticker.png';
-import '../style/form.scss';
+import luffySticker from '../../resources/img/luffy_sticker.png';
+import '../../style/form.scss';
 
 const Login = () => {
   return (
