@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import AnimeSearchForm from "../search/AnimeSearchForm";
+import AnimeSearchForm from "../animeSearchForm/AnimeSearchForm";
 
 import './appHeader.scss';
 
