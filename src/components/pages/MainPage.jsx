@@ -1,11 +1,11 @@
-import AppHeader from "../appHeader/AppHeader";
 import AnimeCard from "../animeCard/AnimeCard";
+
+import '../animeList/animeList.scss';
 
 const MainPage = () => {
   return (
-    <div className="main-page">
-      <AppHeader />
-      <AnimeCard />
+    <div className="anime__content">
+      
     </div>
   )
 }
