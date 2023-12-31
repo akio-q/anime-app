@@ -6,13 +6,13 @@ import './appHeader.scss';
 
 const AppHeader = () => {
   return (
-    <div className="app-header">
+    <header className="app-header">
       <div className="app-header__logo">Anime List</div>
       <AnimeSearchForm />
       <button className="button button__auth button__auth-small">
         <Link to='/login'>Sign in</Link>
       </button>
-    </div>
+    </header>
   )
 } 
 
