@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 import AppHeader from '../appHeader/AppHeader';
-import MainPage from '../pages/MainPage';
+import Home from '../pages/Home';
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 
@@ -25,7 +25,7 @@ const App = () => {
             <Route path="/">
               <Route index element={
                 <ProtectedRoute>
-                  <MainPage />
+                  <Home />
                 </ProtectedRoute>
               } />
               <Route path="/login" element={<Login />} />

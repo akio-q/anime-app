@@ -1,7 +1,5 @@
 .anime {
-  &__content {
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: 10px;
-  }
+  display: grid;
+  grid-template-columns: 1fr 410px;
+  gap: 10px;
 }
