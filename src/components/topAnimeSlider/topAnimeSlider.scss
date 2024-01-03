@@ -1,6 +1,11 @@
 @import '../../style/variables.scss';
 
 .top-anime-slider {
+  width: 100%;
+  cursor: grab;
+  &:active {
+    cursor: grabbing;
+  } 
   &__slide {
     display: flex;
     width: 100%;
