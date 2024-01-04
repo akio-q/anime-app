@@ -1,0 +1,23 @@
+@import '../../style/variables.scss'; 
+
+.anime {
+  &__category {
+    &-title {
+      margin: 35px 0 10px 0;
+      font-size: 25px;
+      color: $main-text-color;
+      font-weight: 500;
+    }
+  }
+}
+
+.category-anime-slider {
+  width: 100%;
+  cursor: grab;
+  &:active {
+    cursor: grabbing;
+  } 
+  &__slide {
+    width: 197px !important;
+  }
+}
