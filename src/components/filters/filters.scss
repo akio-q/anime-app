@@ -1,0 +1,10 @@
+@import '../../style/variables.scss';
+
+.anime {
+  &__filters {
+    height: fit-content;
+    padding: 10px;
+    background-color: $main-color;
+    border-radius: 10px;
+  }
+}

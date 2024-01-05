@@ -1,5 +1,6 @@
 import TopAnimeSlider from "../topAnimeSlider/TopAnimeSlider";
 import CategoryAnimeSlider from '../categoryAnimeSlider/CategoryAnimeSlider';
+import Filters from "../filters/Filters";
 
 import '../animeList/animeList.scss';
 
@@ -12,9 +13,7 @@ const MainPage = () => {
         <CategoryAnimeSlider />
         <CategoryAnimeSlider />
       </div>
-      <div className="anime__filters">
-
-      </div>
+      <Filters />
     </div>
   )
 }
