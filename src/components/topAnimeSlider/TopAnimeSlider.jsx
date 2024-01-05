@@ -20,7 +20,7 @@ const TopAnimeSlider = () => {
       className='top-anime-slider'
     >
       {[...Array(10)].map((_, index) => (
-        <SwiperSlide className="top-anime-slider__slide">
+        <SwiperSlide className="top-anime-slider__slide" key={index}>
           <img src="https://cdn.myanimelist.net/images/anime/1028/117777.jpg" alt="animeImg" className="top-anime-slider__img" />
           <div className="top-anime-slider__info">
             <div className="top-anime-slider__title">Mushoku Tensei: Isekai Ittara Honki Dasu Part 2</div>

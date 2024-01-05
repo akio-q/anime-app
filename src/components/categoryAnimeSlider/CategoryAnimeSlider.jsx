@@ -15,7 +15,7 @@ const CategoryAnimeSlider = () => {
       >
         {[...Array(10)].map((_, index) => (
           <SwiperSlide key={index} className="category-anime-slider__slide">
-            <AnimeCard classModifier='category-slider' />
+            <AnimeCard />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -9,6 +9,8 @@ const MainPage = () => {
       <div className="anime__content">
         <TopAnimeSlider />
         <CategoryAnimeSlider />
+        <CategoryAnimeSlider />
+        <CategoryAnimeSlider />
       </div>
       <div className="anime__filters">
 
