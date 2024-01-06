@@ -83,7 +83,7 @@ const Register = () => {
                         : fileName ? fileName
                         : 'Add a profile picture'}</span>
               </label>
-              <button className='button button__auth'>Sign up</button>
+              <button type='submit' className='button button__auth'>Sign up</button>
             </Form>
           )}
         </Formik>

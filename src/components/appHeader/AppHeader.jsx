@@ -9,7 +9,7 @@ const AppHeader = () => {
     <header className="app__header">
       <div className="app__header-logo">Anime List</div>
       <AnimeSearchForm />
-      <button className="button button__auth button__auth-small">
+      <button className="button">
         <Link to='/login'>Sign in</Link>
       </button>
     </header>
