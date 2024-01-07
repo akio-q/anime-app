@@ -18,7 +18,17 @@ const FilterGenre = () => {
         <div className="anime__filters-item">Josei</div>
         <div className="anime__filters-item">Erotica</div>
         <div className="anime__filters-item">Shounen</div>
-        <div className="anime__filters-item">Romance</div>
+        <div className="anime__filters-item">Supernatural</div>
+        <div className="anime__filters-item">Military</div>
+        <div className="anime__filters-item">Harem</div>
+        <div className="anime__filters-item">Isekai</div>
+        <div className="anime__filters-item">Sci-Fi</div>
+        <div className="anime__filters-item">Josei</div>
+        <div className="anime__filters-item">Ecchi</div>
+        <div className="anime__filters-item">Suspense</div>
+        <div className="anime__filters-item">Detective</div>
+        <div className="anime__filters-item">Mystics</div>
+        <div className="anime__filters-item">Kids</div>
       </div>
     </div>
   )

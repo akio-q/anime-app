@@ -1,3 +1,4 @@
+import FilterSeasonAndYear from './FilterSeasonAndYear';
 import FilterGenre from './FilterGenre';
 
 import './filters.scss';
@@ -5,6 +6,7 @@ import './filters.scss';
 const Filters = () => {
   return (
     <div className="anime__filters">
+      <FilterSeasonAndYear />
       <FilterGenre />
     </div>
   )
