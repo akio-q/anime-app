@@ -2,6 +2,7 @@ import FilterSeasonAndYear from './FilterSeasonAndYear';
 import FilterGenre from './FilterGenre';
 import FilterRating from './FilterRating';
 import FilterStatus from './FilterStatus';
+import FilterEpisodes from './FilterEpisodes';
 
 import './filters.scss';
 
@@ -12,6 +13,7 @@ const Filters = () => {
       <FilterGenre />
       <FilterRating />
       <FilterStatus />
+      <FilterEpisodes />
     </div>
   )
 }
