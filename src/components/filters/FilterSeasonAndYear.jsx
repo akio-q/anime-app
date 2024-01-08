@@ -14,8 +14,8 @@ const FilterSeasonAndYear = () => {
         }}
       >
         <Form>
-          <div className="anime__filters-wrapper_dd">
-            <div className="anime__filters-item_dd">
+          <div className="anime__filters-wrapper-dd">
+            <div className="anime__filters-item-dd">
               <div className="anime__filters-title anime__filters-title_dd">Season</div>
               <Field 
                 name="season" 
@@ -28,7 +28,7 @@ const FilterSeasonAndYear = () => {
                   <option value="summer">Summer</option>
               </Field>
             </div>
-            <div className="anime__filters-item_dd">
+            <div className="anime__filters-item-dd">
               <div className="anime__filters-title anime__filters-title_dd">Year</div>
               <Field 
                 name="year" 
