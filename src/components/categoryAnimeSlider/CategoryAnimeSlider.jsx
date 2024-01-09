@@ -10,7 +10,7 @@ const CategoryAnimeSlider = () => {
       <div className="anime__category-title">Top Airing</div>
       <Swiper
         spaceBetween={20} 
-        slidesPerView={5}
+        slidesPerView={6}
         className="category-anime-slider"
       >
         {[...Array(10)].map((_, index) => (

@@ -12,12 +12,9 @@
 }
 
 .category-anime-slider {
-  width: 100%;
+  height: 300px;
   cursor: grab;
   &:active {
     cursor: grabbing;
   } 
-  &__slide {
-    width: 190px !important;
-  }
 }
