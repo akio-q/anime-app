@@ -1,0 +1,97 @@
+@import '../../../style/variables.scss'; 
+
+.single-anime {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 35px;
+  padding: 30px 50px;
+  &__img {
+    width: 100%;
+    object-fit: contain;
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 100%;
+    padding: 25px;
+    margin-top: 20px;
+    background-color: $main-color;
+    border-radius: 15px;
+  }
+  &__score {
+    width: 100%;
+    padding: 10px 0;
+    background-color: $background-color;
+    border-radius: 15px;
+    color: $main-text-color;
+    &-title {
+      text-align: center;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    &-text {
+      text-align: center;
+      &_bold {
+        font-weight: 800;
+        font-size: 25px;
+        margin-right: 10px;
+      }
+    }
+  }
+  &__rating {
+    text-align: center;
+    color: $secondary-text-color;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  &__status {
+    text-align: center;
+    color: $main-text-color;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  &__genre {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    &-item {
+      text-align: center;
+      padding: 8px 0;
+      color: $main-text-color;
+      border: 1px solid $secondary-text-color;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+  &__about {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__title {
+    &-main {
+      color: $main-text-color;
+      font-size: 30px;
+      font-weight: 700;
+    }
+    &-secondary {
+      color: $secondary-text-color;
+      font-size: 18px;
+      font-weight: 500;
+    }
+  }
+  &__release {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    color: $secondary-text-color;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  &__descr {
+    margin-top: 40px;
+    color: $main-text-color;
+    font-size: 16px;
+  }
+}
