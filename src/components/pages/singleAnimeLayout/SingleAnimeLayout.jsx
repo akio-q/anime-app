@@ -7,7 +7,7 @@ const SingleAnimeLayout = () => {
         <img src="https://i0.wp.com/www.otakupt.com/wp-content/uploads/2020/03/Imagem-promocional-de-Tensei-shitara-Slime-Datta-Ken-2-1.jpg?resize=696%2C984&ssl=1" alt="anime-img" className="single-anime__img" />
         <div className="single-anime__info">
           <div className="single-anime__score">
-            <div className="single-anime__score-title">Score</div>
+            <div className="title_fz18fw600 single-anime__score-title">Score</div>
             <p className="single-anime__score-text">
               <span className='single-anime__score-text single-anime__score-text_bold'>8.11</span> 
               by 596756 users
@@ -26,8 +26,8 @@ const SingleAnimeLayout = () => {
       <div>
         <div className="single-anime__about">
           <div>
-            <div className="single-anime__title-main">Tensei shitara Slime Datta Ken</div>
-            <div className="single-anime__title-secondary">That Time I Got Reincarnated as a Slime</div>
+            <div className="title_fz30fw700">Tensei shitara Slime Datta Ken</div>
+            <div className="title_fz18fw500">That Time I Got Reincarnated as a Slime</div>
           </div>
           <div className="single-anime__release">
             <div>Fall 2018</div>

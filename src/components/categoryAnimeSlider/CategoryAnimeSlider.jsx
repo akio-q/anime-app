@@ -7,7 +7,7 @@ import './categoryAnimeSlider.scss';
 const CategoryAnimeSlider = () => {
   return (
     <>
-      <div className="anime__category-title">Top Airing</div>
+      <div className="title_fz25fw500 anime__category-title">Top Airing</div>
       <Swiper
         spaceBetween={20} 
         slidesPerView={6}

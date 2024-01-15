@@ -1,0 +1,33 @@
+@import './variables.scss';
+
+@mixin title($font-size, $font-weight, $color: $main-text-color) {
+  color: $color;
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+.title {
+  @at-root {
+    &_fz30fw700 {
+      @include title(30px, 700);
+    }
+    &_fz30fw600 {
+      @include title(30px, 600);
+    }
+    &_fz25fw600 {
+      @include title(25px, 600);
+    }
+    &_fz25fw500 {
+      @include title(25px, 500);
+    }
+    &_fz18fw600 {
+      @include title(18px, 600)
+    }
+    &_fz18fw500 {
+      @include title(18px, 500, $secondary-text-color);
+    }
+    &_fz14fw500 {
+      @include title(14px, 500, $secondary-text-color)
+    }
+  }
+}

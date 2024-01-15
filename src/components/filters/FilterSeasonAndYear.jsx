@@ -16,7 +16,7 @@ const FilterSeasonAndYear = () => {
         <Form>
           <div className="anime__filters-wrapper-dd">
             <div className="anime__filters-item-dd">
-              <div className="anime__filters-title anime__filters-title_dd">Season</div>
+              <div className="title_fz18fw600">Season</div>
               <Field 
                 name="season" 
                 id="season" 
@@ -29,7 +29,7 @@ const FilterSeasonAndYear = () => {
               </Field>
             </div>
             <div className="anime__filters-item-dd">
-              <div className="anime__filters-title anime__filters-title_dd">Year</div>
+              <div className="title_fz18fw600">Year</div>
               <Field 
                 name="year" 
                 id="year" 

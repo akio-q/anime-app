@@ -14,7 +14,7 @@ const Register = () => {
     <div className="form">
       <div className="form__wrapper">
         <img src={remSticker} className='form__decoration' alt="Rem" />
-        <span className="form__title">Register</span>
+        <span className="title_fz25fw600 form__title">Register</span>
         <Formik
           initialValues={{
             displayName: '',

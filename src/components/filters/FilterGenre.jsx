@@ -1,7 +1,7 @@
 const FilterGenre = () => {
   return (
     <div className="anime__filters-section">
-      <div className="anime__filters-title">Genre</div>
+      <div className="title_fz18fw600 anime__filters-title">Genre</div>
       <div className="anime__filters-wrapper">
         <div className="anime__filters-item">Action</div>
         <div className="anime__filters-item">Adventure</div>
