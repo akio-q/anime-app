@@ -1,0 +1,24 @@
+@import '../../style/variables.scss';
+
+.related-anime {
+  margin-top: 10px;
+  padding: 25px 20px 25px 60px;
+  background-color: $main-color;
+  border-radius: 15px;
+  &__title {
+    margin-top: 50px;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    &-item {
+      color: $secondary-text-color;
+      cursor: pointer;
+      transition: .2s all;
+      &:hover {
+        color: $main-text-color;
+      }
+    }
+  }
+}
