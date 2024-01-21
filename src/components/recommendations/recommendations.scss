@@ -1,0 +1,35 @@
+@import '../../style/variables.scss';
+
+.recommendations {
+  width: 100%;
+  padding: 25px 10px 25px 40px;
+  margin-top: 10px;
+  border-radius: 15px;
+  background-color: #272626;
+  &__title {
+    margin-top: 30px;
+  }
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 40px;
+    max-height: 500px;
+    padding-right: 30px;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      width: 7px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $secondary-text-color;
+      border-radius: 15px;
+      margin-top: 20px;
+    }
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    & {
+      scrollbar-width: 5px; 
+      scrollbar-color: $secondary-text-color transparent; 
+    }
+  }
+}
