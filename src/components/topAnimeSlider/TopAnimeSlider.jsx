@@ -23,7 +23,7 @@ const TopAnimeSlider = () => {
         <SwiperSlide className="top-anime-slider__slide" key={index}>
           <img src="https://cdn.myanimelist.net/images/anime/1028/117777.jpg" alt="animeImg" className="top-anime-slider__img" />
           <div className="top-anime-slider__info">
-            <div className="title_fz30fw600">Mushoku Tensei: Isekai Ittara Honki Dasu Part 2</div>
+            <div className="title_fz30fw600 top-anime-slider__title">Mushoku Tensei: Isekai Ittara Honki Dasu Part 2</div>
             <div className="top-anime-slider__descr">Second half of Mushoku Tensei: Isekai Ittara Honki Dasu.</div>
             <div className="top-anime-slider__genre">
               <i className='icon-tag'></i>
