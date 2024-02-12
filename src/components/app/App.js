@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import SingleAnimeLayout from '../pages/singleAnimeLayout/SingleAnimeLayout';
 import Register from "../pages/Register";
 import Login from "../pages/Login";
+import AppFooter from '../appFooter/AppFooter';
 
 const App = () => {
   return (
@@ -49,6 +50,7 @@ const Inner = () => {
           </Route>
         </Routes>
       </main>
+      <AppFooter />
     </>
   )
 } 
