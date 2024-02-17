@@ -2,7 +2,9 @@ import { useMemo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import { useGetTopAnimeQuery } from '../../api/apiSlice';
+
 import Spinner from '../Spinner/Spinner';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import 'swiper/css';
 import "swiper/css/autoplay";
@@ -59,7 +61,7 @@ const TopAnimeSlider = () => {
       }}
       className='top-anime-slider'
     >
-      {isLoading ? <Spinner /> : items}
+      {isLoading ? <Spinner /> : isError ? <ErrorMessage /> : items}
     </Swiper>
   )
 }

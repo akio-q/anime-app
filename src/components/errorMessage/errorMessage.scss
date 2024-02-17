@@ -1,0 +1,17 @@
+@import '../../style/variables.scss';
+
+.error-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+  margin: 0 auto;
+  &__img {
+    width: 150px;
+    height: 150px;
+  }
+  &__text {
+    text-align: center;
+    opacity: 0.8;
+  }
+}
