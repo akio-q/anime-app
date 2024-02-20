@@ -18,16 +18,16 @@ const TopAnimeSlider = () => {
   } = useGetTopSeasonalAnimeQuery();
 
   const data = anime.data;
-  const topAnime = useMemo(() => {
+  const topSeasonalAnime = useMemo(() => {
     if (!anime || !anime.data || !anime.data.length) {
       return [];
     }
 
-    const topAnime = data.slice();
-    return topAnime.slice(0, 10);
+    const topSeasonalAnime = data.slice();
+    return topSeasonalAnime.slice(0, 10);
   }, [data])
 
-  const items = topAnime.map((anime) => {
+  const items = topSeasonalAnime.map((anime) => {
     const {mal_id, images, title_english, synopsis, genres} = anime;
     const img = images.jpg.large_image_url;
     const descr = synopsis.length > 510 ? synopsis.slice(0, 510) + '...' : synopsis;
