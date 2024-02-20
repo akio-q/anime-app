@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-import { useGetTopAnimeQuery } from '../../api/apiSlice';
+import { useGetTopSeasonalAnimeQuery } from '../../api/apiSlice';
 
 import Spinner from '../Spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -15,7 +15,7 @@ const TopAnimeSlider = () => {
     data: anime = [],
     isLoading, 
     isError
-  } = useGetTopAnimeQuery();
+  } = useGetTopSeasonalAnimeQuery();
 
   const data = anime.data;
   const topAnime = useMemo(() => {
