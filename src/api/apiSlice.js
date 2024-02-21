@@ -8,8 +8,11 @@ export const apiSlice = createApi({
     getTopSeasonalAnime: builder.query({
       query: () => '/seasons/now'
     }),
+    getUpcomingAnime: builder.query({
+      query: () => '/seasons/upcoming',
+    })
   })
 })
 
-export const {useGetTopSeasonalAnimeQuery} = apiSlice;
+export const {useGetTopSeasonalAnimeQuery, useGetUpcomingAnimeQuery} = apiSlice;
 export default apiSlice.reducer;
