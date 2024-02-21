@@ -1,23 +1,45 @@
 import { Swiper, SwiperSlide } from "swiper/react";
+
 import AnimeCard from '../animeCard/AnimeCard';
+import Spinner from "../Spinner/Spinner";
+import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import 'swiper/css';
 import './categoryAnimeSlider.scss';
 
-const CategoryAnimeSlider = () => {
+const CategoryAnimeSlider = ({title, data, isLoading, isError}) => {
+  if (isLoading) {
+    return <Spinner />
+  } else if (isError) {
+    return <ErrorMessage />
+  }
+
+  const renderCategoryAnimeSlider = (arr) => {
+    return arr.map(item => {
+      const {mal_id, images, episodes, title_english} = item;
+      const img = images.jpg.large_image_url;
+      const title = title_english && title_english.length > 37 
+                    ? title_english.slice(0, 37) + '...' 
+                    : title_english;
+
+      return (
+        <SwiperSlide key={mal_id} className="category-anime-slider__slide">
+          <AnimeCard img={img} episodes={episodes} title={title} />
+        </SwiperSlide>
+      )
+    })
+  }
+
+  const items = renderCategoryAnimeSlider(data)
   return (
     <>
-      <div className="title_fz25fw500 anime__category-title">Top Airing</div>
+      <div className="title_fz25fw500 anime__category-title">{title}</div>
       <Swiper
         spaceBetween={20} 
         slidesPerView={6}
         className="category-anime-slider"
       >
-        {[...Array(10)].map((_, index) => (
-          <SwiperSlide key={index} className="category-anime-slider__slide">
-            <AnimeCard />
-          </SwiperSlide>
-        ))}
+        {items}
       </Swiper>
     </>
   )
