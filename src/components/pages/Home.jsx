@@ -1,3 +1,5 @@
+import { useGetUpcomingAnimeQuery } from "../../api/apiSlice";
+
 import TopAnimeSlider from "../topAnimeSlider/TopAnimeSlider";
 import CategoryAnimeSlider from '../categoryAnimeSlider/CategoryAnimeSlider';
 import Filters from "../filters/Filters";
@@ -5,18 +7,26 @@ import Filters from "../filters/Filters";
 
 import '../animeList/animeList.scss';
 
-const MainPage = () => {
+const Home = () => {
+  const {
+    data: upcomingAnime = [],
+    isLoading,
+    isError
+  } = useGetUpcomingAnimeQuery();
+
   return (
     <div className="anime">
       <div className="anime__content">
         <TopAnimeSlider />
-        <CategoryAnimeSlider />
-        <CategoryAnimeSlider />
-        <CategoryAnimeSlider />
+        <CategoryAnimeSlider 
+          title='Upcoming Anime' 
+          data={upcomingAnime.data} 
+          isLoading={isLoading} 
+          isError={isError} />
       </div>
       <Filters />
     </div>
   )
 }
 
-export default MainPage;
+export default Home;
