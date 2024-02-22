@@ -28,8 +28,9 @@ const TopAnimeSlider = () => {
   }, [data])
 
   const items = topSeasonalAnime.map((anime) => {
-    const {mal_id, images, title_english, synopsis, genres} = anime;
-    const img = images.jpg.large_image_url;
+    const {mal_id, images, title_english, title, synopsis, genres} = anime;
+    const img = images.webp.large_image_url;
+    const displayTitle = title_english ?? title;
     const descr = synopsis.length > 510 ? synopsis.slice(0, 510) + '...' : synopsis;
     const genresString = genres.map(item => item.name).join(', ');
 
@@ -37,7 +38,7 @@ const TopAnimeSlider = () => {
       <SwiperSlide className="top-anime-slider__slide" key={mal_id}>
         <img src={img} alt="animeImg" className="top-anime-slider__img" />
         <div className="top-anime-slider__info">
-          <div className="title_fz30fw600 top-anime-slider__title">{title_english}</div>
+          <div className="title_fz30fw600 top-anime-slider__title">{displayTitle}</div>
           <div className="top-anime-slider__descr">{descr}</div>
           <div className="top-anime-slider__genre">
             <i className='icon-tag'></i>
