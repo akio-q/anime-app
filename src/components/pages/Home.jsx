@@ -1,4 +1,4 @@
-import { useGetUpcomingAnimeQuery } from "../../api/apiSlice";
+import { useGetTopSeasonalAnimeQuery, useGetUpcomingAnimeQuery } from "../../api/apiSlice";
 
 import TopAnimeSlider from "../topAnimeSlider/TopAnimeSlider";
 import CategoryAnimeSlider from '../categoryAnimeSlider/CategoryAnimeSlider';
@@ -9,20 +9,30 @@ import '../animeList/animeList.scss';
 
 const Home = () => {
   const {
-    data: upcomingAnime = [],
-    isLoading,
-    isError
+    data: upcomingAnime = {},
+    isLoading: isUpcomingAnimeLoading,
+    isError: isUpcomingAnimeError
   } = useGetUpcomingAnimeQuery();
+  const {
+    data: topSeasonalAnime = [],
+    isLoading: isTopSeasonalAnimeLoading,
+    isError: isTopSeasonalAnimeError
+  } = useGetTopSeasonalAnimeQuery();
 
   return (
     <div className="anime">
       <div className="anime__content">
         <TopAnimeSlider />
         <CategoryAnimeSlider 
+          title='Top Seasonal Anime' 
+          data={topSeasonalAnime.data} 
+          isLoading={isTopSeasonalAnimeLoading} 
+          isError={isTopSeasonalAnimeError} />
+        <CategoryAnimeSlider 
           title='Upcoming Anime' 
           data={upcomingAnime.data} 
-          isLoading={isLoading} 
-          isError={isError} />
+          isLoading={isUpcomingAnimeLoading} 
+          isError={isUpcomingAnimeError} />
       </div>
       <Filters />
     </div>
