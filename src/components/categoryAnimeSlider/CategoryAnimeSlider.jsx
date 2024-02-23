@@ -24,7 +24,7 @@ const CategoryAnimeSlider = ({title, data, isLoading, isError}) => {
 
       return (
         <SwiperSlide key={mal_id} className="category-anime-slider__slide">
-          <AnimeCard img={img} episodes={episodes} title={displayTitle} />
+          <AnimeCard id={mal_id} img={img} episodes={episodes} title={displayTitle} />
         </SwiperSlide>
       )
     })

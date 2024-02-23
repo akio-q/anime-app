@@ -44,7 +44,7 @@ const Inner = () => {
                 <Home />
               </ProtectedRoute>
             } />
-            <Route path='/anime' element={<SingleAnimeLayout />} />
+            <Route path='/anime/:animeId' element={<SingleAnimeLayout />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>
