@@ -1,4 +1,4 @@
-import { useGetTopSeasonalAnimeQuery, useGetUpcomingAnimeQuery } from "../../api/apiSlice";
+import { useGetTopSeasonalAnimeQuery, useGetUpcomingAnimeQuery, useGetTopAnimeQuery } from "../../api/apiSlice";
 
 import TopAnimeSlider from "../topAnimeSlider/TopAnimeSlider";
 import CategoryAnimeSlider from '../categoryAnimeSlider/CategoryAnimeSlider';
@@ -9,15 +9,22 @@ import '../animeList/animeList.scss';
 
 const Home = () => {
   const {
-    data: upcomingAnime = {},
-    isLoading: isUpcomingAnimeLoading,
-    isError: isUpcomingAnimeError
-  } = useGetUpcomingAnimeQuery();
-  const {
     data: topSeasonalAnime = [],
     isLoading: isTopSeasonalAnimeLoading,
     isError: isTopSeasonalAnimeError
   } = useGetTopSeasonalAnimeQuery();
+  const {
+    data: topAnime = [],
+    isLoading: isTopAnimeLoading,
+    isError: isTopAnimeError
+  } = useGetTopAnimeQuery();
+  const {
+    data: upcomingAnime = {},
+    isLoading: isUpcomingAnimeLoading,
+    isError: isUpcomingAnimeError
+  } = useGetUpcomingAnimeQuery();
+
+  console.log(topAnime);
 
   return (
     <div className="anime">
@@ -28,6 +35,11 @@ const Home = () => {
           data={topSeasonalAnime.data} 
           isLoading={isTopSeasonalAnimeLoading} 
           isError={isTopSeasonalAnimeError} />
+        <CategoryAnimeSlider 
+          title='Popular Anime' 
+          data={topAnime.data} 
+          isLoading={isTopAnimeLoading} 
+          isError={isTopAnimeError} />
         <CategoryAnimeSlider 
           title='Upcoming Anime' 
           data={upcomingAnime.data} 
