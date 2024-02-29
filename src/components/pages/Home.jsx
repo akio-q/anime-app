@@ -24,8 +24,6 @@ const Home = () => {
     isError: isUpcomingAnimeError
   } = useGetUpcomingAnimeQuery();
 
-  console.log(topAnime);
-
   return (
     <div className="anime">
       <div className="anime__content">

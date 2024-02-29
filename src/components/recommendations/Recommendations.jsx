@@ -9,7 +9,7 @@ const Recommendations = () => {
       <div className="recommendations">
         <div className="recommendations__wrapper">
         {[...Array(8)].map((_, index) => (
-            <AnimeCard />
+            <AnimeCard key={index} />
         ))}
         </div>
       </div> 
