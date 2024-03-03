@@ -17,14 +17,16 @@ const CategoryAnimeSlider = ({title, data, isLoading, isError}) => {
   const renderCategoryAnimeSlider = (arr) => {
     return arr.map((item) => {
       const {mal_id, images, episodes, title_english, title} = item;
-      const img = images.webp.large_image_url;
-      const displayTitle = title_english && title_english.length > 37 
-                            ? title_english.slice(0, 37) + '...' 
-                            : title_english ?? title;
-
+      
       return (
         <SwiperSlide key={mal_id} className="category-anime-slider__slide">
-          <AnimeCard id={mal_id} img={img} episodes={episodes} title={displayTitle} data={item} />
+          <AnimeCard 
+            id={mal_id} 
+            images={images} 
+            episodes={episodes}
+            englishTitle={title_english}
+            title={title} 
+            data={item} />
         </SwiperSlide>
       )
     })
