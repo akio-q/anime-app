@@ -19,7 +19,7 @@ const TopAnimeSlider = () => {
 
   const data = anime.data;
   const topSeasonalAnime = useMemo(() => {
-    if (!anime || !anime.data || !anime.data.length) {
+    if (!anime || !data|| !data.length) {
       return [];
     }
 
