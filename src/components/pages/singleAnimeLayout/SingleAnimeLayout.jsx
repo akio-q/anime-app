@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 
 import RelatedAnime from '../../relatedAnime/RelatedAnime';
-import Recommendations from '../../recommendations/Recommendations';
+import AnimeRecommendations from '../../animeRecommendations/AnimeRecommendations';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
 
 import './singleAnimeLayout.scss';
@@ -15,6 +15,7 @@ const SingleAnimeLayout = () => {
   }
 
   const { 
+    mal_id,
     images, 
     score, 
     scored_by, 
@@ -65,8 +66,10 @@ const SingleAnimeLayout = () => {
           </div>
         </div>
         <div className="single-anime__descr">{synopsis}</div>
+        <div className="title_fz25fw500 related-anime__title">Related Anime</div>
         <RelatedAnime />
-        <Recommendations />
+        <div className="title_fz25fw500 recommendations__title">Recommendations</div>
+        <AnimeRecommendations id={mal_id} />
       </div>
     </div>
   )
