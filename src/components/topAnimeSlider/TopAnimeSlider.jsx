@@ -17,38 +17,46 @@ const TopAnimeSlider = () => {
     isError
   } = useGetTopSeasonalAnimeQuery();
 
-  const data = anime.data;
-  const topSeasonalAnime = useMemo(() => {
-    if (!anime || !data|| !data.length) {
+  const data = useMemo(() => {
+    if (!anime || !anime.data|| !anime.data.length) {
       return [];
     }
 
-    const topSeasonalAnime = data.slice();
-    return topSeasonalAnime.slice(0, 10);
-  }, [data])
+    const data = anime.data.slice();
+    return data.slice(0, 10);
+  }, [anime])
 
-  const items = topSeasonalAnime.map((anime) => {
-    const {mal_id, images, title_english, title, synopsis, genres} = anime;
-    const img = images.webp.large_image_url;
-    const displayTitle = title_english ?? title;
-    const descr = synopsis.length > 510 ? synopsis.slice(0, 510) + '...' : synopsis;
-    const genresString = genres.map(item => item.name).join(', ');
+  if (isLoading) {
+    return <Spinner />
+  } else if (isError) {
+    return <ErrorMessage />
+  }
 
-    return (
-      <SwiperSlide className="top-anime-slider__slide" key={mal_id}>
-        <img src={img} alt="animeImg" className="top-anime-slider__img" />
-        <div className="top-anime-slider__info">
-          <div className="title_fz30fw600 top-anime-slider__title">{displayTitle}</div>
-          <div className="top-anime-slider__descr">{descr}</div>
-          <div className="top-anime-slider__genre">
-            <i className='icon-tag'></i>
-            <div className="top-anime-slider__genre-text">{genresString}</div>
+  const renderTopAnimeSlider = (arr) => {
+    return arr.map(item => {
+      const {mal_id, images, title_english, title, synopsis, genres} = item;
+      const img = images.webp.large_image_url;
+      const displayTitle = title_english ?? title;
+      const descr = synopsis.length > 510 ? synopsis.slice(0, 510) + '...' : synopsis;
+      const genresString = genres.map(item => item.name).join(', ');
+
+      return (
+        <SwiperSlide className="top-anime-slider__slide" key={mal_id}>
+          <img src={img} alt="animeImg" className="top-anime-slider__img" />
+          <div className="top-anime-slider__info">
+            <div className="title_fz30fw600 top-anime-slider__title">{displayTitle}</div>
+            <div className="top-anime-slider__descr">{descr}</div>
+            <div className="top-anime-slider__genre">
+              <i className='icon-tag'></i>
+              <div className="top-anime-slider__genre-text">{genresString}</div>
+            </div>
           </div>
-        </div>
-      </SwiperSlide>
-    )
-  })
+        </SwiperSlide>
+      )
+    })
+  }
 
+  const items = renderTopAnimeSlider(data);
   return (
     <Swiper
       modules={[Autoplay]}
@@ -62,7 +70,7 @@ const TopAnimeSlider = () => {
       }}
       className='top-anime-slider'
     >
-      {isLoading ? <Spinner /> : isError ? <ErrorMessage /> : items}
+      {items}
     </Swiper>
   )
 }
