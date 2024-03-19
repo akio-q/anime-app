@@ -2,18 +2,19 @@ import { useNavigate } from 'react-router-dom';
 
 import './animeCard.scss';
 
-const AnimeCard = ({id, images, episodes, englishTitle, title, data}) => {
+const AnimeCard = ({id, data}) => {
   const navigate = useNavigate();
 
   const navigateToSingleAnimePage = () => {
     navigate(`/anime/${id}`, {state: {data}})
   }
 
+  const {images, episodes, title_english, title} = data;
   const img = images.webp.large_image_url;
   const displayEpisodes = episodes ? episodes : 0; 
-  const displayTitle = englishTitle && englishTitle.length > 37 
-                        ? englishTitle.slice(0, 37) + '...' 
-                        : englishTitle ?? title;
+  const displayTitle = title_english && title_english.length > 37 
+                        ? title_english.slice(0, 37) + '...' 
+                        : title_english ?? title;
   
   return (
     <div className='anime__card'>
