@@ -18,7 +18,7 @@ const TopAnimeSlider = () => {
   } = useGetTopSeasonalAnimeQuery();
 
   const data = useMemo(() => {
-    if (!anime || !anime.data|| !anime.data.length) {
+    if (!anime || !anime.data || !anime.data.length) {
       return [];
     }
 
@@ -46,9 +46,12 @@ const TopAnimeSlider = () => {
           <div className="top-anime-slider__info">
             <div className="title_fz30fw600 top-anime-slider__title">{displayTitle}</div>
             <div className="top-anime-slider__descr">{descr}</div>
-            <div className="top-anime-slider__genre">
-              <i className='icon-tag'></i>
-              <div className="top-anime-slider__genre-text">{genresString}</div>
+            <div className="top-anime-slider__footer">
+              <div className="top-anime-slider__genre">
+                <i className='icon-tag'></i>
+                <div className="top-anime-slider__genre-text">{genresString}</div>
+              </div>
+              <button className='button top-anime-slider__button'>Visit the page</button>
             </div>
           </div>
         </SwiperSlide>

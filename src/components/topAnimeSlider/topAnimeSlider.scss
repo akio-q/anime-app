@@ -28,11 +28,20 @@
   &__descr {
     margin: 15px 0 40px 0;
   }
+  &__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
   &__genre {
     display: flex;
     align-items: center;
     column-gap: 12px;
     color: #B19CD9;
     font-weight: 300;
+  }
+  &__button {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
   }
 }
