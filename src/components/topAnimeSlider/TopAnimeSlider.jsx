@@ -36,7 +36,9 @@ const TopAnimeSlider = () => {
     return arr.map(item => {
       const {mal_id, images, title_english, title, synopsis, genres} = item;
       const img = images.webp.large_image_url;
-      const displayTitle = title_english ?? title;
+      const displayTitle = title_english && title_english.length > 37 
+                        ? title_english.slice(0, 50) + '...' 
+                        : title_english ?? title;
       const descr = synopsis.length > 510 ? synopsis.slice(0, 510) + '...' : synopsis;
       const genresString = genres.map(item => item.name).join(', ');
 
