@@ -11,7 +11,8 @@ const AnimeRecommendations = ({id}) => {
   const {
     data: animeRecommendations = [],
     isLoading,
-    isError
+    isError,
+    error
   } = useGetAnimeRecommendationsQuery(id);
   const [animeData, setAnimeData] = useState([]);
   const [isDataLoading, setIsDataLoading] = useState(true);
@@ -40,7 +41,7 @@ const AnimeRecommendations = ({id}) => {
           const anime = await fetchAnimeData(item.entry.mal_id);
           data.push(anime);
     
-          await new Promise(resolve => setTimeout(resolve, 600));
+          await new Promise(resolve => setTimeout(resolve, 500));
         }
     
         setAnimeData(data);
@@ -54,7 +55,7 @@ const AnimeRecommendations = ({id}) => {
   if (isLoading || isDataLoading) {
     return <Spinner />
   } else if (isError) {
-    return <ErrorMessage />
+    return <ErrorMessage errorStatus={error.status} />
   } 
 
   const renderAnimeRecommendations = (arr) => {
@@ -74,7 +75,7 @@ const AnimeRecommendations = ({id}) => {
           />
         )
       } else {
-        return <ErrorMessage key={i} />
+        return <ErrorMessage key={i} errorStatus={429} />
       }
     })
   }

@@ -1,11 +1,24 @@
 import namiSticker from '../../resources/img/nami_sticker.png';
 import './errorMessage.scss';
 
-const ErrorMessage = () => {
+const ErrorMessage = ({ errorStatus }) => {
+  let errorMessageText,
+      errorMessageClass;
+
+  switch (errorStatus) {
+    case 429:
+      errorMessageText = 'Rate limiting error. Please try again in a moment'
+      errorMessageClass = 'limit-error'
+      break;
+    default:
+      errorMessageText = 'Oops, something went wrong...'
+      errorMessageClass = '';
+  }
+
   return (
-    <div className="error-message">
+    <div className={`error-message ${errorMessageClass}`}>
       <img src={namiSticker} className='error-message__img' alt="nami-error" />
-      <div className="title_fz18fw600 error-message__text">Oops, something went wrong...</div>
+      <div className="title_fz18fw600 error-message__text">{errorMessageText}</div>
     </div>
   )
 }

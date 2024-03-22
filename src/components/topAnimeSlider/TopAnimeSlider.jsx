@@ -15,7 +15,8 @@ const TopAnimeSlider = () => {
   const {
     data: anime = [],
     isLoading, 
-    isError
+    isError,
+    error
   } = useGetTopSeasonalAnimeQuery();
 
   const data = useMemo(() => {
@@ -30,7 +31,7 @@ const TopAnimeSlider = () => {
   if (isLoading) {
     return <Spinner />
   } else if (isError) {
-    return <ErrorMessage />
+    return <ErrorMessage errorStatus={error.status} />
   }
 
   const renderTopAnimeSlider = (arr) => {

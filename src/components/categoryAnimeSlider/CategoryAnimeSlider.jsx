@@ -7,11 +7,11 @@ import ErrorMessage from "../errorMessage/ErrorMessage";
 import 'swiper/css';
 import './categoryAnimeSlider.scss';
 
-const CategoryAnimeSlider = ({title, data, isLoading, isError}) => {
+const CategoryAnimeSlider = ({title, data, isLoading, isError, error}) => {
   if (isLoading) {
     return <Spinner />
   } else if (isError) {
-    return <ErrorMessage />
+    return <ErrorMessage errorStatus={error.status} />
   }
 
   const renderCategoryAnimeSlider = (arr) => {
