@@ -36,7 +36,7 @@ const TopAnimeSlider = () => {
   const renderTopAnimeSlider = (arr) => {
     return arr.map(item => (
       <SwiperSlide className="top-anime-slider__slide" key={item.mal_id}>
-        <TopAnimeSliderSlide data={item} />
+        <TopAnimeSliderSlide id={item.mal_id} data={item} />
       </SwiperSlide>
     ))
   }
