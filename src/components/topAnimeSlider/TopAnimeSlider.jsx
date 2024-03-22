@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import { useGetTopSeasonalAnimeQuery } from '../../api/apiSlice';
+import TopAnimeSliderSlide from './TopAnimeSliderSlide';
 
 import Spinner from '../Spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -33,32 +34,11 @@ const TopAnimeSlider = () => {
   }
 
   const renderTopAnimeSlider = (arr) => {
-    return arr.map(item => {
-      const {mal_id, images, title_english, title, synopsis, genres} = item;
-      const img = images.webp.large_image_url;
-      const displayTitle = title_english && title_english.length > 37 
-                        ? title_english.slice(0, 50) + '...' 
-                        : title_english ?? title;
-      const descr = synopsis.length > 510 ? synopsis.slice(0, 510) + '...' : synopsis;
-      const genresString = genres.map(item => item.name).join(', ');
-
-      return (
-        <SwiperSlide className="top-anime-slider__slide" key={mal_id}>
-          <img src={img} alt="animeImg" className="top-anime-slider__img" />
-          <div className="top-anime-slider__info">
-            <div className="title_fz30fw600 top-anime-slider__title">{displayTitle}</div>
-            <div className="top-anime-slider__descr">{descr}</div>
-            <div className="top-anime-slider__footer">
-              <div className="top-anime-slider__genre">
-                <i className='icon-tag'></i>
-                <div className="top-anime-slider__genre-text">{genresString}</div>
-              </div>
-              <button className='button top-anime-slider__button'>Visit the page</button>
-            </div>
-          </div>
-        </SwiperSlide>
-      )
-    })
+    return arr.map(item => (
+      <SwiperSlide className="top-anime-slider__slide" key={item.mal_id}>
+        <TopAnimeSliderSlide data={item} />
+      </SwiperSlide>
+    ))
   }
 
   const items = renderTopAnimeSlider(data);
