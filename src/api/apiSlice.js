@@ -16,6 +16,9 @@ export const apiSlice = createApi({
     }),
     getAnimeRecommendations: builder.query({
       query: id => `/anime/${id}/recommendations`
+    }),
+    getRelatedAnime: builder.query({
+      query: id => `/anime/${id}/relations`
     })
   })
 })
@@ -24,6 +27,7 @@ export const {
   useGetTopSeasonalAnimeQuery, 
   useGetUpcomingAnimeQuery, 
   useGetTopAnimeQuery,
-  useGetAnimeRecommendationsQuery
+  useGetAnimeRecommendationsQuery,
+  useGetRelatedAnimeQuery
 } = apiSlice;
 export default apiSlice.reducer;
