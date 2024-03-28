@@ -1,23 +1,84 @@
-import './relatedAnime.scss';
+import { useEffect, useMemo, useState } from 'react';
+import { useGetRelatedAnimeQuery } from '../../api/apiSlice';
+import ErrorMessage from '../errorMessage/ErrorMessage';
+import Spinner from '../Spinner/Spinner';
 
-const RelatedAnime = () => {
+import './relatedAnime.scss';
+import fetchAnimeData from '../../utils/fetchAnimeData';
+
+const RelatedAnime = ({id}) => {
+  const {
+    data: relatedAnime = [],
+    isLoading,
+    isError,
+    error
+  } = useGetRelatedAnimeQuery(id);
+  const [animeData, setAnimeData] = useState([]);
+  const [isDataLoading, setIsDataLoading] = useState(true);
+
+  const relatedAnimeData = relatedAnime.data && relatedAnime.data[1] ? relatedAnime.data[1].entry : [];;
+  const related = useMemo(() => {
+    if (!relatedAnime || !relatedAnimeData || !relatedAnimeData.length) {
+      return [];
+    }
+    if (relatedAnimeData.length < 10) {
+      return relatedAnimeData
+    }
+
+    const related = relatedAnimeData.slice();
+    return related.slice(0, 10);
+  }, [relatedAnimeData])
+
+  useEffect(() => {
+    setIsDataLoading(true);
+
+    const fetchDataForRecommendations = async () => {
+      if (related) {
+        const data = [];
+
+        for (const item of related) {
+          const anime = await fetchAnimeData(item.mal_id);
+          data.push(anime);
+    
+          await new Promise(resolve => setTimeout(resolve, 600));
+        }
+    
+        setAnimeData(data);
+        setIsDataLoading(false);
+      }
+    };
+
+    fetchDataForRecommendations();
+  }, [related]);
+
+  if (isLoading || isDataLoading) {
+    return <Spinner />
+  } else if (isError) {
+    return <ErrorMessage errorStatus={error.status} />
+  } 
+
+  console.log(relatedAnime);
+
+  const renderRelatedAnime = (arr) => {
+    return arr.map((item, i) => {
+      if (item.data) {
+        const { mal_id, title} = item.data;
+
+        return <li key={mal_id} className="related-anime__list-item">{title}</li>
+      } else {
+        return <ErrorMessage key={i} errorStatus={429} />
+      }
+    })
+  }
+
+  const items = renderRelatedAnime(animeData);
   return (
     <div className="related-anime">
       <ul className="related-anime__list">
-        <li className="related-anime__list-item">Tensei shitara Slime Datta Ken OVA (Side Story)</li>
-        <li className="related-anime__list-item">Tensei shitara Slime Datta Ken 2nd Season (Sequel)</li>
-        <li className="related-anime__list-item">Tensei shitara Slime Datta Ken: Kanwa - Veldora Nikki (Summary)</li>
-        <li className="related-anime__list-item">Tensura Nikki: Tensei shitara Slime Datta Ken (Other)</li>
+        {items}
       </ul>
     </div>
   )
 }
 
 export default RelatedAnime;
-
-
-
-
-
-
-

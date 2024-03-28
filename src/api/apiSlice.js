@@ -24,7 +24,7 @@ export const apiSlice = createApi({
 })
 
 export const {
-  useGetTopSeasonalAnimeQuery, 
+  useGetTopSeasonalAnimeQuery,
   useGetUpcomingAnimeQuery, 
   useGetTopAnimeQuery,
   useGetAnimeRecommendationsQuery,

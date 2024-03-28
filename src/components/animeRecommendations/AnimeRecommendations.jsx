@@ -41,7 +41,7 @@ const AnimeRecommendations = ({id}) => {
           const anime = await fetchAnimeData(item.entry.mal_id);
           data.push(anime);
     
-          await new Promise(resolve => setTimeout(resolve, 500));
+          await new Promise(resolve => setTimeout(resolve, 600));
         }
     
         setAnimeData(data);
@@ -61,16 +61,12 @@ const AnimeRecommendations = ({id}) => {
   const renderAnimeRecommendations = (arr) => {
     return arr.map((item, i) => {
       if (item.data) {
-        const {mal_id, images, episodes, title_english, title } = item.data;
+        const { mal_id } = item.data;
 
         return ( 
           <AnimeCard 
             key={mal_id}
             id={mal_id}
-            images={images}
-            episodes={episodes}
-            englishTitle={title_english}
-            title={title}
             data={item.data}
           />
         )
