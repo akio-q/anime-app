@@ -9,13 +9,13 @@ import '../animeList/animeList.scss';
 
 const Home = () => {
   const {
-    data: topSeasonalAnime = [],
+    data: topSeasonalAnime = {},
     isLoading: isTopSeasonalAnimeLoading,
     isError: isTopSeasonalAnimeError,
     error: TopSeasonalAnimeError
   } = useGetTopSeasonalAnimeQuery();
   const {
-    data: topAnime = [],
+    data: topAnime = {},
     isLoading: isTopAnimeLoading,
     isError: isTopAnimeError,
     error: topAnimeError

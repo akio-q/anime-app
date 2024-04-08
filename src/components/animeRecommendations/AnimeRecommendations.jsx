@@ -9,7 +9,7 @@ import './animeRecommendations.scss';
 
 const AnimeRecommendations = ({id}) => {
   const {
-    data: animeRecommendations = [],
+    data: animeRecommendations = {},
     isLoading,
     isError,
     error
@@ -41,7 +41,7 @@ const AnimeRecommendations = ({id}) => {
           const anime = await fetchAnimeData(item.entry.mal_id);
           data.push(anime);
     
-          await new Promise(resolve => setTimeout(resolve, 600));
+          await new Promise(resolve => setTimeout(resolve, 10000));
         }
     
         setAnimeData(data);

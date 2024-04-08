@@ -13,7 +13,7 @@ import './topAnimeSlider.scss';
 
 const TopAnimeSlider = () => {
   const {
-    data: anime = [],
+    data: anime = {},
     isLoading, 
     isError,
     error

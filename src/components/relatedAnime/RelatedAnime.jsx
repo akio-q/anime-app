@@ -8,7 +8,7 @@ import fetchAnimeData from '../../utils/fetchAnimeData';
 
 const RelatedAnime = ({id}) => {
   const {
-    data: relatedAnime = [],
+    data: relatedAnime = {},
     isLoading,
     isError,
     error
@@ -32,7 +32,7 @@ const RelatedAnime = ({id}) => {
   useEffect(() => {
     setIsDataLoading(true);
 
-    const fetchDataForRecommendations = async () => {
+    const fetchDataForRelatedAnime = async () => {
       if (related) {
         const data = [];
 
@@ -40,7 +40,7 @@ const RelatedAnime = ({id}) => {
           const anime = await fetchAnimeData(item.mal_id);
           data.push(anime);
     
-          await new Promise(resolve => setTimeout(resolve, 600));
+          await new Promise(resolve => setTimeout(resolve, 10000));
         }
     
         setAnimeData(data);
@@ -48,7 +48,7 @@ const RelatedAnime = ({id}) => {
       }
     };
 
-    fetchDataForRecommendations();
+    fetchDataForRelatedAnime();
   }, [related]);
 
   if (isLoading || isDataLoading) {
@@ -56,8 +56,6 @@ const RelatedAnime = ({id}) => {
   } else if (isError) {
     return <ErrorMessage errorStatus={error.status} />
   } 
-
-  console.log(relatedAnime);
 
   const renderRelatedAnime = (arr) => {
     return arr.map((item, i) => {
