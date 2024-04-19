@@ -19,6 +19,9 @@ export const apiSlice = createApi({
     }),
     getRelatedAnime: builder.query({
       query: id => `/anime/${id}/relations`
+    }),
+    getAnimeSearch: builder.query({
+      query: value => `/anime?q=${value}` 
     })
   })
 })
@@ -28,6 +31,7 @@ export const {
   useGetUpcomingAnimeQuery, 
   useGetTopAnimeQuery,
   useGetAnimeRecommendationsQuery,
-  useGetRelatedAnimeQuery
+  useGetRelatedAnimeQuery,
+  useGetAnimeSearchQuery
 } = apiSlice;
 export default apiSlice.reducer;
