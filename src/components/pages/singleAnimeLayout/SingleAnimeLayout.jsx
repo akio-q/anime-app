@@ -30,6 +30,7 @@ const SingleAnimeLayout = () => {
     synopsis 
   } = data;
   const img = images.webp.large_image_url;
+  const displayEpisodes = episodes ? episodes : '?'; 
 
   return (
     <div className="single-anime">
@@ -62,7 +63,7 @@ const SingleAnimeLayout = () => {
           </div>
           <div className="single-anime__release">
             <div>{season} {year}</div>
-            <div>{episodes} episodes</div>
+            <div>{displayEpisodes} episodes</div>
           </div>
         </div>
         <div className="single-anime__descr">{synopsis}</div>

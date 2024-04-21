@@ -11,7 +11,7 @@ const AnimeCard = ({id, data}) => {
 
   const {images, episodes, title_english, title} = data;
   const img = images.webp.large_image_url;
-  const displayEpisodes = episodes ? episodes : 0; 
+  const displayEpisodes = episodes ? episodes : '?'; 
   const displayTitle = title_english && title_english.length > 37 
                         ? title_english.slice(0, 37) + '...' 
                         : title_english ?? title;
