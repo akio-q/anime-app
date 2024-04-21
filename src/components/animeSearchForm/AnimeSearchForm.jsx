@@ -1,13 +1,40 @@
+import { useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
 import { Formik, Form, Field } from 'formik';
+import { useGetAnimeSearchQuery } from '../../api/apiSlice';
+import { animeFetching, animeFetched, animeFetchingError } from '../animeList/animeSlice';
 
 import './animeSearchForm.scss';
 
 const Search = () => {
+  const [searchValue, setSearchValue] = useState('');
+  const {
+    data: anime = {},
+    isLoading,
+    isError
+  } = useGetAnimeSearchQuery(searchValue, { skip: !searchValue });
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (anime) {
+      const { data } = anime;
+      if (data && data.length > 0) {
+        dispatch(animeFetched(data));
+      }
+    }
+  }, [anime])
+
+  if (isLoading) {
+    dispatch(animeFetching());
+  } else if (isError) {
+    dispatch(animeFetchingError());
+  }
+
   return (
     <div className="search">
       <Formik
         initialValues={{animeName: ''}}
-        onSubmit = {values => console.log(JSON.stringify(values, null, 2))}>
+        onSubmit = {value => setSearchValue(value.animeName)}>
         <Form>
           <Field 
             name="animeName"
