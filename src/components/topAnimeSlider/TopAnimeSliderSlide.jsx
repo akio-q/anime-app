@@ -23,7 +23,7 @@ const TopAnimeSliderSlide = ({id, data}) => {
         <div className="top-anime-slider__descr">{descr}</div>
         <div className="top-anime-slider__footer">
           <div className="top-anime-slider__genre">
-            <i className='icon-tag'></i>
+            <i className='icon-price-tag'></i>
             <div className="top-anime-slider__genre-text">{genresString}</div>
           </div>
           <button 

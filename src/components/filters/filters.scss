@@ -2,90 +2,98 @@
 
 .anime {
   &__filters {
-    display: flex;
-    flex-direction: column;
-    row-gap: 15px;
     height: fit-content;
-    padding: 10px;
     background-color: $main-color;
     border-radius: 10px;
-    &-section {
-      padding: 10px 5px 20px 10px;
-      background-color: $background-color;
-      border-radius: 10px;
-      &_dd {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        align-items: center;
-        gap: 30px;
-        padding: 20px 20px 20px 20px; 
-      }
-    }
     &-title {
+      margin-top: 10px;
       text-align: center;
     }
-    &-wrapper {
+    &-section {
+      width: 100%;
+      padding: 10px 20px;
       display: flex;
       flex-wrap: wrap;
-      column-gap: 10px;
-      row-gap: 10px;
-      max-height: 360px;
-      margin-top: 10px;
-      overflow-y: auto;
-      &::-webkit-scrollbar {
-        width: 5px;
-      }
-      &::-webkit-scrollbar-thumb {
-        background-color: $secondary-text-color;
-        border-radius: 15px;
-      }
-      &::-webkit-scrollbar-track {
-        background-color: transparent;
-      }
-      & {
-        scrollbar-width: 5px; 
-        scrollbar-color: $secondary-text-color transparent; 
-      }
-      &-dd {
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        row-gap: 20px;
-      }
+      justify-content: space-between;
+      row-gap: 15px;
     }
     &-item {
-      padding: 5px 18px;
-      color: $main-text-color;
-      border: 1px solid $secondary-text-color;
-      border-radius: 15px;
-      cursor: pointer;
-      transition: .3s all;
-      -webkit-touch-callout: none; 
-      -webkit-user-select: none; 
-      -khtml-user-select: none; 
-        -moz-user-select: none;
-          -ms-user-select: none; 
-              user-select: none;
-      &:hover {
-        color: $secondary-text-color;
-      }
-      &-dd {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
+      display: flex;
+      flex-direction: column;
+      row-gap: 5px;
     }
-    &-dropdown {
-      width: 135px;
-      height: 35px;
-      padding: 6px 10px;
-      background-color: $main-color;
-      border: none;
-      outline: none;
-      border-radius: 5px;
+    &-form {
+      width: 100%;
+    }
+  }
+}
+
+.css {
+  &-1r4vtzz, &-48ayfv {
+    width: 165px !important;
+    height: 35px !important;
+    padding: 6px 10px !important;
+    background-color: $main-color-light !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: 5px !important;
+    color: $secondary-text-color !important;
+    font-size: 16px !important;
+    cursor: pointer !important;
+  }
+  &-11unzgr {
+    min-width: 165px !important;
+    background-color: $main-color-light !important;
+    color: $main-text-color !important;
+    border-radius: 5px;
+    border-color: transparent;
+  }
+  &-1vr111p-option {
+    min-width: 165px !important;
+    display: flex !important;
+    align-items: center;
+    padding: 2px 12px !important;
+    color: $secondary-text-color !important;
+    font-size: 15px !important;
+    transition: 0.3s all;
+    cursor: pointer !important;
+    &:hover {
+      background-color: $main-color-light !important;
+      color: $secondary-color-light !important;
+    }
+  }
+  &-1qprcsu-option {
+    display: flex !important;
+    align-items: center;
+    min-width: 165px !important;
+    padding: 2px 12px !important;
+    background-color: $main-color-light !important;
+    color: $secondary-color-light !important;
+    font-size: 15px !important; 
+    font-weight: 400 !important;
+    cursor: pointer !important;
+  }
+}
+
+input[type=checkbox] {
+  appearance: none;
+  position: relative;
+  width: 14px;
+  height: 14px;
+  background-color: $secondary-text-color;
+  border-radius: 3px;
+  cursor: pointer;
+  &:checked {
+    background-color: $secondary-color-light;
+    &::before {
+      font-family: 'icomoon';
+      content: "\e902";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       color: $main-text-color;
-      font-size: 16px;
-      cursor: pointer;
+      font-size: 12px;
     }
   }
 }
