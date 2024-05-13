@@ -40,7 +40,7 @@ const RelatedAnime = ({id}) => {
           const anime = await fetchAnimeData(item.mal_id);
           data.push(anime);
     
-          await new Promise(resolve => setTimeout(resolve, 10000));
+          await new Promise(resolve => setTimeout(resolve, 2000));
         }
     
         setAnimeData(data);

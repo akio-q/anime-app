@@ -19,8 +19,6 @@ const AnimeRecommendations = ({id}) => {
 
   const animeRecommendationsData = animeRecommendations.data;
   const recommendations = useMemo(() => {
-    setIsDataLoading(true);
-
     if (!animeRecommendations || !animeRecommendationsData || !animeRecommendationsData.length) {
       return [];
     }
@@ -33,6 +31,8 @@ const AnimeRecommendations = ({id}) => {
   }, [animeRecommendationsData])
 
   useEffect(() => {
+    setIsDataLoading(true);
+
     const fetchDataForRecommendations = async () => {
       if (recommendations) {
         const data = [];
@@ -41,7 +41,7 @@ const AnimeRecommendations = ({id}) => {
           const anime = await fetchAnimeData(item.entry.mal_id);
           data.push(anime);
     
-          await new Promise(resolve => setTimeout(resolve, 10000));
+          await new Promise(resolve => setTimeout(resolve, 2000));
         }
     
         setAnimeData(data);
