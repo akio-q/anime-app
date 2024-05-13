@@ -13,10 +13,12 @@ const AnimeList = () => {
   }
 
   const renderAnimeList = (arr) => {
-    return arr.map(item => (
-      <AnimeCard key={item.mal_id} id={item.mal_id} data={item} />
+    return arr.map((item, i) => (
+      <AnimeCard key={i} id={item.mal_id} data={item} />
     ))
   }
+
+  console.log(animeLoadingStatus);
 
   const items = renderAnimeList(animeData);
   return (

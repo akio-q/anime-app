@@ -24,11 +24,13 @@ const Search = () => {
     }
   }, [anime])
 
-  if (isLoading) {
-    dispatch(animeFetching());
-  } else if (isError) {
-    dispatch(animeFetchingError());
-  }
+  useEffect(() => {
+    if (isLoading) {
+      dispatch(animeFetching());
+    } else if (isError) {
+      dispatch(animeFetchingError());
+    }
+  }, [isLoading, isError]);
 
   return (
     <div className="search">

@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useGetRelatedAnimeQuery } from '../../api/apiSlice';
+import fetchAnimeData from '../../utils/fetchAnimeData';
+
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../Spinner/Spinner';
 
 import './relatedAnime.scss';
-import fetchAnimeData from '../../utils/fetchAnimeData';
 
 const RelatedAnime = ({id}) => {
   const {
