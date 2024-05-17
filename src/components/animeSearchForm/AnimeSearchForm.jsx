@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import { useGetAnimeSearchQuery } from '../../api/apiSlice';
 import { animeFetching, animeFetched, animeFetchingError } from '../animeList/animeSlice';
@@ -13,6 +14,7 @@ const Search = () => {
     isLoading,
     isError
   } = useGetAnimeSearchQuery(searchValue, { skip: !searchValue });
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,11 +34,16 @@ const Search = () => {
     }
   }, [isLoading, isError]);
 
+  const onSubmit = ({animeName}) => {
+    setSearchValue(animeName);
+    navigate(`/filter?q=${animeName}`);
+  }
+
   return (
     <div className="search">
       <Formik
         initialValues={{animeName: ''}}
-        onSubmit = {value => setSearchValue(value.animeName)}>
+        onSubmit={onSubmit}>
         <Form>
           <Field 
             name="animeName"

@@ -3,7 +3,6 @@ import { useGetTopSeasonalAnimeQuery, useGetUpcomingAnimeQuery, useGetTopAnimeQu
 import TopAnimeSlider from "../topAnimeSlider/TopAnimeSlider";
 import CategoryAnimeSlider from '../categoryAnimeSlider/CategoryAnimeSlider';
 import Filters from "../filters/Filters";
-// import AnimeList from "../animeList/AnimeList";
 
 import '../animeList/animeList.scss';
 
