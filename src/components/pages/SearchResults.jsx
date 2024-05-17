@@ -1,11 +1,11 @@
-import Search from "../animeSearchForm/AnimeSearchForm";
+import AnimeList from "../animeList/AnimeList";
 import Filters from '../filters/Filters';
 
 const SearchResults = () => {
   return (
     <div className="anime">
       <div className="anime__content">
-        <Search />
+        <AnimeList />
       </div>
       <Filters />
     </div>
