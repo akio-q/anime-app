@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
 import AnimeCard from "../animeCard/AnimeCard"
 import Spinner from "../Spinner/Spinner";
-import { ErrorMessage } from "formik";
+import ErrorMessage from "../errorMessage/ErrorMessage";
+import namiSticker from '../../resources/img/nami_sticker.png';
 
 const AnimeList = () => {
   const { animeData, animeLoadingStatus } = useSelector(state => state.anime);
@@ -13,20 +14,31 @@ const AnimeList = () => {
   }
 
   const renderAnimeList = (arr) => {
-    return arr.map((item, i) => (
-      <AnimeCard key={i} id={item.mal_id} data={item} />
-    ))
+    console.log(arr);
+    if (arr.length === 0) {
+      return (
+        <div className='error-message limit-error anime__list-error '>
+          <img src={namiSticker} className='error-message__img' alt="nami-error" />
+          <div className="title_fz18fw600 error-message__text">Oops! We couldn't find any anime matching your search. <br /> Please check the spelling or try searching for a different title.</div>
+        </div>
+      )
+    } else {
+      const items = arr.map((item, i) => (
+        <AnimeCard key={i} id={item.mal_id} data={item} />
+      ))
+      return (
+        <div className="anime__list">
+          {items}
+        </div>
+      )
+    }
   }
 
-  console.log(animeLoadingStatus);
-
-  const items = renderAnimeList(animeData);
+  const animeList = renderAnimeList(animeData);
   return (
     <>
       <div className="title_fz25fw500 anime__list-title">Search Results:</div>
-      <div className="anime__list">
-        {items}
-      </div>
+      {animeList}
     </>
   )
 }

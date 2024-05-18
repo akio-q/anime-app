@@ -20,5 +20,10 @@
     &-title {
       color: $secondary-text-color !important;
     }
+    &-error {
+      margin-top: 50px;
+      text-align: center;
+      color: $main-text-color;
+    }
   }
 }
