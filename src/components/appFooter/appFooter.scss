@@ -3,8 +3,18 @@
 .app {
   &__footer {
     width: 100%;
-    height: 200px;
+    height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-top: 200px;
     background-color: $main-color;
+    &-link {
+      color: $secondary-text-color;
+      transition: .3s all;
+      &:hover {
+        color: $main-text-color;
+      }
+    }
   }
 }
