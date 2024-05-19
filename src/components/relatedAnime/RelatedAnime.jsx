@@ -19,7 +19,7 @@ const RelatedAnime = ({id}) => {
 
   const relatedAnimeData = relatedAnime.data && relatedAnime.data[1] ? relatedAnime.data[1].entry : [];;
   const related = useMemo(() => {
-    if (!relatedAnime || !relatedAnimeData || !relatedAnimeData.length) {
+    if (!relatedAnimeData || !relatedAnimeData.length) {
       return [];
     }
     if (relatedAnimeData.length < 10) {
@@ -31,17 +31,16 @@ const RelatedAnime = ({id}) => {
   }, [relatedAnimeData])
 
   useEffect(() => {
-    setIsDataLoading(true);
-
     const fetchDataForRelatedAnime = async () => {
-      if (related) {
+      if (related.length > 0) {
+        setIsDataLoading(true);
         const data = [];
 
         for (const item of related) {
           const anime = await fetchAnimeData(item.mal_id);
           data.push(anime);
     
-          await new Promise(resolve => setTimeout(resolve, 2000));
+          await new Promise(resolve => setTimeout(resolve, 1000));
         }
     
         setAnimeData(data);
