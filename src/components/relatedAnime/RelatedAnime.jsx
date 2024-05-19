@@ -45,6 +45,8 @@ const RelatedAnime = ({id}) => {
     
         setAnimeData(data);
         setIsDataLoading(false);
+      } else {
+        setIsDataLoading(false);
       }
     };
 

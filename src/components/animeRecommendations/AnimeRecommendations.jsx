@@ -32,7 +32,7 @@ const AnimeRecommendations = ({id}) => {
 
   useEffect(() => {
     const fetchDataForRecommendations = async () => {
-      if (recommendations) {
+      if (recommendations.length > 0) {
         setIsDataLoading(true);
         const data = [];
 
@@ -44,6 +44,8 @@ const AnimeRecommendations = ({id}) => {
         }
     
         setAnimeData(data);
+        setIsDataLoading(false);
+      } else {
         setIsDataLoading(false);
       }
     };
