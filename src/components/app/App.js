@@ -52,6 +52,7 @@ const Inner = () => {
           </Route>
         </Routes>
       </main>
+      {!isLoginOrRegister() && <AppFooter />}
     </>
   )
 } 
