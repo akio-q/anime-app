@@ -7,34 +7,22 @@ import { animeFetching, animeFetched, animeFetchingError } from '../animeList/an
 
 import './animeSearchForm.scss';
 
-const Search = () => {
+const AnimeSearchForm = () => {
   const [searchValue, setSearchValue] = useState('');
-  const {
-    data: anime = {},
-    isLoading,
-    isError
-  } = useGetAnimeSearchQuery(searchValue, { skip: !searchValue });
+  const { data: anime = {}, isError } = useGetAnimeSearchQuery(searchValue, { skip: !searchValue });
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (anime) {
-      const { data } = anime;
-      if (data && data.length > 0) {
-        dispatch(animeFetched(data));
-      }
-    }
-  }, [anime])
-
-  useEffect(() => {
-    if (isLoading) {
-      dispatch(animeFetching());
-    } else if (isError) {
+    if (isError) {
       dispatch(animeFetchingError());
-    }
-  }, [isLoading, isError]);
+    } else if (anime && anime.data) {
+      dispatch(animeFetched(anime.data));
+    } 
+  }, [anime, isError]);
 
   const onSubmit = ({animeName}) => {
+    dispatch(animeFetching());
     setSearchValue(animeName);
     navigate(`/filter?q=${animeName}`);
   }
@@ -59,4 +47,4 @@ const Search = () => {
   )
 }
 
-export default Search;
+export default AnimeSearchForm;

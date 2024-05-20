@@ -14,8 +14,7 @@ const AnimeList = () => {
   }
 
   const renderAnimeList = (arr) => {
-    console.log(arr);
-    if (arr.length === 0) {
+    if (arr.length === 0) { 
       return (
         <div className='error-message limit-error anime__list-error '>
           <img src={namiSticker} className='error-message__img' alt="nami-error" />
