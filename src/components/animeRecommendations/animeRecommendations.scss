@@ -27,9 +27,5 @@
     &::-webkit-scrollbar-track {
       background-color: transparent;
     }
-    & {
-      scrollbar-width: 5px; 
-      scrollbar-color: $secondary-text-color transparent; 
-    }
   }
 }
