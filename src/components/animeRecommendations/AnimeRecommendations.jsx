@@ -1,6 +1,7 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useGetAnimeRecommendationsQuery } from '../../api/apiSlice';
-import fetchAnimeData from '../../utils/fetchAnimeData';
+import delayedFetchAnimeData from '../../utils/delayedFetchData';
+
 import AnimeCard from '../animeCard/AnimeCard';
 import Spinner from '../Spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
@@ -31,26 +32,7 @@ const AnimeRecommendations = ({id}) => {
   }, [animeRecommendationsData])
 
   useEffect(() => {
-    const fetchDataForRecommendations = async () => {
-      if (recommendations.length > 0) {
-        setIsDataLoading(true);
-        const data = [];
-
-        for (const item of recommendations) {
-          const anime = await fetchAnimeData(item.entry.mal_id);
-          data.push(anime);
-    
-          await new Promise(resolve => setTimeout(resolve, 5000));
-        }
-    
-        setAnimeData(data);
-        setIsDataLoading(false);
-      } else {
-        setIsDataLoading(false);
-      }
-    };
-
-    fetchDataForRecommendations();
+    delayedFetchAnimeData(recommendations, setIsDataLoading, setAnimeData);
   }, [recommendations]);
 
   if (isLoading || isDataLoading) {

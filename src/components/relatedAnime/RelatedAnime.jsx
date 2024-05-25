@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useGetRelatedAnimeQuery } from '../../api/apiSlice';
-import fetchAnimeData from '../../utils/fetchAnimeData';
+import delayedFetchAnimeData from '../../utils/delayedFetchData';
 
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../Spinner/Spinner';
@@ -17,7 +17,7 @@ const RelatedAnime = ({id}) => {
   const [animeData, setAnimeData] = useState([]);
   const [isDataLoading, setIsDataLoading] = useState(true);
 
-  const relatedAnimeData = relatedAnime.data && relatedAnime.data[1] ? relatedAnime.data[1].entry : [];;
+  const relatedAnimeData = relatedAnime.data && relatedAnime.data[1] ? relatedAnime.data[1] : [];
   const related = useMemo(() => {
     if (!relatedAnimeData || !relatedAnimeData.length) {
       return [];
@@ -31,26 +31,8 @@ const RelatedAnime = ({id}) => {
   }, [relatedAnimeData])
 
   useEffect(() => {
-    const fetchDataForRelatedAnime = async () => {
-      if (related.length > 0) {
-        setIsDataLoading(true);
-        const data = [];
+    delayedFetchAnimeData(related, setIsDataLoading, setAnimeData);
 
-        for (const item of related) {
-          const anime = await fetchAnimeData(item.mal_id);
-          data.push(anime);
-    
-          await new Promise(resolve => setTimeout(resolve, 5000));
-        }
-    
-        setAnimeData(data);
-        setIsDataLoading(false);
-      } else {
-        setIsDataLoading(false);
-      }
-    };
-
-    fetchDataForRelatedAnime();
   }, [related]);
 
   if (isLoading || isDataLoading) {
