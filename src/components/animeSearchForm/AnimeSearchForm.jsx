@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import { useGetAnimeSearchQuery } from '../../api/apiSlice';
-import { animeFetching, animeFetched, animeFetchingError } from '../animeList/animeSlice';
+import { setSearch, setLoading, setLoadingFailed } from '../filters/filtersSlice';
 
 import './animeSearchForm.scss';
 
@@ -15,14 +15,14 @@ const AnimeSearchForm = () => {
 
   useEffect(() => {
     if (isError) {
-      dispatch(animeFetchingError());
+      dispatch(setLoadingFailed());
     } else if (anime && anime.data) {
-      dispatch(animeFetched(anime.data));
+      dispatch(setSearch(anime.data));
     } 
   }, [anime, isError]);
 
   const onSubmit = ({animeName}) => {
-    dispatch(animeFetching());
+    dispatch(setLoading());
     setSearchValue(animeName);
     navigate(`/filter?q=${animeName}`);
   }

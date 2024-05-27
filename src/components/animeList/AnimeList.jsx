@@ -5,11 +5,11 @@ import ErrorMessage from "../errorMessage/ErrorMessage";
 import namiSticker from '../../resources/img/nami_sticker.png';
 
 const AnimeList = () => {
-  const { animeData, animeLoadingStatus } = useSelector(state => state.anime);
+  const { filters, loadingStatus } = useSelector(state => state.filters);
 
-  if (animeLoadingStatus === 'loading') {
+  if (loadingStatus === 'loading') {
     return <Spinner />
-  } else if (animeLoadingStatus === 'error') {
+  } else if (loadingStatus === 'failed') {
     return <ErrorMessage />
   }
 
@@ -33,7 +33,7 @@ const AnimeList = () => {
     }
   }
 
-  const animeList = renderAnimeList(animeData);
+  const animeList = renderAnimeList(filters.search);
   return (
     <>
       <div className="title_fz25fw500 anime__list-title">Search Results:</div>
