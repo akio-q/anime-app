@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'r
 import AppHeader from '../appHeader/AppHeader';
 import Home from '../pages/Home';
 import SingleAnimeLayout from '../pages/singleAnimeLayout/SingleAnimeLayout';
-import SearchResults from '../pages/SearchResults';
+import SearchResults from '../pages/searchResultsLayout/SearchResults';
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import AppFooter from '../appFooter/AppFooter';

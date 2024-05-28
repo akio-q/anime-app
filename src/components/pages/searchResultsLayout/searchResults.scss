@@ -1,0 +1,11 @@
+.search-results {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 20px;
+  margin-top: 40px;
+  &__container {
+    width: 100%;
+    overflow: hidden;
+  }
+}

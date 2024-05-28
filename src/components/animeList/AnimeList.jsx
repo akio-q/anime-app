@@ -36,7 +36,6 @@ const AnimeList = () => {
   const animeList = renderAnimeList(filters.search);
   return (
     <>
-      <div className="title_fz25fw500 anime__list-title">Search Results:</div>
       {animeList}
     </>
   )
