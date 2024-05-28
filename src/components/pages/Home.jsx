@@ -2,7 +2,6 @@ import { useGetTopSeasonalAnimeQuery, useGetUpcomingAnimeQuery, useGetTopAnimeQu
 
 import TopAnimeSlider from "../topAnimeSlider/TopAnimeSlider";
 import CategoryAnimeSlider from '../categoryAnimeSlider/CategoryAnimeSlider';
-import Filters from "../filters/Filters";
 
 import '../animeList/animeList.scss';
 
@@ -28,28 +27,25 @@ const Home = () => {
 
   return (
     <div className="anime">
-      <div className="anime__content">
-        <TopAnimeSlider />
-        <CategoryAnimeSlider 
-          title='Top Seasonal Anime' 
-          data={topSeasonalAnime.data} 
-          isLoading={isTopSeasonalAnimeLoading} 
-          isError={isTopSeasonalAnimeError}
-          error={TopSeasonalAnimeError} />
-        <CategoryAnimeSlider 
-          title='Popular Anime' 
-          data={topAnime.data} 
-          isLoading={isTopAnimeLoading} 
-          isError={isTopAnimeError}
-          error={topAnimeError} />
-        <CategoryAnimeSlider 
-          title='Upcoming Anime' 
-          data={upcomingAnime.data} 
-          isLoading={isUpcomingAnimeLoading} 
-          isError={isUpcomingAnimeError}
-          error={upcomingAnimeError} />
-      </div>
-      <Filters />
+      <TopAnimeSlider />
+      <CategoryAnimeSlider 
+        title='Top Seasonal Anime' 
+        data={topSeasonalAnime.data} 
+        isLoading={isTopSeasonalAnimeLoading} 
+        isError={isTopSeasonalAnimeError}
+        error={TopSeasonalAnimeError} />
+      <CategoryAnimeSlider 
+        title='Popular Anime' 
+        data={topAnime.data} 
+        isLoading={isTopAnimeLoading} 
+        isError={isTopAnimeError}
+        error={topAnimeError} />
+      <CategoryAnimeSlider 
+        title='Upcoming Anime' 
+        data={upcomingAnime.data} 
+        isLoading={isUpcomingAnimeLoading} 
+        isError={isUpcomingAnimeError}
+        error={upcomingAnimeError} />
     </div>
   )
 }

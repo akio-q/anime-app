@@ -32,7 +32,7 @@ const CategoryAnimeSlider = ({title, data, isLoading, isError, error}) => {
       <div className="title_fz25fw500 anime__category-title">{title}</div>
       <Swiper
         spaceBetween={20} 
-        slidesPerView={6}
+        slidesPerView={8}
         className="category-anime-slider"
       >
         {items}

@@ -2,15 +2,8 @@
 
 .anime {
   max-width: 1800px;
-  display: grid;
-  grid-template-columns: 3fr 1fr;
-  gap: 20px;
   margin: 20px auto 0 auto;
-  padding: 0 15px;
-  &__content {
-    width: 100%;
-    overflow: hidden;
-  }
+  padding: 0 30px;
   &__list {
     width: 100%;
     display: grid;
