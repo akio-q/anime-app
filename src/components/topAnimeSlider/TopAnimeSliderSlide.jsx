@@ -9,10 +9,8 @@ const TopAnimeSliderSlide = ({id, data}) => {
 
   const { images, title_english, title, synopsis, genres} = data;
   const img = images.webp.large_image_url;
-  const displayTitle = title_english && title_english.length > 37 
-                    ? title_english.slice(0, 50) + '...' 
-                    : title_english ?? title;
-  const descr = synopsis.length > 510 ? synopsis.slice(0, 510) + '...' : synopsis;
+  const displayTitle = title_english ? title_english : title;
+  const descr = synopsis.length > 800 ? synopsis.slice(0, 800) + '...' : synopsis;
   const genresString = genres.map(item => item.name).join(', ');
 
   return (
