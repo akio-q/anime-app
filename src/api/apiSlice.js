@@ -22,6 +22,12 @@ export const apiSlice = createApi({
     }),
     getAnimeSearch: builder.query({
       query: value => `/anime?q=${value}` 
+    }),
+    getAnimeGenres: builder.query({
+      query: () => '/genres/anime'
+    }),
+    getAnimeSeasons: builder.query({
+      query: () => '/seasons'
     })
   })
 })
@@ -32,6 +38,8 @@ export const {
   useGetTopAnimeQuery,
   useGetAnimeRecommendationsQuery,
   useGetRelatedAnimeQuery,
-  useGetAnimeSearchQuery
+  useGetAnimeSearchQuery,
+  useGetAnimeGenresQuery,
+  useGetAnimeSeasonsQuery
 } = apiSlice;
 export default apiSlice.reducer;
