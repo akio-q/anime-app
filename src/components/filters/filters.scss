@@ -47,6 +47,17 @@
     color: $main-text-color !important;
     border-radius: 5px;
     border-color: transparent;
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $secondary-text-color;
+      border-radius: 15px;
+    }
+    &::-webkit-scrollbar-track {
+      margin: 5px 0;
+      background-color: transparent;
+    }
   }
   &-1vr111p-option {
     min-width: 165px !important;
