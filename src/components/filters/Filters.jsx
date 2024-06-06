@@ -1,12 +1,16 @@
 import { useGetAnimeGenresQuery, useGetAnimeSeasonsQuery } from "../../api/apiSlice";
-import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
+import { setSeason, setYear, setGenre, setRating, setStatus, setEpisodes } from "./filtersSlice";
+import { useDispatch } from "react-redux";
 
+import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 import Spinner from "../Spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import './filters.scss';
 
 const Filters = () => {
+  const dispatch = useDispatch();
+
   const { 
     data: animeGenres = {}, 
     loading: isGenresLoading, 
@@ -24,7 +28,7 @@ const Filters = () => {
     return <ErrorMessage errorStatus={429} />
   }
 
-  const genresOptions = animeGenres.data ? animeGenres.data.map(item => {
+  const genreOptions = animeGenres.data ? animeGenres.data.map(item => {
     const nameLowerCase = item.name.toLowerCase(); 
     return { value: nameLowerCase, label: item.name }
   }) : [];
@@ -51,6 +55,7 @@ const Filters = () => {
               hideSearch={true}
               rightAligned={true}
               placeholderButtonLabel="Select Season"
+              onChange={(selected) => dispatch(setSeason(selected))}
             />
           </div>
           <div className="anime__filters-item">
@@ -58,6 +63,7 @@ const Filters = () => {
             <ReactMultiSelectCheckboxes 
               className="react-select-container"
               options={yearOptions}
+              onChange={(selected) => dispatch(setYear(selected))}
               hideSearch={true}
               rightAligned={true}
               placeholderButtonLabel="Select Year"
@@ -67,10 +73,11 @@ const Filters = () => {
             <div className="title_fz18fw600">Genre:</div>
             <ReactMultiSelectCheckboxes 
               className="react-select-container"
-              options={genresOptions}
+              options={genreOptions}
               hideSearch={true}
               rightAligned={true}
               placeholderButtonLabel="Select Genre"
+              onChange={(selected) => dispatch(setGenre(selected))}
             />
           </div>
           <div className="anime__filters-item">
@@ -92,6 +99,7 @@ const Filters = () => {
               hideSearch={true}
               rightAligned={true}
               placeholderButtonLabel="Select Rating"
+              onChange={(selected) => dispatch(setRating(selected))}
             />
           </div>
           <div className="anime__filters-item">
@@ -102,10 +110,12 @@ const Filters = () => {
                 { value: 'airing', label: 'Airing' },
                 { value: 'finished airing', label: 'Finished Airing' },
                 { value: 'upcoming', label: 'Upcoming' },
+                { value: 'not yet aired', label: 'Not Yet Aired' },
               ]}
               hideSearch={true}
               rightAligned={true}
               placeholderButtonLabel="Select Status"
+              onChange={(selected) => dispatch(setStatus(selected))}
             />
           </div>
           <div className="anime__filters-item">
@@ -122,6 +132,7 @@ const Filters = () => {
               hideSearch={true}
               rightAligned={true}
               placeholderButtonLabel="Select Episodes"
+              onChange={(selected) => dispatch(setEpisodes(selected))}
             />
           </div>
         </div>

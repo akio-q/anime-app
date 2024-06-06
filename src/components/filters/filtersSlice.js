@@ -2,13 +2,13 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   filters: {
-    season: '',
-    year: '',
-    episodes: '',
-    rating: '',
-    genre: '',
-    status: '',
-    search: ''
+    season: [],
+    year: [],
+    episodes: [],
+    rating: [],
+    genre: [],
+    status: [],
+    search: []
   },
   loadingStatus: 'idle', 
   error: null
