@@ -1,5 +1,6 @@
 const checkEpisodesMatch = (episodes, episodesSet) => {
   if (episodesSet.size === 0) return true;
+  if (episodes === null) return episodesSet.has('?');
   if (episodesSet.has(episodes.toString())) return true;
 
   const episodeNumber = parseInt(episodes);
@@ -27,7 +28,7 @@ const filterData = (data, filters) => {
     const matchesGenre = !item.genres || genreSet.size === 0 || item.genres.some(genre => genreSet.has(genre.name.toLowerCase()));
     const matchesRating = !item.score || ratingSet.size === 0 || ratingSet.has(Math.round(item.score).toString());
     const matchesStatus = !item.status || statusSet.size === 0 || statusSet.has(item.status.toLowerCase());
-    const matchesEpisodes = !item.episodes || episodesSet.size === 0 || checkEpisodesMatch(item.episodes, episodesSet);
+    const matchesEpisodes = episodesSet.size === 0 || checkEpisodesMatch(item.episodes, episodesSet);
 
     return matchesSeason && matchesYear && matchesGenre && matchesRating && matchesStatus && matchesEpisodes;
   });

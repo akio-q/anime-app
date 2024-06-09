@@ -13,9 +13,9 @@ const AnimeList = () => {
   const [filteredAnimeList, setFilteredAnimeList] = useState([]);
 
   useEffect(() => {
-    const filteredList = filterData(filters.search, filters);
-    setFilteredAnimeList(filteredList);
-    console.log(filteredAnimeList);
+    const filteredData = filterData(filters.search, filters);
+    console.log("Filtered Data:", filteredData);
+    setFilteredAnimeList(filteredData);
   }, [filters]);
 
   if (loadingStatus === 'loading') {
