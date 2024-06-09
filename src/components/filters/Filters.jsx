@@ -47,6 +47,7 @@ const Filters = () => {
             <ReactMultiSelectCheckboxes 
               className="react-select-container"
               options={[
+                { value: '?', label: '?' },
                 { value: 'fall', label: 'Fall' },
                 { value: 'winter', label: 'Winter' },
                 { value: 'spring', label: 'Spring' },
@@ -62,7 +63,7 @@ const Filters = () => {
             <div className="title_fz18fw600">Year:</div>
             <ReactMultiSelectCheckboxes 
               className="react-select-container"
-              options={yearOptions}
+                options={[{ value: '?', label: '?' }, ...yearOptions]}
               onChange={(selected) => dispatch(setYear(selected))}
               hideSearch={true}
               rightAligned={true}
@@ -85,6 +86,7 @@ const Filters = () => {
             <ReactMultiSelectCheckboxes 
               className="react-select-container"
               options={[
+                { value: '?', label: '?' },
                 { value: '1', label: '1' },
                 { value: '2', label: '2' },
                 { value: '3', label: '3' },
@@ -94,7 +96,7 @@ const Filters = () => {
                 { value: '7', label: '7' },
                 { value: '8', label: '8' },
                 { value: '9', label: '9' },
-                { value: '10', label: '10' },
+                { value: '10', label: '10' }
               ]}
               hideSearch={true}
               rightAligned={true}
@@ -107,7 +109,7 @@ const Filters = () => {
             <ReactMultiSelectCheckboxes 
               className="react-select-container"
               options={[
-                { value: 'airing', label: 'Airing' },
+                { value: 'currently airing', label: 'Currently Airing' },
                 { value: 'finished airing', label: 'Finished Airing' },
                 { value: 'upcoming', label: 'Upcoming' },
                 { value: 'not yet aired', label: 'Not Yet Aired' },
@@ -123,11 +125,11 @@ const Filters = () => {
             <ReactMultiSelectCheckboxes 
               className="react-select-container"
               options={[
+                { value: '?', label: '?' },
                 { value: '1', label: '1' },
                 { value: '12+', label: '12+' },
                 { value: '24+', label: '24+' },
-                { value: '100+', label: '100+' },  
-                { value: '?', label: '?' }
+                { value: '100+', label: '100+' }
               ]}
               hideSearch={true}
               rightAligned={true}

@@ -23,11 +23,11 @@ const filterData = (data, filters) => {
   const episodesSet = new Set(episodes.map(filter => filter.value));
 
   return data.filter(item => {
-    const matchesSeason = !item.sesason || seasonSet.size === 0 || seasonSet.has(item.season.toLowerCase());
-    const matchesYear = !item.year || yearSet.size === 0 || yearSet.has(item.year.toString());
-    const matchesGenre = !item.genres || genreSet.size === 0 || item.genres.some(genre => genreSet.has(genre.name.toLowerCase()));
-    const matchesRating = !item.score || ratingSet.size === 0 || ratingSet.has(Math.round(item.score).toString());
-    const matchesStatus = !item.status || statusSet.size === 0 || statusSet.has(item.status.toLowerCase());
+    const matchesSeason = seasonSet.size === 0 || (item.season === null ? seasonSet.has('?') : seasonSet.has(item.season.toLowerCase()));
+    const matchesYear = yearSet.size === 0 || (item.year === null ? yearSet.has('?') : yearSet.has(item.year.toString()));
+    const matchesGenre = genreSet.size === 0 || item.genres.some(genre => genreSet.has(genre.name.toLowerCase()));
+    const matchesRating = ratingSet.size === 0 || (item.score === null ? ratingSet.has('?') : ratingSet.has(Math.round(item.score).toString()));
+    const matchesStatus = statusSet.size === 0 || statusSet.has(item.status.toLowerCase());
     const matchesEpisodes = episodesSet.size === 0 || checkEpisodesMatch(item.episodes, episodesSet);
 
     return matchesSeason && matchesYear && matchesGenre && matchesRating && matchesStatus && matchesEpisodes;
