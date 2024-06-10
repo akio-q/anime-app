@@ -1,14 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
+  data: [],
   filters: {
     season: [],
     year: [],
     episodes: [],
     rating: [],
     genre: [],
-    status: [],
-    search: []
+    status: []
   },
   loadingStatus: 'idle', 
   error: null
@@ -18,8 +18,8 @@ const filtersSlice = createSlice({
   name: 'filters',
   initialState,
   reducers: {
-    setSearch: (state, action) => {
-      state.filters.search = action.payload;
+    setData: (state, action) => {
+      state.data = action.payload;
       state.loadingStatus = 'idle';
       state.error = null;
     },
@@ -69,7 +69,7 @@ const filtersSlice = createSlice({
 });
 
 export const {
-  setSearch,
+  setData,
   setSeason,
   setYear,
   setGenre,

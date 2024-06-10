@@ -9,14 +9,14 @@ import ErrorMessage from "../errorMessage/ErrorMessage";
 import namiSticker from '../../resources/img/nami_sticker.png';
 
 const AnimeList = () => {
-  const { filters, loadingStatus } = useSelector(state => state.filters);
+  const { data, filters, loadingStatus } = useSelector(state => state.filters);
   const [filteredAnimeList, setFilteredAnimeList] = useState([]);
 
   useEffect(() => {
-    const filteredData = filterData(filters.search, filters);
+    const filteredData = filterData(data, filters);
     console.log("Filtered Data:", filteredData);
     setFilteredAnimeList(filteredData);
-  }, [filters]);
+  }, [data, filters]);
 
   if (loadingStatus === 'loading') {
     return <Spinner />

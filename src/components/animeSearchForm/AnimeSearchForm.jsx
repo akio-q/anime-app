@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import { useGetAnimeSearchQuery } from '../../api/apiSlice';
-import { setSearch, setLoading, setLoadingFailed } from '../filters/filtersSlice';
+import { setData, setLoading, setLoadingFailed } from '../filters/filtersSlice';
 
 import './animeSearchForm.scss';
 
@@ -17,7 +17,7 @@ const AnimeSearchForm = () => {
     if (isError) {
       dispatch(setLoadingFailed());
     } else if (anime && anime.data) {
-      dispatch(setSearch(anime.data));
+      dispatch(setData(anime.data));
     } 
   }, [anime, isError]);
 
