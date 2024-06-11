@@ -29,7 +29,7 @@ const AnimeList = () => {
       return (
         <div className='error-message limit-error anime__list-error '>
           <img src={namiSticker} className='error-message__img' alt="nami-error" />
-          <div className="title_fz18fw600 error-message__text">Oops! We couldn't find any anime matching your search. <br /> Please check the spelling or try searching for a different title.</div>
+          <div className="title_fz18fw600 error-message__text">Oops! No anime matches your search or filter criteria.  <br /> Please try adjusting your filters or search terms.</div>
         </div>
       )
     } else {
