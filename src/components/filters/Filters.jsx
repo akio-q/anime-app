@@ -139,7 +139,7 @@ const Filters = () => {
           </div>
         </div>
         
-        <button type="submit" className="button button__filter">Filter</button>
+        <button type="submit" className="button button__filter" disabled>Filter</button>
       </form>
     </div>
   );
