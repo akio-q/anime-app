@@ -14,5 +14,14 @@
       text-align: center;
       color: $main-text-color;
     }
+    &-button {
+      padding: 15px 50px !important;
+      border-radius: 30px !important;
+      &-container {
+        display: flex;
+        justify-content: center;
+        margin: 50px; 
+      }
+    }
   }
 }

@@ -48,6 +48,9 @@ const AnimeList = () => {
   return (
     <>
       {animeList}
+      <div className="anime__list-button-container">
+        <button className="button anime__list-button">Load More</button>
+      </div>
     </>
   )
 }
