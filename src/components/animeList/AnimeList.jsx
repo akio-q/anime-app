@@ -13,9 +13,11 @@ const AnimeList = () => {
   const [filteredAnimeList, setFilteredAnimeList] = useState([]);
 
   useEffect(() => {
-    const filteredData = filterData(data, filters);
-    console.log("Filtered Data:", filteredData);
-    setFilteredAnimeList(filteredData);
+    if (data && data.data) {
+      console.log(data);
+      const filteredData = filterData(data.data, filters);
+      setFilteredAnimeList(filteredData); 
+    }
   }, [data, filters]);
 
   if (loadingStatus === 'loading') {
@@ -48,9 +50,12 @@ const AnimeList = () => {
   return (
     <>
       {animeList}
-      <div className="anime__list-button-container">
-        <button className="button anime__list-button">Load More</button>
-      </div>
+      {data.pagination && data.pagination.has_next_page ? 
+        <div className="anime__list-button-container">
+          <button className="button anime__list-button">Load More</button>
+        </div> 
+        : null
+      }
     </>
   )
 }

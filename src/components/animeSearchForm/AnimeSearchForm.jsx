@@ -17,7 +17,7 @@ const AnimeSearchForm = () => {
     if (isError) {
       dispatch(setLoadingFailed());
     } else if (anime && anime.data) {
-      dispatch(setData(anime.data));
+      dispatch(setData(anime));
     } 
   }, [anime, isError]);
 
