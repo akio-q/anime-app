@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from "react-redux";
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import { useGetAnimeSearchQuery } from '../../api/apiSlice';
-import { setData, setLoading, setLoadingFailed } from '../filters/filtersSlice';
+import { setData, setSearch, setLoading, setLoadingFailed } from '../filters/filtersSlice';
 
 import './animeSearchForm.scss';
 
 const AnimeSearchForm = () => {
-  const [searchValue, setSearchValue] = useState('');
-  const { data: anime = {}, isError } = useGetAnimeSearchQuery(searchValue, { skip: !searchValue });
+  const { filters } = useSelector(state => state.filters);
+  const { data: anime = {}, isError } = useGetAnimeSearchQuery(filters.search, { skip: !filters.search });
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -22,8 +22,12 @@ const AnimeSearchForm = () => {
   }, [anime, isError]);
 
   const onSubmit = ({animeName}) => {
+    if (animeName.trim() === '') {
+      return; 
+    }
+
     dispatch(setLoading());
-    setSearchValue(animeName);
+    dispatch(setSearch(animeName));
     navigate(`/filter?q=${animeName}`);
   }
 
