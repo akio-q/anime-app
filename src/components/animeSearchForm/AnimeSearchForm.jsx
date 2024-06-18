@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
@@ -10,6 +10,8 @@ import './animeSearchForm.scss';
 const AnimeSearchForm = () => {
   const { filters } = useSelector(state => state.filters);
   const { data: anime = {}, isError } = useGetAnimeSearchQuery(filters.search, { skip: !filters.search });
+  const [prevSearch, setPrevSearch] = useState('');
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -22,12 +24,13 @@ const AnimeSearchForm = () => {
   }, [anime, isError]);
 
   const onSubmit = ({animeName}) => {
-    if (animeName.trim() === '') {
+    if (animeName.trim() === '' || animeName === prevSearch) {
       return; 
     }
 
     dispatch(setLoading());
     dispatch(setSearch(animeName));
+    setPrevSearch(animeName); 
     navigate(`/filter?q=${animeName}`);
   }
 
