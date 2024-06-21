@@ -9,7 +9,7 @@ import './animeSearchForm.scss';
 
 const AnimeSearchForm = () => {
   const { filters } = useSelector(state => state.filters);
-  const { data: anime = {}, isError } = useGetAnimeSearchQuery(filters.search, { skip: !filters.search });
+  const { data: anime = {}, isError } = useGetAnimeSearchQuery({ value: filters.search }, { skip: !filters.search });
   const [prevSearch, setPrevSearch] = useState('');
   
   const navigate = useNavigate();

@@ -11,6 +11,7 @@ const initialState = {
     genre: [],
     status: []
   },
+  page: 1,
   loadingStatus: 'idle', 
   error: null
 };
@@ -57,6 +58,12 @@ const filtersSlice = createSlice({
       state.loadingStatus = 'idle';
       state.error = null;
     },
+    incrementPage: (state) => {
+      state.page += 1;
+    },
+    resetPage: (state) => {
+      state.page = 1;
+    },
     setLoading: (state) => {
       state.loadingStatus = 'loading';
       state.error = null;
@@ -77,6 +84,8 @@ export const {
   setRating,
   setStatus,
   setEpisodes,
+  incrementPage,
+  resetPage,
   setLoading,
   setLoadingFailed
 } = filtersSlice.actions;
