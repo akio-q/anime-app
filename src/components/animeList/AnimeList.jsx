@@ -14,21 +14,26 @@ const AnimeList = () => {
   const { data, filters, page, loadingStatus } = useSelector(state => state.filters);
   const [fetchAnimeSearch, { data: animeSearchData }] = useLazyGetAnimeSearchQuery();
   const [filteredAnimeList, setFilteredAnimeList] = useState([]);
+  const [hasNextPage, setHasNextPage] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (data && data.data) {
       const filteredData = filterData(data.data, filters);
       setFilteredAnimeList(filteredData); 
+      setHasNextPage(data.pagination.has_next_page);
     }
   }, [data, filters]);
+  
   useEffect(() => {
     if (animeSearchData && animeSearchData.data) {
       console.log(animeSearchData);
       const filteredData = filterData(animeSearchData.data, filters);
       setFilteredAnimeList(prevList => [...prevList, ...filteredData]);
+      setHasNextPage(animeSearchData.pagination.has_next_page);
     }
   }, [animeSearchData])
+
 
   if (loadingStatus === 'loading') {
     return <Spinner />
@@ -65,11 +70,11 @@ const AnimeList = () => {
   return (
     <>
       {animeList}
-      {data && data.pagination && data.pagination.has_next_page ? 
+      {hasNextPage ? ( 
         <div className="anime__list-button-container">
           <button className="button anime__list-button" onClick={onLoadMore}>Load More</button>
         </div> 
-        : null
+      ) : null
       }
     </>
   )
