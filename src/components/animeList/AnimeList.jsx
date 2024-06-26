@@ -20,20 +20,22 @@ const AnimeList = () => {
   useEffect(() => {
     if (data && data.data) {
       const filteredData = filterData(data.data, filters);
-      setFilteredAnimeList(filteredData); 
+      setFilteredAnimeList(filteredData);
       setHasNextPage(data.pagination.has_next_page);
     }
   }, [data, filters]);
   
   useEffect(() => {
     if (animeSearchData && animeSearchData.data) {
-      console.log(animeSearchData);
-      const filteredData = filterData(animeSearchData.data, filters);
-      setFilteredAnimeList(prevList => [...prevList, ...filteredData]);
-      setHasNextPage(animeSearchData.pagination.has_next_page);
-    }
-  }, [animeSearchData])
+      const updatedData = {
+        ...data,
+        data: [...data.data, ...animeSearchData.data],
+        pagination: animeSearchData.pagination
+      }
 
+      dispatch(setData(updatedData));
+    }
+  }, [animeSearchData]);
 
   if (loadingStatus === 'loading') {
     return <Spinner />
@@ -47,7 +49,7 @@ const AnimeList = () => {
   }
 
   const renderAnimeList = (arr) => {
-    if (arr.length === 0) { 
+    if (arr.length === 0) {       
       return (
         <div className='error-message limit-error anime__list-error '>
           <img src={namiSticker} className='error-message__img' alt="nami-error" />
@@ -58,6 +60,7 @@ const AnimeList = () => {
       const items = arr.map((item, i) => (
         <AnimeCard key={i} id={item.mal_id} data={item} />
       ))
+      
       return (
         <div className="anime__list">
           {items}
