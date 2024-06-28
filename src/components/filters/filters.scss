@@ -5,7 +5,7 @@
     position: sticky;
     top: 20px;
     height: fit-content;
-    margin-bottom: 155px;
+    margin-bottom: 255px;
     background-color: $main-color;
     border-radius: 10px;
     &-title {
@@ -19,6 +19,7 @@
       flex-wrap: wrap;
       justify-content: space-between;
       row-gap: 15px;
+      margin-top: 10px;
     }
     &-item {
       display: flex;
@@ -27,6 +28,14 @@
     }
     &-form {
       width: 100%;
+    }
+    &-sticker {
+      position: relative; 
+      width: 260px;
+      height: 280px;
+      display: block;
+      margin: 30px auto -70px auto;
+      z-index: 1; 
     }
   }
 }
@@ -50,6 +59,7 @@
     color: $main-text-color !important;
     border-radius: 5px;
     border-color: transparent;
+    z-index: 2 ; 
     &::-webkit-scrollbar {
       width: 8px;
     }

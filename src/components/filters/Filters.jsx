@@ -6,6 +6,7 @@ import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 import Spinner from "../Spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 
+import chopperSticker from '../../resources/img/chopper_sticker.png'
 import './filters.scss';
 
 const Filters = () => {
@@ -138,7 +139,7 @@ const Filters = () => {
             />
           </div>
         </div>
-        
+        <img className="anime__filters-sticker" src={chopperSticker} alt="chopper-sticker" />
         <button type="submit" className="button button__filter" disabled>Filter</button>
       </form>
     </div>
