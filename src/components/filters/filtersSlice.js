@@ -61,9 +61,6 @@ const filtersSlice = createSlice({
     incrementPage: (state) => {
       state.page += 1;
     },
-    resetPage: (state) => {
-      state.page = 1;
-    },
     setLoading: (state) => {
       state.loadingStatus = 'loading';
       state.error = null;
@@ -85,7 +82,6 @@ export const {
   setStatus,
   setEpisodes,
   incrementPage,
-  resetPage,
   setLoading,
   setLoadingFailed
 } = filtersSlice.actions;
