@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import RelatedAnime from '../../relatedAnime/RelatedAnime';
@@ -9,6 +10,10 @@ import './singleAnimeLayout.scss';
 const SingleAnimeLayout = () => {
   const location = useLocation();
   const data = location.state ? location.state.data : null;
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   if (!data) {
     return <ErrorMessage />
