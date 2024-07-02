@@ -12,7 +12,7 @@ import namiSticker from '../../resources/img/nami_sticker.png';
 
 const AnimeList = () => {
   const { data, filters, page, loadingStatus } = useSelector(state => state.filters);
-  const [fetchAnimeSearch, { data: animeSearchData }] = useLazyGetAnimeSearchQuery();
+  const [fetchAnimeSearch, { data: animeSearchData, isFetching }] = useLazyGetAnimeSearchQuery();
   const [filteredAnimeList, setFilteredAnimeList] = useState([]);
   const [hasNextPage, setHasNextPage] = useState(false);
   const dispatch = useDispatch();
@@ -73,12 +73,16 @@ const AnimeList = () => {
   return (
     <>
       {animeList}
-      {hasNextPage ? ( 
+      { hasNextPage ? ( 
         <div className="anime__list-button-container">
-          <button className="button anime__list-button" onClick={onLoadMore}>Load More</button>
+          <button 
+            className="button anime__list-button" 
+            onClick={onLoadMore}
+            disabled={isFetching}>
+              {isFetching ? 'Loading...' : 'Load More'}
+          </button>
         </div> 
-      ) : null
-      }
+      ) : null }
     </>
   )
 }

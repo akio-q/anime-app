@@ -17,6 +17,13 @@
     &-button {
       padding: 15px 50px !important;
       border-radius: 30px !important;
+      &:disabled {
+        background-color: #46217a;
+        color: #8d8d8d;
+      }
+      &:disabled:hover {
+        box-shadow: none;
+      }
       &-container {
         display: flex;
         justify-content: center;
