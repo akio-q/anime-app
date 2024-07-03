@@ -81,16 +81,15 @@ const AnimeList = () => {
   return (
     <>
       {animeList}
-      { hasNextPage ? ( 
-        <div className="anime__list-button-container">
-          <button 
-            className="button anime__list-button" 
-            onClick={onLoadMore}
-            disabled={isFetching}>
-              {isFetching ? 'Loading...' : 'Load More'}
-          </button>
-        </div> 
-      ) : null }
+      <div className="anime__list-button-container">
+        <button 
+          className="button anime__list-button" 
+          onClick={onLoadMore}
+          style={{'display': hasNextPage ? 'block' : 'none'}}
+          disabled={isFetching}>
+            {isFetching ? 'Loading...' : 'Load More'}
+        </button>
+      </div> 
     </>
   )
 }
