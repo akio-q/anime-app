@@ -25,42 +25,14 @@ const filtersSlice = createSlice({
       state.loadingStatus = 'idle';
       state.error = null;
     },
-    setSearch: (state, action) => {
-      state.filters.search = action.payload;
-    },
-    setSeason: (state, action) => {
-      state.filters.season = action.payload;
-      state.loadingStatus = 'idle';
-      state.error = null;
-    },
-    setYear: (state, action) => {
-      state.filters.year = action.payload;
-      state.loadingStatus = 'idle';
-      state.error = null;
-    },
-    setGenre: (state, action) => {
-      state.filters.genre = action.payload;
-      state.loadingStatus = 'idle';
-      state.error = null;
-    },
-    setRating: (state, action) => {
-      state.filters.rating = action.payload;
-      state.loadingStatus = 'idle';
-      state.error = null;
-    },
-    setStatus: (state, action) => {
-      state.filters.status = action.payload;
-      state.loadingStatus = 'idle';
-      state.error = null;
-    },
-    setEpisodes: (state, action) => {
-      state.filters.episodes = action.payload;
-      state.loadingStatus = 'idle';
-      state.error = null;
-    },
-    incrementPage: (state) => {
-      state.page += 1;
-    },
+    setSearch: (state, action) => { state.filters.search = action.payload },
+    setSeason: (state, action) => { state.filters.season = action.payload },
+    setYear: (state, action) => { state.filters.year = action.payload },
+    setGenre: (state, action) => { state.filters.genre = action.payload },
+    setRating: (state, action) => { state.filters.rating = action.payload },
+    setStatus: (state, action) => { state.filters.status = action.payload },
+    setEpisodes: (state, action) => { state.filters.episodes = action.payload },
+    incrementPage: (state) => { state.page += 1 },
     setLoading: (state) => {
       state.loadingStatus = 'loading';
       state.error = null;
