@@ -1,5 +1,12 @@
 import { useGetAnimeGenresQuery, useGetAnimeSeasonsQuery } from "../../api/apiSlice";
-import { setSeason, setYear, setGenre, setRating, setStatus, setEpisodes } from "./filtersSlice";
+import { 
+  setSeason, 
+  setYear, 
+  setGenre, 
+  setRating, 
+  setStatus, 
+  setEpisodes, 
+  setFilterTrigger } from "./filtersSlice";
 import { useDispatch } from "react-redux";
 
 import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
@@ -38,10 +45,15 @@ const Filters = () => {
     return { value: yearString, label: yearString }
   }) : [];
 
+  const handleFilterClick = (e) => {
+    e.preventDefault();
+    dispatch(setFilterTrigger(true));
+  };
+
   return (
     <div className="anime__filters">
       <div className="anime__filters-title title title_fz25fw500">Filter Anime</div>
-      <form>
+      <form onSubmit={handleFilterClick}>
         <div className="anime__filters-section">
           <div className="anime__filters-item">
             <div className="title_fz18fw600">Season:</div>
@@ -140,7 +152,7 @@ const Filters = () => {
           </div>
         </div>
         <img className="anime__filters-sticker" src={chopperSticker} alt="chopper-sticker" />
-        <button type="submit" className="button button__filter" disabled>Filter</button>
+        <button type="submit" className="button button__filter">Filter</button>
       </form>
     </div>
   );
