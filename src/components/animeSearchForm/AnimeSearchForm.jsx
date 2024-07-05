@@ -3,7 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
 import { useGetAnimeSearchQuery } from '../../api/apiSlice';
-import { setData, setSearch, setLoading, setLoadingFailed } from '../filters/filtersSlice';
+import { 
+  setData, 
+  setSearch, 
+  resetPage, 
+  setLoading, 
+  setLoadingFailed } from '../filters/filtersSlice';
 
 import './animeSearchForm.scss';
 
@@ -29,6 +34,7 @@ const AnimeSearchForm = () => {
     }
 
     dispatch(setLoading());
+    dispatch(resetPage());
     dispatch(setSearch(animeName));
     setPrevSearch(animeName); 
     navigate(`/filter?q=${animeName}`);
