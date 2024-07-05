@@ -1,3 +1,4 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useGetAnimeGenresQuery, useGetAnimeSeasonsQuery } from "../../api/apiSlice";
 import { 
   setSeason, 
@@ -7,7 +8,6 @@ import {
   setStatus, 
   setEpisodes, 
   setFilterTrigger } from "./filtersSlice";
-import { useDispatch } from "react-redux";
 
 import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
 import Spinner from "../Spinner/Spinner";
@@ -17,6 +17,7 @@ import chopperSticker from '../../resources/img/chopper_sticker.png'
 import './filters.scss';
 
 const Filters = () => {
+  const { filters } = useSelector(state => state.filters);
   const dispatch = useDispatch();
 
   const { 
@@ -74,6 +75,7 @@ const Filters = () => {
               hideSearch={true}
               rightAligned={true}
               placeholderButtonLabel="Select Season"
+              value={filters.season}
               onChange={(selected) => dispatch(setSeason(selected))}
             />
           </div>
@@ -81,11 +83,12 @@ const Filters = () => {
             <div className="title_fz18fw600">Year:</div>
             <ReactMultiSelectCheckboxes 
               className="react-select-container"
-                options={[{ value: '?', label: '?' }, ...yearOptions]}
-              onChange={(selected) => dispatch(setYear(selected))}
+              options={[{ value: '?', label: '?' }, ...yearOptions]}
               hideSearch={true}
               rightAligned={true}
               placeholderButtonLabel="Select Year"
+              value={filters.year}
+              onChange={(selected) => dispatch(setYear(selected))}
             />
           </div>
           <div className="anime__filters-item">
@@ -96,6 +99,7 @@ const Filters = () => {
               hideSearch={true}
               rightAligned={true}
               placeholderButtonLabel="Select Genre"
+              value={filters.genre}
               onChange={(selected) => dispatch(setGenre(selected))}
             />
           </div>
@@ -119,6 +123,7 @@ const Filters = () => {
               hideSearch={true}
               rightAligned={true}
               placeholderButtonLabel="Select Rating"
+              value={filters.rating}
               onChange={(selected) => dispatch(setRating(selected))}
             />
           </div>
@@ -135,6 +140,7 @@ const Filters = () => {
               hideSearch={true}
               rightAligned={true}
               placeholderButtonLabel="Select Status"
+              value={filters.status}
               onChange={(selected) => dispatch(setStatus(selected))}
             />
           </div>
@@ -152,6 +158,7 @@ const Filters = () => {
               hideSearch={true}
               rightAligned={true}
               placeholderButtonLabel="Select Episodes"
+              value={filters.episodes}
               onChange={(selected) => dispatch(setEpisodes(selected))}
             />
           </div>

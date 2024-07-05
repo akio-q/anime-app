@@ -36,6 +36,17 @@ const filtersSlice = createSlice({
     incrementPage: (state) => { state.page += 1 },
     resetPage: (state) => { state.page = 1 },
     setFilterTrigger: (state, action) => { state.filterTrigger = action.payload },
+    resetFilters: (state) => { 
+      state.filters = {
+        search: state.filters.search, 
+        season: [],
+        year: [],
+        episodes: [],
+        rating: [],
+        genre: [],
+        status: []
+      };
+    },
     setLoading: (state) => {
       state.loadingStatus = 'loading';
       state.error = null;
@@ -59,6 +70,7 @@ export const {
   incrementPage,
   resetPage,
   setFilterTrigger,
+  resetFilters,
   setLoading,
   setLoadingFailed
 } = filtersSlice.actions;

@@ -7,6 +7,7 @@ import {
   setData, 
   setSearch, 
   resetPage, 
+  resetFilters,
   setLoading, 
   setLoadingFailed } from '../filters/filtersSlice';
 
@@ -35,6 +36,7 @@ const AnimeSearchForm = () => {
 
     dispatch(setLoading());
     dispatch(resetPage());
+    dispatch(resetFilters());
     dispatch(setSearch(animeName));
     setPrevSearch(animeName); 
     navigate(`/filter?q=${animeName}`);
