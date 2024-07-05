@@ -50,7 +50,8 @@ const AnimeSearchForm = () => {
             name="animeName"
             type="text" 
             className="search__input"
-            placeholder="Search anime" />
+            placeholder="Search anime"
+            autoComplete="off" />
             <button type='submit' className='search__submit'>
               <i className='icon-search'></i>
             </button>
