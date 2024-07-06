@@ -28,6 +28,9 @@ export const apiSlice = createApi({
     }),
     getAnimeSeasons: builder.query({
       query: () => '/seasons'
+    }),
+    getRecentAnimeRecommendations: builder.query({
+      query: () => '/recommendations/anime'
     })
   })
 })
@@ -41,6 +44,7 @@ export const {
   useGetAnimeSearchQuery,
   useLazyGetAnimeSearchQuery,
   useGetAnimeGenresQuery,
-  useGetAnimeSeasonsQuery
+  useGetAnimeSeasonsQuery,
+  useGetRecentAnimeRecommendationsQuery
 } = apiSlice;
 export default apiSlice.reducer;
