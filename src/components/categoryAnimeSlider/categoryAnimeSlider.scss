@@ -4,6 +4,9 @@
   &__category {
     &-title {
       margin: 35px 0 10px 0;
+      &:first-child {
+        margin-top: 0;
+      }
     }
   }
 }
