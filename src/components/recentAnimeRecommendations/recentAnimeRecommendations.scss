@@ -23,22 +23,6 @@
       height: 100%;
       border-radius: 10px;
     }
-    &-container {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 100%;
-      padding: 8px 0;
-    }
-    &-info {
-      display: flex;
-      column-gap: 10px;
-      font-size: 13px;
-      font-weight: 300;
-      color: $secondary-color-light;
-      &-divider {
-        color: $secondary-text-color;
-      }
-    }
+
   }
 }
