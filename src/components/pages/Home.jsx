@@ -2,6 +2,7 @@ import { useGetTopSeasonalAnimeQuery, useGetUpcomingAnimeQuery, useGetTopAnimeQu
 
 import TopAnimeSlider from "../topAnimeSlider/TopAnimeSlider";
 import CategoryAnimeSlider from '../categoryAnimeSlider/CategoryAnimeSlider';
+import RecentAnimeRecommendations from "../recentAnimeRecommendations/RecentAnimeRecommendations";
 
 import '../animeList/animeList.scss';
 
@@ -24,28 +25,33 @@ const Home = () => {
     isError: isUpcomingAnimeError,
     error: upcomingAnimeError
   } = useGetUpcomingAnimeQuery();
-
+  
   return (
     <div className="anime">
       <TopAnimeSlider />
-      <CategoryAnimeSlider 
-        title='Top Seasonal Anime' 
-        data={topSeasonalAnime.data} 
-        isLoading={isTopSeasonalAnimeLoading} 
-        isError={isTopSeasonalAnimeError}
-        error={TopSeasonalAnimeError} />
-      <CategoryAnimeSlider 
-        title='Popular Anime' 
-        data={topAnime.data} 
-        isLoading={isTopAnimeLoading} 
-        isError={isTopAnimeError}
-        error={topAnimeError} />
-      <CategoryAnimeSlider 
-        title='Upcoming Anime' 
-        data={upcomingAnime.data} 
-        isLoading={isUpcomingAnimeLoading} 
-        isError={isUpcomingAnimeError}
-        error={upcomingAnimeError} />
+      <div className="anime__wrapper">
+        <div className="anime__wrapper-container">
+          <CategoryAnimeSlider 
+            title='Top Seasonal Anime' 
+            data={topSeasonalAnime.data} 
+            isLoading={isTopSeasonalAnimeLoading} 
+            isError={isTopSeasonalAnimeError}
+            error={TopSeasonalAnimeError} />
+          <CategoryAnimeSlider 
+            title='Popular Anime' 
+            data={topAnime.data} 
+            isLoading={isTopAnimeLoading} 
+            isError={isTopAnimeError}
+            error={topAnimeError} />
+          <CategoryAnimeSlider 
+            title='Upcoming Anime' 
+            data={upcomingAnime.data} 
+            isLoading={isUpcomingAnimeLoading} 
+            isError={isUpcomingAnimeError}
+            error={upcomingAnimeError} />
+        </div>
+        <RecentAnimeRecommendations />
+      </div>
     </div>
   )
 }

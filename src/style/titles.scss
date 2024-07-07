@@ -26,6 +26,9 @@
     &_fz18fw500 {
       @include title(18px, 500, $secondary-text-color);
     }
+    &_fz16fw500 {
+      @include title(16px, 500, $secondary-text-color);
+    }
     &_fz16fw300 {
       @include title(16px, 300);
     }
