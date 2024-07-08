@@ -10,13 +10,13 @@ import ErrorMessage from '../../errorMessage/ErrorMessage';
 import './singleAnimeLayout.scss';
 
 const SingleAnimeLayout = () => {
-  const id = useParams();
+  const { animeId } = useParams();
   const {
     data: anime,
     isLoading, 
     isError,
     error
-  } = useGetAnimeByIdQuery(id.animeId);
+  } = useGetAnimeByIdQuery(animeId);
 
   useEffect(() => {
     window.scrollTo({
@@ -24,7 +24,7 @@ const SingleAnimeLayout = () => {
       left: 0,
       behavior: "smooth"
     });
-  }, [id]);
+  }, [animeId]);
 
   if (isLoading) {
     return <Spinner />
