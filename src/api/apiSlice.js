@@ -5,6 +5,9 @@ export const apiSlice = createApi({
   baseQuery: fetchBaseQuery({baseUrl: 'https://api.jikan.moe/v4'}),
   tagTypes: ['Anime'],
   endpoints: builder => ({
+    getAnimeById: builder.query({
+      query: id => `anime/${id}`
+    }),
     getTopSeasonalAnime: builder.query({
       query: () => '/seasons/now'
     }),
@@ -36,6 +39,7 @@ export const apiSlice = createApi({
 })
 
 export const {
+  useGetAnimeByIdQuery,
   useGetTopSeasonalAnimeQuery,
   useGetUpcomingAnimeQuery, 
   useGetTopAnimeQuery,
