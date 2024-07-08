@@ -24,4 +24,19 @@
     border-radius: 0 0 15px 15px;  
     margin-top: 50px;
   }
+  &__recent-recommendations {
+    height: 100%;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    background-color: $main-color-light;
+    font-size: 18px;
+    border-radius: 0 10px 10px 0;
+    &:hover .icon-arrow-right {
+      transition: .6s all;
+      color: $secondary-color-light;
+    }
+  }
 }

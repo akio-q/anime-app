@@ -30,12 +30,25 @@ const RecentAnimeRecommendations = () => {
   }
 
   const renderRecentAnimeRecommendations = (arr) => {
-    return arr.map(item => (
-      <div className="recent-recommendations__card" key={item.mal_id}>
-        <img src={item.entry[0].images.webp.large_image_url} alt="" className="recent-recommendations__card-img" />
-        <div className="title_fz16fw500">{item.entry[0].title}</div>
+    return arr.map(item => {
+      const { images, title } = item.entry[0];
+      const img = images.webp.large_image_url;
+
+      return (
+        <div className="recent-recommendations__card" key={item.mal_id}>
+        <div className="recent-recommendations__info">
+          <img 
+            src={img} 
+            alt={title}
+            className="recent-recommendations__img" />
+          <div className="title_fz16fw500">{title}</div>
+        </div>
+        <button className='button button__recent-recommendations'>
+          <i className='icon-arrow-right'></i>
+        </button>
       </div>
-    ))
+      )
+    })
   }
 
   const items = renderRecentAnimeRecommendations(data);
