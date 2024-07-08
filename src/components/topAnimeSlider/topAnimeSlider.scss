@@ -47,5 +47,8 @@
   &__button {
     padding: 20px 35px !important;
     border-radius: 30px !important;
+    &:hover {
+      color: $main-text-color;
+    }
   }
 }

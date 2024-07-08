@@ -1,12 +1,6 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const TopAnimeSliderSlide = ({id, data}) => {
-  const navigate = useNavigate();
-
-  const navigateToSingleAnimePage = () => {
-    navigate(`/anime/${id}`, {state: {data}})
-  }
-
   const { images, title_english, title, synopsis, genres} = data;
   const img = images.webp.large_image_url;
   const displayTitle = title_english ? title_english : title;
@@ -24,9 +18,10 @@ const TopAnimeSliderSlide = ({id, data}) => {
             <i className='icon-price-tag'></i>
             <div className="top-anime-slider__genre-text">{genresString}</div>
           </div>
-          <button 
+          <NavLink 
             className='button top-anime-slider__button'
-            onClick={navigateToSingleAnimePage}>Visit the page</button>
+            end
+            to={`/anime/${id}`}>Visit the page</NavLink>
         </div>
       </div>
     </>

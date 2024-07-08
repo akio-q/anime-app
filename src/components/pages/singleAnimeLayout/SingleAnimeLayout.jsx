@@ -1,15 +1,22 @@
 import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useGetAnimeByIdQuery } from '../../../api/apiSlice';
 
 import RelatedAnime from '../../relatedAnime/RelatedAnime';
 import AnimeRecommendations from '../../animeRecommendations/AnimeRecommendations';
+import Spinner from '../../Spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
 
 import './singleAnimeLayout.scss';
 
 const SingleAnimeLayout = () => {
-  const location = useLocation();
-  const data = location.state ? location.state.data : null;
+  const id = useParams();
+  const {
+    data: anime,
+    isLoading, 
+    isError,
+    error
+  } = useGetAnimeByIdQuery(id.animeId);
 
   useEffect(() => {
     window.scrollTo({
@@ -17,10 +24,12 @@ const SingleAnimeLayout = () => {
       left: 0,
       behavior: "smooth"
     });
-  }, [location]);
+  }, [id]);
 
-  if (!data) {
-    return <ErrorMessage />
+  if (isLoading) {
+    return <Spinner />
+  } else if (isError) {
+    return <ErrorMessage errorStatus={error.status} />
   }
 
   const { 
@@ -37,7 +46,7 @@ const SingleAnimeLayout = () => {
     year,
     episodes,
     synopsis 
-  } = data;
+  } = anime.data;
   const img = images.webp.large_image_url;
   const displayEpisodes = episodes ? episodes : '?'; 
 
