@@ -5,7 +5,6 @@ import { Formik, Form, Field } from 'formik';
 import { useGetAnimeSearchQuery } from '../../api/apiSlice';
 import { 
   setData, 
-  setSearch, 
   resetPage, 
   resetFilters,
   setLoading, 
@@ -37,9 +36,8 @@ const AnimeSearchForm = () => {
     dispatch(setLoading());
     dispatch(resetPage());
     dispatch(resetFilters());
-    dispatch(setSearch(animeName));
-    setPrevSearch(animeName); 
-    navigate(`/filter?q=${animeName}`);
+    setPrevSearch(animeName);
+    navigate(`/search/${animeName}`);  
   }
 
   return (
@@ -54,7 +52,7 @@ const AnimeSearchForm = () => {
             className="search__input"
             placeholder="Search anime"
             autoComplete="off" />
-            <button type='submit' className='search__submit'>
+            <button type="submit" className='search__submit'>
               <i className='icon-search'></i>
             </button>
         </Form>
