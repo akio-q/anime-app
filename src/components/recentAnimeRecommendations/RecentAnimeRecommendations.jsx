@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useGetRecentAnimeRecommendationsQuery } from '../../api/apiSlice';
 
 import Spinner from '../Spinner/Spinner';
@@ -31,11 +32,11 @@ const RecentAnimeRecommendations = () => {
 
   const renderRecentAnimeRecommendations = (arr) => {
     return arr.map(item => {
-      const { images, title } = item.entry[0];
+      const { mal_id, images, title } = item.entry[0];
       const img = images.webp.large_image_url;
 
       return (
-        <div className="recent-recommendations__card" key={item.mal_id}>
+        <div className="recent-recommendations__card" key={mal_id}>
         <div className="recent-recommendations__info">
           <img 
             src={img} 
@@ -43,9 +44,12 @@ const RecentAnimeRecommendations = () => {
             className="recent-recommendations__img" />
           <div className="title_fz16fw500">{title}</div>
         </div>
-        <button className='button button__recent-recommendations'>
+        <NavLink 
+          className='button button__recent-recommendations'
+          end
+          to={`/anime/${mal_id}`}>
           <i className='icon-arrow-right'></i>
-        </button>
+        </NavLink>
       </div>
       )
     })
