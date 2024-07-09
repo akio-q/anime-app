@@ -31,21 +31,24 @@ const RecentAnimeRecommendations = () => {
   }
 
   const renderRecentAnimeRecommendations = (arr) => {
-    return arr.map(item => {
+    return arr.map((item, i) => {
       const { mal_id, images, title } = item.entry[0];
       const img = images.webp.large_image_url;
 
       return (
-        <NavLink 
-          className="recent-recommendations__card" key={mal_id}
-          end
-          to={`/anime/${mal_id}`}>
-          <img 
-            src={img} 
-            alt={title}
-            className="recent-recommendations__img" />
-          <div className="title_fz16fw500 recent-recommendations__title">{title}</div>
-        </NavLink>
+        <div className="recent-recommendations__card" key={mal_id}>
+          <NavLink 
+            className="recent-recommendations__info" 
+            end
+            to={`/anime/${mal_id}`}>
+            <img 
+              src={img} 
+              alt={title}
+              className="recent-recommendations__img" />
+            <div className="title_fz16fw500 recent-recommendations__title">{title}</div>
+          </NavLink>
+          <div className="recent-recommendations__number">{i + 1}</div>
+        </div>
       )
     })
   }
