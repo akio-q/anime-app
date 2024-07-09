@@ -36,13 +36,16 @@ const RecentAnimeRecommendations = () => {
       const img = images.webp.large_image_url;
 
       return (
-        <div className="recent-recommendations__card" key={mal_id}>
+        <NavLink 
+          className="recent-recommendations__card" key={mal_id}
+          end
+          to={`/anime/${mal_id}`}>
           <img 
             src={img} 
             alt={title}
             className="recent-recommendations__img" />
           <div className="title_fz16fw500 recent-recommendations__title">{title}</div>
-        </div>
+        </NavLink>
       )
     })
   }
