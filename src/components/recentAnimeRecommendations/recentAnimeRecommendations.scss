@@ -12,22 +12,23 @@
   }
   &__card {
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    column-gap: 20px;
     width: 100%;
     height: 90px;
+    padding-right: 30px;
     background-color: $main-color;
     border-radius: 10px;
+    cursor: pointer;
+    &:hover .recent-recommendations__title {
+      color: $secondary-color-light;
+      transition: .3s all;
+    }
   }
   &__img {
     height: 100%;
     width: 70px;
     object-fit: cover;
     border-radius: 10px;
-  }
-  &__info {
-    height: 100%;
-    display: flex;
-    column-gap: 20px;
-    align-items: center;
   }
 }

@@ -37,20 +37,12 @@ const RecentAnimeRecommendations = () => {
 
       return (
         <div className="recent-recommendations__card" key={mal_id}>
-        <div className="recent-recommendations__info">
           <img 
             src={img} 
             alt={title}
             className="recent-recommendations__img" />
-          <div className="title_fz16fw500">{title}</div>
+          <div className="title_fz16fw500 recent-recommendations__title">{title}</div>
         </div>
-        <NavLink 
-          className='button button__recent-recommendations'
-          end
-          to={`/anime/${mal_id}`}>
-          <i className='icon-arrow-right'></i>
-        </NavLink>
-      </div>
       )
     })
   }
