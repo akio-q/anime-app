@@ -1,24 +1,150 @@
 @media (max-width: 1350px) {
   .anime {
-    grid-template-columns: 1fr;
-    &__filters {
-      display: none;
+    &__wrapper {
+      grid-template-columns: 2fr 1fr;
+    }
+  }
+  .top-anime-slider {
+    &__slide {
+      height: 430px;
+    }
+    &__title {
+      font-size: 33px !important;
+    }
+    &__descr {
+      font-size: 16px;
     }
   }
 }
 
 @media (max-width: 1200px) {
-  
+  .anime {
+    &__wrapper {
+      grid-template-columns: 1fr;
+    }
+  }
+  .top-anime-slider {
+    &__slide {
+      height: 400px;
+    }
+    &__title {
+      font-size: 30px !important;
+    }
+    &__info {
+      overflow-y: auto;
+      padding: 20px ;
+    }
+    &__descr {
+      font-size: 15px;
+    }
+    &__genre {
+      flex-shrink: 1;
+      font-size: 13px;
+    }
+    &__button {
+      flex-shrink: 0;
+      padding: 20px !important;
+      margin-left: 10px;
+      font-size: 14px !important;
+    }
+  }
+  .recent-recommendations {
+    &__list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      column-gap: 20px;
+    }
+    &__title {
+      font-size: 14px;
+    }
+  }
 }
 
 @media (max-width: 992px) {
-  
+  .anime {
+    &__wrapper {
+      grid-template-columns: 1fr;
+    }
+  }
+  .top-anime-slider {
+    &__slide {
+      height: 350px;
+    }
+    &__title {
+      font-size: 22px !important;
+    }
+  }
 }
 
 @media (max-width: 768px) {
-  
+  .app {
+    &__header {
+      padding: 10px 30px 10px 10px;
+      &
+      .button {
+        display: none;
+      }
+    }
+  }
+  .top-anime-slider {
+    &__slide {
+      height: 260px;
+    }
+    &__title {
+      font-size: 20px !important;
+    }
+  }
+  .category-anime-slider {
+    height: 250px;
+  }
+  .recent-recommendations {
+    &__list {
+      display: flex
+    }
+    &__title {
+      font-size: 16px;
+    }
+  }
 }
 
-@media (max-width: 576px) {
-
+@media (max-width: 575px) {
+  .app {
+    &__header {
+      justify-content: center;
+      &-logo {
+        display: none;
+      }
+    }
+    &__footer {
+      height: 100px;
+      margin-top: 150px;
+      &-link {
+        font-size: 14px;
+      }
+    }
+  }
+  .anime {
+    &__wrapper {
+      margin-top: 0;
+    }
+    &__category {
+      &-title {
+        font-size: 20px;
+      }
+    }
+  }
+  .top-anime-slider {
+    display: none;
+  }
+  .category-anime-slider {
+    height: 280px;
+  }
+  .recent-recommendations {
+    .title_fz25fw500 {
+      font-size: 20px;
+    }
+    &__title {
+      font-size: 13px;
+    }
+  }
 }

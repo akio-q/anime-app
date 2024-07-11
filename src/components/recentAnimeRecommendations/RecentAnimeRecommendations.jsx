@@ -45,7 +45,7 @@ const RecentAnimeRecommendations = () => {
               src={img} 
               alt={title}
               className="recent-recommendations__img" />
-            <div className="title_fz16fw500 recent-recommendations__title">{title}</div>
+            <div className="title_fz14fw500 recent-recommendations__title">{title}</div>
           </NavLink>
           <div className="recent-recommendations__number">{i + 1}</div>
         </div>

@@ -31,6 +31,29 @@ const CategoryAnimeSlider = ({title, data, isLoading, isError, error}) => {
     <>
       <div className="title_fz25fw500 anime__category-title">{title}</div>
       <Swiper
+        breakpoints={{
+          320: {
+            slidesPerView: 2,
+          },
+          490: {
+            slidesPerView: 3,
+          },
+          576: {
+            slidesPerView: 4,
+          },
+          768: {
+            slidesPerView: 4,
+          },
+          992: {
+            slidesPerView: 5,
+          },
+          1200: {
+            slidesPerView: 4,
+          },
+          1350: {
+            slidesPerView: 6,
+          }
+        }}
         spaceBetween={20} 
         slidesPerView={6}
         className="category-anime-slider"
