@@ -76,8 +76,8 @@ const SingleAnimeLayout = () => {
       <div>
         <div className="single-anime__about">
           <div>
-            <div className="title_fz30fw700">{title_english}</div>
-            <div className="title_fz18fw500">{title}</div>
+            <div className="title_fz30fw700 single-anime__main-title">{title_english}</div>
+            <div className="title_fz18fw500 single-anime__secondary-title">{title}</div>
           </div>
           <div className="single-anime__release">
             <div>{season} {year}</div>
