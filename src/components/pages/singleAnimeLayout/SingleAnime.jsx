@@ -7,9 +7,9 @@ import AnimeRecommendations from '../../animeRecommendations/AnimeRecommendation
 import Spinner from '../../Spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
 
-import './singleAnimeLayout.scss';
+import './singleAnime.scss';
 
-const SingleAnimeLayout = () => {
+const SingleAnime = () => {
   const { animeId } = useParams();
   const {
     data: anime,
@@ -94,4 +94,4 @@ const SingleAnimeLayout = () => {
   )
 }
 
-export default SingleAnimeLayout;
+export default SingleAnime;

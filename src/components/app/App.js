@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'r
 
 import AppHeader from '../appHeader/AppHeader';
 import Home from '../pages/Home';
-import SingleAnimeLayout from '../pages/singleAnimeLayout/SingleAnimeLayout';
+import SingleAnime from '../pages/singleAnimeLayout/SingleAnime';
 import SearchResults from '../pages/searchResultsLayout/SearchResults';
 import Register from "../pages/Register";
 import Login from "../pages/Login";
@@ -45,7 +45,7 @@ const Inner = () => {
                 <Home />
               </ProtectedRoute>
             } />
-            <Route path='/anime/:animeId' element={<SingleAnimeLayout />} />
+            <Route path='/anime/:animeId' element={<SingleAnime />} />
             <Route path='/search/:animeName' element={<SearchResults />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
