@@ -1,7 +1,18 @@
+@media (max-width: 1460px) {
+  .css {
+    &-1r4vtzz, &-48ayfv {
+      width: 140px !important;
+    }
+  }
+}
+
 @media (max-width: 1350px) {
   .anime {
     &__wrapper {
       grid-template-columns: 2fr 1fr;
+    }
+    &__list {
+      grid-template-columns: repeat(5, 1fr);
     }
   }
   .top-anime-slider {
@@ -15,12 +26,28 @@
       font-size: 16px;
     }
   }
+  .search-results {
+    grid-template-columns: 2.5fr 1fr;
+  }
+  .css {
+    &-1r4vtzz, &-48ayfv {
+      width: 140px !important;
+    }
+  }
 }
 
 @media (max-width: 1200px) {
   .anime {
     &__wrapper {
       grid-template-columns: 1fr;
+    }
+    &__list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    &__filters {
+      &-sticker {
+        display: none;
+      }
     }
   }
   .top-anime-slider {
@@ -110,12 +137,30 @@
       font-size: 20px;
     }
   }
+  .css {
+    &-1r4vtzz, &-48ayfv {
+      width: 130px !important;
+    }
+  }
+  .search-results {
+    grid-template-columns: 2fr 1fr;
+  }
 }
 
 @media (max-width: 992px) {
   .anime {
     &__wrapper {
       grid-template-columns: 1fr;
+    }
+    &__list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    &__filters {
+      &-item {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+      }
     }
   }
   .top-anime-slider {
@@ -172,6 +217,11 @@
       font-size: 18px;
     }
   }
+  .css {
+    &-1r4vtzz, &-48ayfv {
+      width: 120px !important;
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -182,6 +232,14 @@
       .button {
         display: none;
       }
+    }
+  }
+  .anime {
+    &__list {
+      grid-template-columns: repeat(4, 1fr);
+    }
+    &__filters {
+      display: none;
     }
   }
   .top-anime-slider {
@@ -237,6 +295,9 @@
       grid-template-columns: repeat(2, 1fr);
     }
   }
+  .search-results {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 575px) {
@@ -274,6 +335,9 @@
       &-title {
         font-size: 20px;
       }
+    }
+    &__list {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
   .top-anime-slider {
@@ -336,6 +400,14 @@
     }
     &__title {
       font-size: 18px;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .anime {
+    &__list {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }
