@@ -240,6 +240,17 @@
 }
 
 @media (max-width: 575px) {
+  .form {
+    &__wrapper {
+      padding: 10px; 
+    }
+    &__form {
+      &-input {
+        width: 250px;
+        height: 50px;
+      }
+    }
+  }
   .app {
     &__header {
       justify-content: center;
