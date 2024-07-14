@@ -228,11 +228,17 @@
   .app {
     &__header {
       padding: 10px 30px 10px 10px;
-      &
+      &-logo {
+        font-size: 25px;
+      }
       .button {
-        display: none;
+        font-size: 12px;
+        flex-shrink: 0;
       }
     }
+  }
+  .search {
+    width: 40px;
   }
   .anime {
     &__list {
@@ -298,6 +304,39 @@
   .search-results {
     grid-template-columns: 1fr;
   }
+  .hamburger {
+    display: block;
+    transform:  translateY(-50%);
+    width: 35px;
+    height: 12px;
+    flex-shrink: 0;
+    span {
+      display: block;
+      height: 4px;
+      width: 100%;
+      margin-bottom: 5px;
+      background-color: $secondary-text-color;
+      transition: 0.5s all;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    &_active {
+      span {
+        margin-top: 6px;
+        margin-bottom: -9px;
+        &:nth-child(1) {
+          transform: translateY(4px) rotate(-45deg);
+        }
+        &:nth-child(2) {
+          display: none;
+        }
+        &:nth-child(3) {
+          transform: translateY(4px) rotate(45deg);
+        }
+      }    
+    }       
+  }       
 }
 
 @media (max-width: 575px) {
@@ -314,9 +353,12 @@
   }
   .app {
     &__header {
-      justify-content: center;
+      padding-right: 15px;
+      justify-content: space-between;
+      column-gap: 20px;
       &-logo {
-        display: none;
+        font-size: 22px;
+        flex-shrink: 0;
       }
     }
     &__footer {
@@ -326,6 +368,9 @@
         font-size: 14px;
       }
     }
+  }
+  .search {
+    flex-shrink: 1;
   }
   .anime {
     &__wrapper {
@@ -408,6 +453,13 @@
   .anime {
     &__list {
       grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  .app {
+    &__header {
+      &-logo {
+        font-size: 18px;
+      }
     }
   }
 }
