@@ -34,6 +34,7 @@ const RecentAnimeRecommendations = () => {
     return arr.map((item, i) => {
       const { mal_id, images, title } = item.entry[0];
       const img = images.webp.large_image_url;
+      const displayTitle = title.length > 70 ? title.slice(0, 70) + '...' : title;
 
       return (
         <div className="recent-recommendations__card" key={mal_id}>
@@ -45,7 +46,7 @@ const RecentAnimeRecommendations = () => {
               src={img} 
               alt={title}
               className="recent-recommendations__img" />
-            <div className="title_fz14fw500 recent-recommendations__title">{title}</div>
+            <div className="title_fz14fw500 recent-recommendations__title">{displayTitle}</div>
           </NavLink>
           <div className="recent-recommendations__number">{i + 1}</div>
         </div>
