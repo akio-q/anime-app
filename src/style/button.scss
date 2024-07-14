@@ -24,4 +24,11 @@
     border-radius: 0 0 15px 15px;  
     margin-top: 50px;
   }
+  &__search {
+    padding: 9px 12px;
+    background-color: $main-color-light;
+    .icon-search {
+      font-size: 18px;
+    }
+  }
 }

@@ -231,10 +231,6 @@
       &-logo {
         font-size: 25px;
       }
-      .button {
-        font-size: 12px;
-        flex-shrink: 0;
-      }
     }
   }
   .search {
@@ -336,7 +332,7 @@
         }
       }    
     }       
-  }       
+  }     
 }
 
 @media (max-width: 575px) {
@@ -355,9 +351,16 @@
     &__header {
       padding-right: 15px;
       justify-content: space-between;
-      column-gap: 20px;
+      column-gap: 10px;
       &-logo {
         font-size: 22px;
+        flex-shrink: 0;
+      }
+      &-wrapper {
+        column-gap: 10px;
+      }
+      .button {
+        font-size: 14px;
         flex-shrink: 0;
       }
     }
@@ -447,6 +450,14 @@
       font-size: 18px;
     }
   }
+  .button {
+    &__search {
+      padding: 8px 11px;
+      .icon-search {
+        font-size: 16px;
+      }
+    }
+  }
 }
 
 @media (max-width: 420px) {
@@ -460,6 +471,17 @@
       &-logo {
         font-size: 18px;
       }
+      .button {
+        font-size: 12px;
+        padding: 6px 18px;
+        &__search {
+          padding: 6px 9px;
+          .icon-search {
+            font-size: 14px;
+          }
+        }
+      }
     }
   }
+
 }
