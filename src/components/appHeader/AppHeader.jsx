@@ -37,27 +37,32 @@ const AppHeader = () => {
   const hamburgerClassName = `hamburger ${isHamburgerActive ? 'hamburger_active' : ''}`;
 
   return (
-    <header className="app__header">
-      <Link to='/' className="app__header-logo">Anime Surf</Link>
-      {!isMobileScreen && <AnimeSearchForm />}
-      <div className="app__header-wrapper">
-        {isMobileScreen && (
-          <button className="button button__search" onClick={onSearchButtonClick}>
-            <i className="icon-search"></i>
+    <>
+      <header className="app__header">
+        <Link to='/' className="app__header-logo">Anime Surf</Link>
+        {!isMobileScreen && <AnimeSearchForm />}
+        <div className="app__header-wrapper">
+          {isMobileScreen && (
+            <button className="button button__search" onClick={onSearchButtonClick}>
+              <i className="icon-search"></i>
+            </button>
+          )}
+          <button className="button">
+            <Link to='/login'>Sign in</Link>
           </button>
-        )}
-        <button className="button">
-          <Link to='/login'>Sign in</Link>
-        </button>
-        {isSearchPage && isMobileScreen && (
-          <div className={hamburgerClassName} onClick={onHamburgerClick}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-        )}
-      </div>
-    </header>
+          {isSearchPage && isMobileScreen && (
+            <div className={hamburgerClassName} onClick={onHamburgerClick}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          )}
+        </div>
+      </header>
+      {isMobileScreen && isSearchFormVisible && (
+        <AnimeSearchForm />
+      )}
+    </>
   )
 } 
 

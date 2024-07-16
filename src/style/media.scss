@@ -234,7 +234,15 @@
     }
   }
   .search {
-    width: 40px;
+    width: 100%;
+    animation: slidein .3s ease-out;
+    &__input {
+      border: 10px solid  $main-color;
+    }
+    &__submit {
+      top: 16px;
+      right: 22px;
+    }
   }
   .anime {
     &__list {
@@ -332,7 +340,16 @@
         }
       }    
     }       
-  }     
+  }  
+  @keyframes slidein {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }   
 }
 
 @media (max-width: 575px) {
