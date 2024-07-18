@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import AnimeSearchForm from "../animeSearchForm/AnimeSearchForm";
+import Filters from "../filters/Filters";
 
 import './appHeader.scss';
 
@@ -61,6 +62,11 @@ const AppHeader = () => {
       </header>
       {isMobileScreen && isSearchFormVisible && (
         <AnimeSearchForm />
+      )}
+      {isMobileScreen && isHamburgerActive && (
+        <div className="menu">
+          <Filters />
+        </div>
       )}
     </>
   )
