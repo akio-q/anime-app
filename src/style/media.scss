@@ -34,6 +34,19 @@
       width: 140px !important;
     }
   }
+  .error-message {
+    &_small {
+      .error-message {
+        &__img {
+          width: 100px;
+          height: 100px;
+        }
+        &__text {
+          font-size: 15px;
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 1200px) {
@@ -144,6 +157,15 @@
   }
   .search-results {
     grid-template-columns: 2fr 1fr;
+  }
+  .error-message {
+    &_small {
+      .error-message {
+        &__text {
+          font-size: 14px;
+        }
+      }
+    }
   }
 }
 
@@ -527,6 +549,19 @@
   .css {
     &-1r4vtzz, &-48ayfv {
       width: 145px !important;
+    }
+  }
+  .error-message {
+    &_small {
+      .error-message {
+        &__img {
+          width: 80px;
+          height: 80px;
+        }
+        &__text {
+          font-size: 14px;
+        }
+      }
     }
   }
 }

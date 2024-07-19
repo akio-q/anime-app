@@ -54,7 +54,7 @@ const AnimeRecommendations = ({id}) => {
           />
         )
       } else {
-        return <ErrorMessage key={i} errorStatus={429} />
+        return <ErrorMessage key={i} errorStatus={429} isSmall={true} />
       }
     })
   }
