@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useGetRelatedAnimeQuery } from '../../api/apiSlice';
 import delayedFetchAnimeData from '../../utils/delayedFetchData';
+import { delayedFetchRelatedAnimeData } from '../../utils/delayedFetchData';
 
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../Spinner/Spinner';
@@ -16,24 +17,12 @@ const RelatedAnime = ({id}) => {
   } = useGetRelatedAnimeQuery(id);
   const [animeData, setAnimeData] = useState([]);
   const [isDataLoading, setIsDataLoading] = useState(true);
-
-  const relatedAnimeData = relatedAnime.data && relatedAnime.data[1] ? relatedAnime.data[1].entry : [];
+  const relatedAnimeData = relatedAnime?.data ?? [];
   console.log(relatedAnimeData);
-  const related = useMemo(() => {
-    if (!relatedAnimeData || !relatedAnimeData.length) {
-      return [];
-    }
-    if (relatedAnimeData.length < 10) {
-      return relatedAnimeData
-    }
-
-    const related = relatedAnimeData.slice();
-    return related.slice(0, 10);
-  }, [relatedAnimeData])
 
   useEffect(() => {
-    delayedFetchAnimeData(related, setIsDataLoading, setAnimeData, false);
-  }, [related]);
+    delayedFetchRelatedAnimeData(relatedAnimeData, setIsDataLoading, setAnimeData);
+  }, [relatedAnimeData]);
 
   if (isLoading || isDataLoading) {
     return <Spinner />

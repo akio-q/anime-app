@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useGetAnimeRecommendationsQuery } from '../../api/apiSlice';
-import delayedFetchAnimeData from '../../utils/delayedFetchData';
+import { delayedFetchAnimeData } from '../../utils/delayedFetchData';
 
 import AnimeCard from '../animeCard/AnimeCard';
 import Spinner from '../Spinner/Spinner';
