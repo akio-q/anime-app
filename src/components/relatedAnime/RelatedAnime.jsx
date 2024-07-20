@@ -17,7 +17,8 @@ const RelatedAnime = ({id}) => {
   const [animeData, setAnimeData] = useState([]);
   const [isDataLoading, setIsDataLoading] = useState(true);
 
-  const relatedAnimeData = relatedAnime.data && relatedAnime.data[1] ? relatedAnime.data[1] : [];
+  const relatedAnimeData = relatedAnime.data && relatedAnime.data[1] ? relatedAnime.data[1].entry : [];
+  console.log(relatedAnimeData);
   const related = useMemo(() => {
     if (!relatedAnimeData || !relatedAnimeData.length) {
       return [];
@@ -31,8 +32,7 @@ const RelatedAnime = ({id}) => {
   }, [relatedAnimeData])
 
   useEffect(() => {
-    delayedFetchAnimeData(related, setIsDataLoading, setAnimeData);
-
+    delayedFetchAnimeData(related, setIsDataLoading, setAnimeData, false);
   }, [related]);
 
   if (isLoading || isDataLoading) {
