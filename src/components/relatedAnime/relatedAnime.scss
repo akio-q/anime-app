@@ -1,32 +1,39 @@
 @import '../../style/variables.scss';
 
 .related-anime {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 30px;
+  row-gap: 10px;
   margin-top: 10px;
-  padding: 25px 20px 25px 40px;
-  background-color: $main-color;
-  border-radius: 15px;
   &__title {
     margin-top: 60px;
   }
-  &__list {
+  &__item {
     display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    list-style: none;
-    &-item {
-      color: $secondary-text-color;
-      cursor: pointer;
-      transition: .2s all;
-      &::before {
-        content: "\2022"; 
-        margin-right: 10px; 
-        color: $main-text-color; 
-        font-size: 18px;
-        line-height: 1;
+    align-items: center;
+    column-gap: 20px;
+    height: 90px;
+    width: 100%;
+    padding-right: 20px;
+    background-color: $main-color;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      .related-anime__item-title {
+        color: $secondary-color-light;
       }
-      &:hover {
-        color: $secondary-color;
-      }
+    }
+    &-img {
+      height: 100%;
+      width: 70px;
+      object-fit: cover;
+      border-radius: 5px;
+      flex-shrink: 0;
+    }
+    &-title {
+      width: 100%;
+      transition: .3s all;
     }
   }
 }

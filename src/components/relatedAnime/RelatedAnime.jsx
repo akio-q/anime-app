@@ -18,7 +18,6 @@ const RelatedAnime = ({id}) => {
   const [animeData, setAnimeData] = useState([]);
   const [isDataLoading, setIsDataLoading] = useState(true);
   const relatedAnimeData = relatedAnime?.data ?? [];
-  console.log(relatedAnimeData);
 
   useEffect(() => {
     delayedFetchRelatedAnimeData(relatedAnimeData, setIsDataLoading, setAnimeData);
@@ -33,21 +32,27 @@ const RelatedAnime = ({id}) => {
   const renderRelatedAnime = (arr) => {
     return arr.map((item, i) => {
       if (item.data) {
-        const { mal_id, title} = item.data;
+        const { mal_id, images, title} = item.data;
+        const img = images.webp.large_image_url;
 
-        return <li key={mal_id} className="related-anime__list-item">{title}</li>
+        return (
+          <div key={mal_id} className="related-anime__item">
+            <img src={img} className='related-anime__item-img' alt="" />
+            <div className="title_fz16fw500 related-anime__item-title">{title}</div>
+          </div>
+        )
       } else {
         return <ErrorMessage key={i} errorStatus={429} />
       }
     })
   }
 
+  console.log(animeData);
+
   const items = renderRelatedAnime(animeData);
   return (
     <div className="related-anime">
-      <ul className="related-anime__list">
-        {items}
-      </ul>
+      {items}
     </div>
   )
 }
