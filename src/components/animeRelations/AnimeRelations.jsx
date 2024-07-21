@@ -54,7 +54,15 @@ const AnimeRelations = ({id}) => {
   const items = renderAnimeRelations(animeData);
   return (
     <div className="related-anime">
-      {items}
+      { 
+        !animeData.length ? 
+          <div className='title title_fz16fw300'>
+            This anime has no relations
+          </div> : 
+          <div className="related-anime__wrapper">
+            {items}
+          </div>
+      }
     </div>
   )
 }

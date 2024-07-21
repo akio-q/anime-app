@@ -1,11 +1,13 @@
 @import '../../style/variables.scss';
 
 .related-anime {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 30px;
-  row-gap: 10px;
   margin-top: 10px;
+  &__wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 30px;
+    row-gap: 10px;  
+  }
   &__title {
     margin-top: 60px;
   }
