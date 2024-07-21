@@ -57,6 +57,7 @@
     height: 100%;
     width: 70px;
     object-fit: cover;
+    flex-shrink: 0;
     border-radius: 5px;
   }
 }
