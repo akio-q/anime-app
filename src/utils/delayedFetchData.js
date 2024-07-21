@@ -19,7 +19,7 @@ const delayedFetchAnimeData = async (arr, setIsDataLoading, setAnimeData, delay 
   }
 };
 
-const delayedFetchRelatedAnimeData = async (arr, setIsDataLoading, setAnimeData, delay = 1500) => {
+const delayedFetchAnimeRelationsData = async (arr, setIsDataLoading, setAnimeData, delay = 1500) => {
   if (arr.length > 0) {
     setIsDataLoading(true);
     const data = [];
@@ -43,4 +43,4 @@ const delayedFetchRelatedAnimeData = async (arr, setIsDataLoading, setAnimeData,
   }
 };
 
-export { delayedFetchRelatedAnimeData, delayedFetchAnimeData };
+export { delayedFetchAnimeRelationsData, delayedFetchAnimeData };

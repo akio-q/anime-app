@@ -1,27 +1,26 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useGetRelatedAnimeQuery } from '../../api/apiSlice';
-import delayedFetchAnimeData from '../../utils/delayedFetchData';
-import { delayedFetchRelatedAnimeData } from '../../utils/delayedFetchData';
+import { useEffect, useState } from 'react';
+import { useGetAnimeRelationsQuery } from '../../api/apiSlice';
+import { delayedFetchAnimeRelationsData } from '../../utils/delayedFetchData';
 
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import Spinner from '../Spinner/Spinner';
 
-import './relatedAnime.scss';
+import './animeRelations.scss';
 
-const RelatedAnime = ({id}) => {
+const AnimeRelations = ({id}) => {
   const {
-    data: relatedAnime = {},
+    data: animeRelations = {},
     isLoading,
     isError,
     error
-  } = useGetRelatedAnimeQuery(id);
+  } = useGetAnimeRelationsQuery(id);
   const [animeData, setAnimeData] = useState([]);
   const [isDataLoading, setIsDataLoading] = useState(true);
-  const relatedAnimeData = relatedAnime?.data ?? [];
+  const animeRelationsData = animeRelations?.data ?? [];
 
   useEffect(() => {
-    delayedFetchRelatedAnimeData(relatedAnimeData, setIsDataLoading, setAnimeData);
-  }, [relatedAnimeData]);
+    delayedFetchAnimeRelationsData(animeRelationsData, setIsDataLoading, setAnimeData);
+  }, [animeRelationsData]);
 
   if (isLoading || isDataLoading) {
     return <Spinner />
@@ -29,7 +28,7 @@ const RelatedAnime = ({id}) => {
     return <ErrorMessage errorStatus={error.status} />
   } 
 
-  const renderRelatedAnime = (arr) => {
+  const renderAnimeRelations = (arr) => {
     return arr.map((item, i) => {
       if (item.data) {
         const { mal_id, images, title} = item.data;
@@ -47,9 +46,7 @@ const RelatedAnime = ({id}) => {
     })
   }
 
-  console.log(animeData);
-
-  const items = renderRelatedAnime(animeData);
+  const items = renderAnimeRelations(animeData);
   return (
     <div className="related-anime">
       {items}
@@ -57,4 +54,4 @@ const RelatedAnime = ({id}) => {
   )
 }
 
-export default RelatedAnime;
+export default AnimeRelations;

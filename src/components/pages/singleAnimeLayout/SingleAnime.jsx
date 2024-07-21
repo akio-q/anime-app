@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetAnimeByIdQuery } from '../../../api/apiSlice';
 
-import RelatedAnime from '../../relatedAnime/RelatedAnime';
+import AnimeRelations from '../../animeRelations/AnimeRelations';
 import AnimeRecommendations from '../../animeRecommendations/AnimeRecommendations';
 import Spinner from '../../Spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
@@ -85,8 +85,8 @@ const SingleAnime = () => {
           </div>
         </div>
         <div className="single-anime__descr">{synopsis}</div>
-        <div className="title_fz25fw500 related-anime__title">Related Anime</div>
-        <RelatedAnime id={mal_id} />
+        <div className="title_fz25fw500 related-anime__title">Anime Relations</div>
+        <AnimeRelations id={mal_id} />
         <div className="title_fz25fw500 recommendations__title">Recommendations</div>
         <AnimeRecommendations id={mal_id} />
       </div>
