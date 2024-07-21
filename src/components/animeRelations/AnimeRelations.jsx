@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { useGetAnimeRelationsQuery } from '../../api/apiSlice';
 import { delayedFetchAnimeRelationsData } from '../../utils/delayedFetchData';
 
@@ -35,10 +36,14 @@ const AnimeRelations = ({id}) => {
         const img = images.webp.large_image_url;
 
         return (
-          <div key={mal_id} className="related-anime__item">
+          <NavLink 
+            key={mal_id} 
+            className="related-anime__item"
+            end 
+            to={`/anime/${mal_id}`}>
             <img src={img} className='related-anime__item-img' alt="" />
             <div className="title_fz16fw500 related-anime__item-title">{title}</div>
-          </div>
+          </NavLink>
         )
       } else {
         return <ErrorMessage key={i} errorStatus={429} />
