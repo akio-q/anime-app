@@ -1,7 +1,7 @@
 import namiSticker from '../../resources/img/nami_sticker.png';
 import './errorMessage.scss';
 
-const ErrorMessage = ({ errorStatus, isSmall }) => {
+const ErrorMessage = ({ errorStatus, isSmall, isDirectionRow }) => {
   let errorMessageText,
       errorMessageClass;
 
@@ -16,7 +16,12 @@ const ErrorMessage = ({ errorStatus, isSmall }) => {
   }
 
   return (
-    <div className={`error-message ${errorMessageClass} ${isSmall ? 'error-message_small' : ''}`}>
+    <div className={
+      `error-message 
+      ${errorMessageClass} 
+      ${isSmall ? 'error-message_small' : ''}
+      ${isDirectionRow ? 'error-message_row' : ''}`
+    }>
       <img src={namiSticker} className='error-message__img' alt="nami-error" />
       <div className="title_fz18fw600 error-message__text">{errorMessageText}</div>
     </div>

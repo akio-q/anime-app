@@ -26,6 +26,18 @@
       }
     }
   }
+  &_row {
+    flex-direction: row !important;
+    .error-message {
+      &__img {
+        width: 70px;
+        height: 70px;
+      }
+      &__text {
+        font-size: 15px;
+      }
+    }
+  }
 }
 
 .limit-error {

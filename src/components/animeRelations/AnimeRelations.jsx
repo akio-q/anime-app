@@ -46,7 +46,7 @@ const AnimeRelations = ({id}) => {
           </NavLink>
         )
       } else {
-        return <ErrorMessage key={i} errorStatus={429} />
+        return <ErrorMessage key={i} errorStatus={429} isDirectionRow={true} />
       }
     })
   }
