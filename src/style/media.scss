@@ -26,6 +26,13 @@
       font-size: 16px;
     }
   }
+  .related-anime {
+    &__item {
+      &-title {
+        font-size: 15px;
+      }
+    }
+  }
   .search-results {
     grid-template-columns: 2.5fr 1fr;
   }
@@ -140,6 +147,14 @@
     &__title {
       font-size: 20px;
     }
+    &__item {
+      &-img {
+        width: 60px;
+      }
+      &-title {
+        font-size: 14px;
+      }
+    }
   }
   .recommendations {
     padding: 25px 0 25px 20px;
@@ -229,6 +244,15 @@
   .related-anime {
     &__title {
       font-size: 18px;
+    }
+    &__wrapper {
+      column-gap: 10px;
+    }
+    &__item {
+      column-gap: 10px;
+      &-title {
+        font-size: 13px;
+      }
     }
   }
   .recommendations {
@@ -321,6 +345,17 @@
     &__release {
       flex-direction: row;
       justify-content: space-between;
+    }
+  }
+  .related-anime {
+    &__wrapper {
+      grid-template-columns: 1fr;
+    }
+    &__item {
+      column-gap: 20px;
+      &-title {
+        font-size: 14px;
+      }
     }
   }
   .recommendations {
@@ -586,6 +621,14 @@
             font-size: 14px;
           }
         }
+      }
+    }
+  }
+  .related-anime {
+    &__item {
+      column-gap: 15px;
+      &-title {
+        font-size: 13px;
       }
     }
   }
