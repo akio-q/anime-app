@@ -7,7 +7,6 @@ import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore'; 
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
-import addAvatar from '../../resources/img/add_avatar.png';
 import remSticker from '../../resources/img/rem_sticker.png';
 import '../../style/form.scss';
 
@@ -117,10 +116,7 @@ const Register = () => {
                 style={{display: 'none'}}
               />
               <label htmlFor="avatar" className='form__form-add-avatar'>
-                <img 
-                  src={addAvatar} 
-                  className='form__form-add-avatar-img' 
-                  alt="avatar" />
+                <i className='icon-user-circle'></i>
                 <span>
                   { fileName && fileName.length > 15 ? `${fileName.slice(0, 15)}...`
                   : fileName ? fileName
