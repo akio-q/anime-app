@@ -55,7 +55,8 @@ const Register = () => {
           initialValues={{
             displayName: '',
             email: '',
-            password: ''
+            password: '',
+            avatar: null
           }}
           validationSchema={Yup.object({
             displayName: Yup.string()
@@ -66,7 +67,15 @@ const Register = () => {
                       .required('Required field'),
             password: Yup.string()
                         .min(8, 'Password is too short, minimum 8 symbols')
-                        .required('Required field')
+                        .required('Required field'),
+            avatar: Yup.mixed()
+                      .required('A profile picture is required')
+                      .test('fileSize', 'File size too large', value => {
+                        return value && value.size <= 5 * 1024 * 1024; // 5MB
+                      })
+                      .test('fileType', 'Unsupported file format', value => {
+                        return value && ['image/jpg', 'image/jpeg', 'image/png'].includes(value.type);
+                      })
           })}
           onSubmit={signUp}>
           {({setFieldValue}) => (
@@ -95,15 +104,15 @@ const Register = () => {
                 className="form__form-input"
               />
               <ErrorMessage className='form__form-error' name="password" component="div" />
-              <Field 
+              <input 
                 id="avatar"
                 name="avatar"
                 type="file"
-                value={undefined}
+                accept="image/*"
                 onChange={e => {
                   const file = e.currentTarget.files[0];
                   setFieldValue('avatar', file);
-                  setFileName(file.name);
+                  setFileName(file ? file.name : '');
                 }}
                 style={{display: 'none'}}
               />
@@ -112,10 +121,13 @@ const Register = () => {
                   src={addAvatar} 
                   className='form__form-add-avatar-img' 
                   alt="avatar" />
-                <span>{fileName && fileName.length > 15 ? `${fileName.slice(0, 15)}...`
-                        : fileName ? fileName
-                        : 'Add a profile picture'}</span>
+                <span>
+                  { fileName && fileName.length > 15 ? `${fileName.slice(0, 15)}...`
+                  : fileName ? fileName
+                  : 'Add a profile picture' }
+                </span>
               </label>
+              <ErrorMessage className='form__form-error' name="avatar" component="div" />
               <button type='submit' className='button button__auth'>Sign up</button>
             </Form>
           )}
