@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes, Navigate, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 
 import AppHeader from '../appHeader/AppHeader';
 import Home from '../pages/Home';
@@ -19,19 +19,10 @@ const App = () => {
 }
 
 const Inner = () => {
-  const currentUser = true;
   const { pathname } = useLocation();
 
   const isLoginOrRegister = () => {
     return pathname === '/login' || pathname === '/register';
-  }
-
-  const ProtectedRoute = ({children}) => {
-    if (!currentUser && !isLoginOrRegister()) {
-      return <Navigate to="/login" />;
-    }
-
-    return children;
   }
 
   return (
@@ -39,17 +30,11 @@ const Inner = () => {
       {!isLoginOrRegister() && <AppHeader />}
       <main>
         <Routes>
-          <Route path="/">
-            <Route index element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            } />
-            <Route path='/anime/:animeId' element={<SingleAnime />} />
-            <Route path='/search/:animeName' element={<SearchResults />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-          </Route>
+          <Route path="/" element={<Home />} />
+          <Route path='/anime/:animeId' element={<SingleAnime />} />
+          <Route path='/search/:animeName' element={<SearchResults />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </main>
       {!isLoginOrRegister() && <AppFooter />}
