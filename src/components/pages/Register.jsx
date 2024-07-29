@@ -57,7 +57,7 @@ const Register = () => {
             email: '',
             password: ''
           }}
-          validationSchema = {Yup.object({
+          validationSchema={Yup.object({
             displayName: Yup.string()
                             .min(2, 'Minimum two symbols')
                             .required('Required field'),
@@ -68,7 +68,7 @@ const Register = () => {
                         .min(8, 'Password is too short, minimum 8 symbols')
                         .required('Required field')
           })}
-          onSubmit = { values => signUp(values) }>
+          onSubmit={signUp}>
           {({setFieldValue}) => (
             <Form className='form__form'>
               <Field

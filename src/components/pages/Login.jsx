@@ -1,11 +1,26 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../config/firebase';
 
 import luffySticker from '../../resources/img/luffy_sticker.png';
 import '../../style/form.scss';
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const signIn = async (values) => {
+    const { email, password } = values;
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password); 
+      navigate("/"); 
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
   return (
     <div className="form">
       <div className="form__wrapper">
@@ -24,7 +39,7 @@ const Login = () => {
                         .min(8, 'Password is too short, minimum 8 symbols')
                         .required('Required field')
           })}
-          onSubmit = {values => console.log(JSON.stringify(values, null, 2))}>
+          onSubmit={signIn}>
           <Form className="form__form">
             <Field 
               id="email"
