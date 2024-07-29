@@ -84,6 +84,7 @@ const Register = () => {
                 name="displayName"
                 type="text"
                 placeholder="Display name"
+                autoComplete="off"
                 className="form__form-input"
               />
               <ErrorMessage className='form__form-error' name="displayName" component="div" />
@@ -92,6 +93,7 @@ const Register = () => {
                 name="email"
                 type="email"
                 placeholder="Email"
+                autoComplete="off"
                 className="form__form-input"
               />
               <ErrorMessage className='form__form-error' name="email" component="div" />

@@ -46,6 +46,7 @@ const Login = () => {
               name="email"
               type="email"
               placeholder="Email"
+              autoComplete="off"
               className="form__form-input"
             />
             <ErrorMessage className='form__form-error' name="email" component="div" />
