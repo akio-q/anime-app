@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import { auth, db, storage } from '../../config/firebase';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore'; 
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 import addAvatar from '../../resources/img/add_avatar.png';
 import remSticker from '../../resources/img/rem_sticker.png';
@@ -9,6 +13,38 @@ import '../../style/form.scss';
 
 const Register = () => {
   const [fileName, setFileName] = useState('');
+  const navigate = useNavigate();
+
+  const signUp = async (values) => { 
+    const { displayName, email, password, avatar } = values;
+
+    if (!avatar) return;
+    
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      const userAvatarsFolderRef = ref(storage, `userAvatars/${avatar.name}`);
+
+      await uploadBytes(userAvatarsFolderRef, avatar).then(snapshot => {
+        getDownloadURL(snapshot.ref).then(async downloadURL => {
+          await updateProfile(res.user, { 
+            displayName, 
+            photoURL: downloadURL 
+          });
+
+          await setDoc(doc(db, "users", res.user.uid), { 
+            uid: res.user.uid,
+            displayName,
+            email,
+            photoURL: downloadURL
+          });
+
+          navigate('/');
+        })
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   return (
     <div className="form">
@@ -32,10 +68,7 @@ const Register = () => {
                         .min(8, 'Password is too short, minimum 8 symbols')
                         .required('Required field')
           })}
-          onSubmit = {values => {
-            console.log(JSON.stringify(values, null, 2))
-            console.log(values.avatar.name);
-          }}>
+          onSubmit = { values => signUp(values) }>
           {({setFieldValue}) => (
             <Form className='form__form'>
               <Field
