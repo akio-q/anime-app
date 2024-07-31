@@ -95,7 +95,9 @@ const AppHeader = () => {
               </nav>
             </div>
           ) : !currentUser && isMobileScreen ? (
-            <RiLoginCircleFill className="app__header-login-icon" />
+            <Link to='/login'>
+              <RiLoginCircleFill className="app__header-login-icon" />
+            </Link>
           ) : (
             <button className="button">
               <Link to='/login'>Sign in</Link>
