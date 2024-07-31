@@ -3,13 +3,13 @@ import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-route
 
 import AppHeader from '../appHeader/AppHeader';
 import AppFooter from '../appFooter/AppFooter';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../Spinner/Spinner'; 
 
 const Home = lazy(() => import('../pages/Home'));
 const SingleAnime = lazy(() => import('../pages/singleAnimeLayout/SingleAnime'));
 const SearchResults = lazy(() => import('../pages/searchResultsLayout/SearchResults'));
 const Register = lazy(() => import("../pages/Register"));
-const Login = lazy(() => import("../pages/Login")); 
+const Login = lazy(() => import("../pages/Login"));
 
 const App = () => {
   return (
