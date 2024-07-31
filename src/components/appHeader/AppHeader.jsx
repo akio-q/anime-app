@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 import { FaBookmark } from "react-icons/fa";
 import { IoIosLogOut } from "react-icons/io";
+import { RiLoginCircleFill } from "react-icons/ri";
 
 import AnimeSearchForm from "../animeSearchForm/AnimeSearchForm";
 import Filters from "../filters/Filters";
@@ -65,9 +66,16 @@ const AppHeader = () => {
               <i className="icon-search"></i>
             </button>
           )}
+          {isSearchPage && isMobileScreen && (
+            <div className={hamburgerClassName} onClick={onHamburgerClick}>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          )}
           {currentUser ? (
             <div className="app__header-user">
-              <div className="title_fz16fw300">{currentUser.displayName}</div>
+              <div className="title_fz16fw300 app__header-user-name">{currentUser.displayName}</div>
               <img 
                 src={currentUser.photoURL} 
                 alt={`${currentUser.displayName} avatar`} 
@@ -86,17 +94,12 @@ const AppHeader = () => {
                 </ul>
               </nav>
             </div>
+          ) : !currentUser && isMobileScreen ? (
+            <RiLoginCircleFill className="app__header-login-icon" />
           ) : (
             <button className="button">
               <Link to='/login'>Sign in</Link>
             </button>
-          )}
-          {isSearchPage && isMobileScreen && (
-            <div className={hamburgerClassName} onClick={onHamburgerClick}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
           )}
         </div>
       </header>
