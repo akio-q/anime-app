@@ -31,8 +31,49 @@
         width: 40px;
         height: 40px;
         border-radius: 50px;
+        cursor: pointer;
       }
     }
+  }
+}
+
+.user-menu {
+  position: absolute;
+  top: 55px;
+  right: 10px;
+  width: 150px;
+  padding: 10px 0;
+  background-color: $main-color-light;
+  border-radius: 5px;
+  z-index: 100;
+  opacity: 0;
+  transform: translateY(-10px);
+  visibility: hidden;
+  transition: 0.3s;
+  &__list {
+    list-style-type: none;
+    &-item {
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+      width: 100%;
+      padding: 3px 5px 3px 20px;
+      color: $secondary-text-color;
+      line-height: 30px;
+      transition: 0.3s;
+      cursor: pointer;
+      &:hover {
+        background-color: #3e3d3d;
+      }
+    }
+  }
+  &__icon {
+    font-size: 18px;
+  }
+  &.active {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
   }
 }
 

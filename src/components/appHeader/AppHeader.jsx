@@ -4,6 +4,9 @@ import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
 
+import { FaBookmark } from "react-icons/fa";
+import { IoIosLogOut } from "react-icons/io";
+
 import AnimeSearchForm from "../animeSearchForm/AnimeSearchForm";
 import Filters from "../filters/Filters";
 
@@ -15,6 +18,7 @@ const AppHeader = () => {
 
   const [isMobileScreen, setIsMobileScreen] = useState(window.innerWidth < 768);
   const [isHamburgerActive, setIsHamburgerActive] = useState(false);
+  const [isUserMenuActive, setIsUserMenuActive] = useState(false);
   const [isSearchFormVisible, setIsSearchFormVisible] = useState(false);
 
   const {currentUser} = useContext(AuthContext);
@@ -67,8 +71,20 @@ const AppHeader = () => {
               <img 
                 src={currentUser.photoURL} 
                 alt={`${currentUser.displayName} avatar`} 
-                className="app__header-user-photo" />
-              <button onClick={logout}>Log Out</button>
+                className="app__header-user-photo"
+                onClick={() => setIsUserMenuActive(!isUserMenuActive)} />
+              <nav className={`user-menu ${isUserMenuActive ? "active" : ""}`}>
+                <ul className="user-menu__list">
+                  <li className="user-menu__list-item">
+                    <FaBookmark className="user-menu__icon" />
+                    <span>My list</span>
+                  </li>
+                  <li className="user-menu__list-item">
+                    <IoIosLogOut className="user-menu__icon" /> 
+                    <span onClick={logout}>Log Out</span>
+                  </li>
+                </ul>
+              </nav>
             </div>
           ) : (
             <button className="button">
@@ -88,7 +104,7 @@ const AppHeader = () => {
         <AnimeSearchForm />
       )}
       {isMobileScreen && isHamburgerActive && (
-        <div className="menu">
+        <div className="hamburger-menu">
           <Filters />
         </div>
       )}
