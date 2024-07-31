@@ -103,8 +103,8 @@ const AppHeader = () => {
       {isMobileScreen && isSearchFormVisible && (
         <AnimeSearchForm />
       )}
-      {isMobileScreen && isHamburgerActive && (
-        <div className="hamburger-menu">
+      {isMobileScreen && (
+        <div className={`hamburger-menu ${isHamburgerActive ? "active" : ""}`}>
           <Filters />
         </div>
       )}
