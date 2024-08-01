@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { auth, db, storage } from '../../config/firebase';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore'; 
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { ToastContainer, toast } from 'react-toastify';
 
 import remSticker from '../../resources/img/rem_sticker.png';
 import '../../style/form.scss';
@@ -37,11 +38,18 @@ const Register = () => {
             photoURL: downloadURL
           });
 
-          navigate('/');
+          toast.success("Success! Redirecting...", { 
+            position: "bottom-center",
+            className: "custom-toast",
+            onClose: () => navigate('/')
+          });
         })
       });
     } catch (err) {
-      console.error(err);
+      toast.error(err.message, { 
+        position: "bottom-center",
+        className: "custom-toast"
+      });
     }
   }
 
@@ -138,6 +146,7 @@ const Register = () => {
             to="/login">Login</NavLink>
         </p>
       </div>
+      <ToastContainer />
     </div>
   )
 }

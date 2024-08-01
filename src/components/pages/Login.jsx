@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebase';
+import { ToastContainer, toast } from 'react-toastify';
 
 import luffySticker from '../../resources/img/luffy_sticker.png';
 import '../../style/form.scss';
@@ -15,9 +16,17 @@ const Login = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password); 
-      navigate("/"); 
+
+      toast.success("Success! Redirecting...", { 
+        position: "bottom-center",
+        className: "custom-toast",
+        onClose: () => navigate('/')
+      });
     } catch(err) {
-      console.log(err);
+      toast.error(err.message, { 
+        position: "bottom-center",
+        className: "custom-toast"
+      });
     }
   }
 
@@ -69,6 +78,7 @@ const Login = () => {
             to="/register">Register</NavLink>
         </p>
       </div>
+      <ToastContainer />
     </div>
   )
 }
