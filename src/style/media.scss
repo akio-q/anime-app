@@ -273,8 +273,6 @@
 @media (max-width: 768px) {
   .app {
     &__header {
-      position: sticky;
-      padding: 10px 30px 10px 10px;
       &-logo {
         font-size: 25px;
       }
@@ -407,7 +405,7 @@
   .hamburger-menu {
     position: absolute;
     top: 70px;
-    right: 0;
+    right: 50px;
     width: 60%;
     height: 100vh;
     padding-right: 20px;
@@ -470,7 +468,6 @@
   }
   .app {
     &__header {
-      padding-right: 15px;
       justify-content: space-between;
       column-gap: 10px;
       &-logo {
@@ -584,6 +581,7 @@
   }
   .hamburger-menu {
     width: 70%;
+    right: 50px;
     padding-right: 10px;
     .anime {
       &__filters {
@@ -639,6 +637,12 @@
       &-login-icon {
         font-size: 38px;
       }
+      &-user {
+        &-photo {
+          width: 35px;
+          height: 35px;
+        }
+      }
     }
   }
   .related-anime {
@@ -662,6 +666,7 @@
     }       
   }  
   .hamburger-menu {
+    right: 45px;
     width: 80%;
     .anime {
       &__filters {
