@@ -58,20 +58,22 @@ const AppHeader = () => {
   return (
     <>
       <header className="app__header">
-        <Link to='/' className="app__header-logo">Anime Surf</Link>
-        {!isMobileScreen && <AnimeSearchForm />}
         <div className="app__header-wrapper">
-          {isMobileScreen && (
-            <button className="button button__search" onClick={onSearchButtonClick}>
-              <i className="icon-search"></i>
-            </button>
-          )}
           {isSearchPage && isMobileScreen && (
             <div className={hamburgerClassName} onClick={onHamburgerClick}>
               <span></span>
               <span></span>
               <span></span>
             </div>
+          )}
+          <Link to='/' className="app__header-logo">Anime Surf</Link>
+        </div>
+        {!isMobileScreen && <AnimeSearchForm />}
+        <div className="app__header-wrapper">
+          {isMobileScreen && (
+            <button className="button button__search" onClick={onSearchButtonClick}>
+              <i className="icon-search"></i>
+            </button>
           )}
           {currentUser ? (
             <div className="app__header-user">
