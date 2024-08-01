@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/AuthContext";
 
 import { FaBookmark } from "react-icons/fa";
 import { IoIosLogOut } from "react-icons/io";
-import { RiLoginCircleFill } from "react-icons/ri";
+import { FaUser } from "react-icons/fa";
 
 import AnimeSearchForm from "../animeSearchForm/AnimeSearchForm";
 import Filters from "../filters/Filters";
@@ -96,12 +96,12 @@ const AppHeader = () => {
             </div>
           ) : !currentUser && isMobileScreen ? (
             <Link to='/login'>
-              <RiLoginCircleFill className="app__header-login-icon" />
+              <button className="button button__round"><FaUser /></button>
             </Link>
           ) : (
-            <button className="button">
-              <Link to='/login'>Sign in</Link>
-            </button>
+            <Link to='/login'>
+              <button className="button">Sign In</button>
+            </Link>
           )}
         </div>
       </header>
