@@ -66,7 +66,7 @@ const AppHeader = () => {
               <span></span>
             </div>
           )}
-          <Link to='/' className="app__header-logo">Anime Surf</Link>
+          <Link to='/' className="app__header-logo">AniSurf</Link>
         </div>
         {!isMobileScreen && <AnimeSearchForm />}
         <div className="app__header-wrapper">
