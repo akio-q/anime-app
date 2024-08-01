@@ -51,6 +51,13 @@ const SingleAnime = () => {
   const img = images.webp.large_image_url;
   const displayTitle = title_english || title;
   const displayEpisodes = episodes ? episodes : '?'; 
+  const displaySeasonAndYear = season && year 
+                                ? `${season} ${year}` 
+                                : season 
+                                ? `${season}, (year unknown)` 
+                                : year 
+                                ? `${year}, (season unknown)` 
+                                : 'Season and year unknown';
 
   return (
     <>
@@ -89,7 +96,7 @@ const SingleAnime = () => {
               <div className="title_fz18fw500 single-anime__secondary-title">{title}</div>
             </div>
             <div className="single-anime__release">
-              <div>{season} {year}</div>
+              <div>{displaySeasonAndYear}</div>
               <div>{displayEpisodes} episodes</div>
             </div>
           </div>
