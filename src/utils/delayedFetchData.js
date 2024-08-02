@@ -29,14 +29,17 @@ const delayedFetchAnimeRelationsData = async (arr, setIsDataLoading, setAnimeDat
       const animeArr = relationObj.entry;
 
       for (const animeObj of animeArr) {
-        await new Promise(resolve => setTimeout(resolve, delay));
+        if (data.length >= 10) {
+          break;
+        }
 
+        await new Promise(resolve => setTimeout(resolve, delay));
         const anime = await fetchAnimeData(animeObj.mal_id);
         data.push(anime);
       }
     }
 
-    setAnimeData(data.slice(0, 10));
+    setAnimeData(data);
     setIsDataLoading(false);
   } else {
     setIsDataLoading(false);
