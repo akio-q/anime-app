@@ -21,12 +21,14 @@ const Login = () => {
       toast.success("Success! Redirecting...", { 
         position: "bottom-center",
         className: "custom-toast",
+        autoClose: 3000,
         onClose: () => navigate('/')
       });
     } catch(err) {
       toast.error(err.message, { 
         position: "bottom-center",
-        className: "custom-toast"
+        className: "custom-toast",
+        autoClose: 3000
       });
     }
   }
