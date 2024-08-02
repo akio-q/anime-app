@@ -41,8 +41,9 @@ export const apiSlice = createApi({
 export const {
   useGetAnimeByIdQuery,
   useGetTopSeasonalAnimeQuery,
-  useGetUpcomingAnimeQuery, 
-  useGetTopAnimeQuery,
+  useLazyGetTopSeasonalAnimeQuery,
+  useLazyGetUpcomingAnimeQuery, 
+  useLazyGetTopAnimeQuery,
   useGetAnimeRecommendationsQuery,
   useGetAnimeRelationsQuery,
   useGetAnimeSearchQuery,
