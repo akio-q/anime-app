@@ -6,10 +6,10 @@ const delayedFetchAnimeData = async (arr, setIsDataLoading, setAnimeData, delay 
     const data = [];
 
     for (const item of arr) {
+      await new Promise(resolve => setTimeout(resolve, delay));
+
       const anime = await fetchAnimeData(item.entry.mal_id);
       data.push(anime);
-
-      await new Promise(resolve => setTimeout(resolve, delay));
     }
 
     setAnimeData(data);
@@ -29,10 +29,10 @@ const delayedFetchAnimeRelationsData = async (arr, setIsDataLoading, setAnimeDat
       const animeArr = relationObj.entry;
 
       for (const animeObj of animeArr) {
+        await new Promise(resolve => setTimeout(resolve, delay));
+
         const anime = await fetchAnimeData(animeObj.mal_id);
         data.push(anime);
-    
-        await new Promise(resolve => setTimeout(resolve, delay));
       }
     }
 
