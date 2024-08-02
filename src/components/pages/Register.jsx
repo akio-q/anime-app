@@ -77,7 +77,8 @@ const Register = () => {
             }}
             validationSchema={Yup.object({
               displayName: Yup.string()
-                              .min(2, 'Minimum two symbols')
+                              .min(2, 'Minimum 2 symbols')
+                              .max(15, 'Maximum 15 symbols')
                               .required('Required field'),
               email: Yup.string()
                         .email('Wrong email adress')
