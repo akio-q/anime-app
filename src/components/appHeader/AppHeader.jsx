@@ -87,7 +87,7 @@ const AppHeader = () => {
                 <ul className="user-menu__list">
                   <li className="user-menu__list-item">
                     <FaBookmark className="user-menu__icon" />
-                    <span>My list</span>
+                    <Link to='/user/anime-list'>My list</Link>
                   </li>
                   <li className="user-menu__list-item">
                     <IoIosLogOut className="user-menu__icon" /> 
