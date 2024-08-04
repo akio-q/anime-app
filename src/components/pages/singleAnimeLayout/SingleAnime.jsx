@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useGetAnimeByIdQuery } from '../../../api/apiSlice';
+import { AuthContext } from '../../../context/AuthContext';
+import { arrayUnion, doc, setDoc } from 'firebase/firestore';
+import { db } from '../../../config/firebase';
 import Helmet from 'react-helmet';
 
 import AnimeRelations from '../../animeRelations/AnimeRelations';
@@ -13,6 +16,8 @@ import './singleAnime.scss';
 
 const SingleAnime = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const { animeId } = useParams();
   const {
@@ -62,6 +67,32 @@ const SingleAnime = () => {
                                 ? `${year}, (season unknown)` 
                                 : 'Season and year unknown';
 
+  const handleListButtonClick = () => {
+    if (currentUser) {
+      setIsModalOpen(true);
+    } else {
+      navigate('/login');
+    }
+  }
+
+  const handleAddToList = async (listName) => {
+    try {
+      const animeListDocRef = doc(db, 'users', currentUser.uid, 'animeLists', listName);
+      const animeDataToAdd = {
+        animeId: mal_id,
+        data: anime.data      
+      };
+
+      await setDoc(animeListDocRef, {
+        anime: arrayUnion(animeDataToAdd)
+      }, { merge: true });
+      
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error('Error adding anime to list: ', error);
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -103,7 +134,7 @@ const SingleAnime = () => {
               <div>{displayEpisodes} episodes</div>
               <button
                 className=' button single-anime__list-button' 
-                onClick={() => setIsModalOpen(true)}>Add to List</button>
+                onClick={handleListButtonClick}>Add to List</button>
             </div>
           </div>
           <div className="single-anime__descr">{synopsis}</div>
@@ -115,6 +146,7 @@ const SingleAnime = () => {
         <ChooseListModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
+          onChoose={handleAddToList}
         />
       </div>
     </>
