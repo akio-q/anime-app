@@ -94,7 +94,10 @@ const UserAnimeList = () => {
           ) : (
             <div className="anime__list">
               {animeList.map((anime) => (
-                <AnimeCard key={anime.animeId} data={anime.data} />
+                <AnimeCard 
+                  key={anime.animeId} 
+                  id={anime.animeId}
+                  data={anime.data} />
               ))}
             </div>
           )}
