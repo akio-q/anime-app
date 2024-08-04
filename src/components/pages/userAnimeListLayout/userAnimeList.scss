@@ -1,0 +1,46 @@
+@import '../../../style/variables.scss';
+
+.user-anime-list {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 20px;
+  margin-top: 30px;
+  padding: 0 50px;
+  &__user {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    align-items: center;
+    background-color: $main-color;
+    padding: 30px;
+    &-photo {
+      width: 100%;
+      border-radius: 50%;
+    }
+  }
+  &__tabs {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    border-bottom: 2px solid $secondary-color;
+  }
+  &__tab {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+    background: $main-color;
+    color: $secondary-text-color;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s all ease;
+    &.active {
+      font-weight: bold;
+      color: $main-text-color;
+      background-color: $secondary-color;
+    }
+    &:hover {
+      color: $main-text-color;
+      background-color: $secondary-color;
+    }
+  }
+}
