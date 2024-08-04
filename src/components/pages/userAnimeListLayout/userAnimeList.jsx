@@ -93,12 +93,19 @@ const UserAnimeList = () => {
             </div>
           ) : (
             <div className="anime__list">
-              {animeList.map((anime) => (
-                <AnimeCard 
-                  key={anime.animeId} 
-                  id={anime.animeId}
-                  data={anime.data} />
-              ))}
+              {animeList.map((anime) => {
+                const { animeId, images, episodes, title_english, title } = anime; 
+
+                return (
+                  <AnimeCard 
+                    key={animeId} 
+                    id={animeId}
+                    images={images}
+                    episodes={episodes}
+                    title_english={title_english}
+                    title={title} />
+                )
+              })}
             </div>
           )}
         </div>

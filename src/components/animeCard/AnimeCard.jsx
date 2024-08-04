@@ -2,8 +2,7 @@ import { NavLink } from 'react-router-dom';
 
 import './animeCard.scss';
 
-const AnimeCard = ({id, data}) => {
-  const {images, episodes, title_english, title} = data;
+const AnimeCard = ({id, images, episodes, title_english, title}) => {
   const img = images.webp.large_image_url;
   const displayEpisodes = episodes ? episodes : '?'; 
   const displayTitle = title_english && title_english.length > 37 

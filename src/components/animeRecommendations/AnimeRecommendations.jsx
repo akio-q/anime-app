@@ -44,14 +44,16 @@ const AnimeRecommendations = ({id}) => {
   const renderAnimeRecommendations = (arr) => {
     return arr.map((item, i) => {
       if (item.data) {
-        const { mal_id } = item.data;
+        const { mal_id, images, episodes, title_english, title } = item.data;
 
         return ( 
           <AnimeCard 
             key={mal_id}
             id={mal_id}
-            data={item.data}
-          />
+            images={images}
+            episodes={episodes}
+            title_english={title_english}
+            title={title} />
         )
       } else {
         return <ErrorMessage key={i} errorStatus={429} isSmall={true} />

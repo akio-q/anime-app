@@ -65,9 +65,19 @@ const AnimeList = () => {
         </div>
       )
     } else {
-      const items = arr.map((item, i) => (
-        <AnimeCard key={i} id={item.mal_id} data={item} />
-      ))
+      const items = arr.map(item => {
+        const { mal_id, images, episodes, title_english, title } = item;
+      
+        return (
+          <AnimeCard 
+            key={mal_id} 
+            id={mal_id} 
+            images={images}
+            episodes={episodes}
+            title_english={title_english}
+            title={title} />
+        )
+      })
       
       return (
         <div className="anime__list">

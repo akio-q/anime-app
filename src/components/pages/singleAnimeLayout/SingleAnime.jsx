@@ -80,7 +80,10 @@ const SingleAnime = () => {
       const animeListDocRef = doc(db, 'users', currentUser.uid, 'animeLists', listName);
       const animeDataToAdd = {
         animeId: mal_id,
-        data: anime.data      
+        images,
+        episodes,
+        title_english,
+        title
       };
 
       await setDoc(animeListDocRef, {
