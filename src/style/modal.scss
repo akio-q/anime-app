@@ -1,0 +1,52 @@
+@import '../style/variables.scss';
+
+.modal {
+  position: relative;
+  background: $main-color-light;
+  color: $main-text-color;
+  border-radius: 8px;
+  padding-bottom: 40px;
+  &-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  &__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: $secondary-text-color;
+    font-size: 40px;
+    cursor: pointer;
+    transition: .3s all;
+    &:hover {
+      color: $main-text-color;
+    }
+  }
+  &__title {
+    margin-top: 50px;
+    text-align: center;
+  }
+  &__list {
+    margin-top: 10px;
+    list-style-type: none;
+    &-item {
+      width: 300px;
+      padding: 10px 20px;
+      text-align: center;
+      color: $secondary-text-color;
+      cursor: pointer;
+      transition: .3s all;
+      &:hover {
+        background-color: $main-color;
+        color: $main-text-color;
+      }
+    }
+  }
+}
