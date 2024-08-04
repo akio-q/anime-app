@@ -1,16 +1,19 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetAnimeByIdQuery } from '../../../api/apiSlice';
 import Helmet from 'react-helmet';
 
 import AnimeRelations from '../../animeRelations/AnimeRelations';
 import AnimeRecommendations from '../../animeRecommendations/AnimeRecommendations';
+import ChooseListModal from '../../modals/ChooseListModal';
 import Spinner from '../../Spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
 
 import './singleAnime.scss';
 
 const SingleAnime = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { animeId } = useParams();
   const {
     data: anime,
@@ -98,6 +101,9 @@ const SingleAnime = () => {
             <div className="single-anime__release">
               <div>{displaySeasonAndYear}</div>
               <div>{displayEpisodes} episodes</div>
+              <button
+                className=' button single-anime__list-button' 
+                onClick={() => setIsModalOpen(true)}>Add to List</button>
             </div>
           </div>
           <div className="single-anime__descr">{synopsis}</div>
@@ -106,6 +112,10 @@ const SingleAnime = () => {
           <div className="title_fz25fw500 recommendations__title">Recommendations</div>
           <AnimeRecommendations id={mal_id} />
         </div>
+        <ChooseListModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+        />
       </div>
     </>
   )
