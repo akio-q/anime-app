@@ -1,11 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useGetAnimeByIdQuery } from '../../../api/apiSlice';
 import { AuthContext } from '../../../context/AuthContext';
-import { arrayUnion, doc, setDoc } from 'firebase/firestore';
+import { arrayRemove, arrayUnion, doc, getDoc, setDoc } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import { toast, ToastContainer } from 'react-toastify';
 import { IoMdAddCircleOutline } from "react-icons/io";
+import { FaEdit } from "react-icons/fa";
 import Helmet from 'react-helmet';
 
 import AnimeRelations from '../../animeRelations/AnimeRelations';
@@ -18,8 +19,9 @@ import './singleAnime.scss';
 
 const SingleAnime = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isInList, setIsInList] = useState(false);
+  const [currentList, setCurrentList] = useState('');
   const { currentUser } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const { animeId } = useParams();
   const {
@@ -30,12 +32,36 @@ const SingleAnime = () => {
   } = useGetAnimeByIdQuery(animeId);
 
   useEffect(() => {
+    if (currentUser) {
+      checkIfAnimeInAnyList();
+    }
+
     window.scrollTo({
       top: 0,
       left: 0,
       behavior: "smooth"
     });
-  }, [animeId]);
+  }, [animeId, currentUser]);
+
+  const checkIfAnimeInAnyList = async () => {
+    if (!animeId || !currentUser || !currentUser.uid) return;
+
+    const lists = ['watching', 'completed', 'planned', 'on-hold', 'dropped'];
+
+    for (const list of lists) {
+      const animeListDocRef = doc(db, 'users', currentUser.uid, 'animeLists', list);
+      const querySnapshot = await getDoc(animeListDocRef);
+
+      if (querySnapshot.exists() && querySnapshot.data().anime.some(a => a.animeId === +animeId)) {
+        setIsInList(true);
+        setCurrentList(list);
+        break;
+      } else {
+        setIsInList(false);
+        setCurrentList('');
+      }
+    }
+  };
 
   if (isLoading) {
     return <Spinner />
@@ -92,12 +118,54 @@ const SingleAnime = () => {
         title
       };
 
+      if (isInList) {
+        const currentListDocRef = doc(db, 'users', currentUser.uid, 'animeLists', currentList);
+        await setDoc(currentListDocRef, {
+          anime: arrayRemove(animeDataToAdd)
+        }, { merge: true });
+      }
+
       await setDoc(animeListDocRef, {
         anime: arrayUnion(animeDataToAdd)
       }, { merge: true });
       
       setIsModalOpen(false);
-      toast.success(`Anime successfully added to '${listName}' list`, { 
+      setIsInList(true);
+      setCurrentList(listName);
+
+      toast.success(`Anime successfully moved to '${listName}' list`, { 
+        position: "bottom-center",
+        className: "custom-toast",
+        autoClose: 3000,
+      });
+    } catch (error) {
+      toast.error(error.message, { 
+        position: "bottom-center",
+        className: "custom-toast",
+        autoClose: 3000
+      });
+    }
+  };
+
+  const handleRemoveFromList = async () => {
+    try {
+      const animeListDocRef = doc(db, 'users', currentUser.uid, 'animeLists', currentList);
+      const animeDataToRemove = {
+        animeId: mal_id,
+        images,
+        episodes,
+        title_english,
+        title
+      };
+
+      await setDoc(animeListDocRef, {
+        anime: arrayRemove(animeDataToRemove)
+      }, { merge: true });
+
+      setIsInList(false);
+      setCurrentList('');
+
+      toast.success(`Anime successfully removed from '${currentList}' list`, { 
         position: "bottom-center",
         className: "custom-toast",
         autoClose: 3000,
@@ -124,7 +192,19 @@ const SingleAnime = () => {
           <img src={img} alt="anime-img" className="single-anime__img" />
           <button
             className=' button single-anime__list-button' 
-            onClick={handleListButtonClick}><IoMdAddCircleOutline /> Add to List</button>
+            onClick={handleListButtonClick}>
+              {isInList ? (
+                <>
+                  <FaEdit />
+                  Edit List
+                </>
+              ) : (
+                <>
+                  <IoMdAddCircleOutline /> 
+                  Add to List
+                </>
+              )}
+          </button>
           <div className="single-anime__info">
             <div className="single-anime__score">
               <div className="title_fz18fw600 single-anime__score-title">Score</div>
@@ -165,6 +245,8 @@ const SingleAnime = () => {
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           onChoose={handleAddToList}
+          currentList={currentList}
+          handleRemoveFromList={handleRemoveFromList}
         />
         <ToastContainer />
       </div>

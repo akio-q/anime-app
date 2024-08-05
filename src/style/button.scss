@@ -44,4 +44,14 @@
     padding: 0;
     border-radius: 50px;
   }
+  &__red {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #C8102E;
+    border-radius: 0 0 5px 5px;
+    &:hover {
+      box-shadow: none;
+      background-color: #8B0000;
+    }
+  }
 }

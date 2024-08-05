@@ -5,7 +5,6 @@
   background: $main-color-light;
   color: $main-text-color;
   border-radius: 8px;
-  padding-bottom: 40px;
   &-overlay {
     position: fixed;
     top: 0;
@@ -19,8 +18,8 @@
   }
   &__close {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 5px;
+    right: 5px;
     color: $secondary-text-color;
     font-size: 40px;
     cursor: pointer;
@@ -37,15 +36,19 @@
     margin-top: 10px;
     list-style-type: none;
     &-item {
-      width: 300px;
+      width: 350px;
       padding: 10px 20px;
       text-align: center;
+      text-transform: capitalize;
       color: $secondary-text-color;
       cursor: pointer;
       transition: .3s all;
       &:hover {
         background-color: $main-color;
         color: $main-text-color;
+      }
+      &:last-child {
+        margin-bottom: 30px;
       }
     }
   }
