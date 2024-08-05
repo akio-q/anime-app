@@ -85,13 +85,15 @@ const AppHeader = () => {
                 onClick={() => setIsUserMenuActive(!isUserMenuActive)} />
               <nav className={`user-menu ${isUserMenuActive ? "active" : ""}`}>
                 <ul className="user-menu__list">
-                  <li className="user-menu__list-item">
-                    <FaBookmark className="user-menu__icon" />
-                    <Link to='/user/anime-list'>My list</Link>
+                  <li>
+                    <Link to='/user/anime-list' className="user-menu__list-item">
+                      <FaBookmark className="user-menu__icon" />
+                      My list
+                    </Link>
                   </li>
-                  <li className="user-menu__list-item">
+                  <li className="user-menu__list-item" onClick={logout}>
                     <IoIosLogOut className="user-menu__icon" /> 
-                    <span onClick={logout}>Log Out</span>
+                    <span>Log Out</span>
                   </li>
                 </ul>
               </nav>
