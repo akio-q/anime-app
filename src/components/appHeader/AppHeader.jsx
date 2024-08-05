@@ -1,5 +1,6 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useClickOutside } from "../../hooks/useClickOutside";
 import { auth } from "../../config/firebase";
 import { signOut } from "firebase/auth";
 import { AuthContext } from "../../context/AuthContext";
@@ -23,6 +24,11 @@ const AppHeader = () => {
   const [isSearchFormVisible, setIsSearchFormVisible] = useState(false);
 
   const {currentUser} = useContext(AuthContext);
+
+  const hamburgerMenuRef = useRef(null);
+  const userMenuRef = useRef(null);
+  useClickOutside(hamburgerMenuRef, isHamburgerActive, setIsHamburgerActive);
+  useClickOutside(userMenuRef, isUserMenuActive, setIsUserMenuActive);
 
   const hamburgerClassName = `hamburger ${isHamburgerActive ? 'hamburger_active' : ''}`;
 
@@ -83,7 +89,7 @@ const AppHeader = () => {
                 alt={`${currentUser.displayName} avatar`} 
                 className="app__header-user-photo"
                 onClick={() => setIsUserMenuActive(!isUserMenuActive)} />
-              <nav className={`user-menu ${isUserMenuActive ? "active" : ""}`}>
+              <nav className={`user-menu ${isUserMenuActive ? "active" : ""}`} ref={userMenuRef}>
                 <ul className="user-menu__list">
                   <li>
                     <Link to='/user/anime-list' className="user-menu__list-item">
@@ -113,7 +119,7 @@ const AppHeader = () => {
         <AnimeSearchForm />
       )}
       {isMobileScreen && (
-        <div className={`hamburger-menu ${isHamburgerActive ? "active" : ""}`}>
+        <div className={`hamburger-menu ${isHamburgerActive ? "active" : ""}`} ref={hamburgerMenuRef}>
           <Filters />
         </div>
       )}

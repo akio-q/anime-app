@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { throttle } from 'lodash';
 
-const useThrottle = (fetchData, delay) => {
+export const useThrottle = (fetchData, delay) => {
   const throttledFetchData = useCallback(
     throttle(() => {
       fetchData();
@@ -11,5 +11,3 @@ const useThrottle = (fetchData, delay) => {
 
   return throttledFetchData;
 };
-
-export default useThrottle;

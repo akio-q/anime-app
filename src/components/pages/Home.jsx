@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { useLazyGetTopSeasonalAnimeQuery, useLazyGetUpcomingAnimeQuery, useLazyGetTopAnimeQuery } from "../../api/apiSlice";
-import useThrottle from "../../hooks/useThrottle";
+import { useThrottle } from "../../hooks/useThrottle";
 import Helmet from 'react-helmet';
 
 import TopAnimeSlider from "../topAnimeSlider/TopAnimeSlider";
@@ -7,7 +8,6 @@ import CategoryAnimeSlider from '../categoryAnimeSlider/CategoryAnimeSlider';
 import RecentAnimeRecommendations from "../recentAnimeRecommendations/RecentAnimeRecommendations";
 
 import '../animeList/animeList.scss';
-import { useEffect } from "react";
 
 const Home = () => {
   const [fetchTopSeasonalAnime, { 
