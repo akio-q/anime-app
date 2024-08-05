@@ -5,6 +5,7 @@ import { AuthContext } from '../../../context/AuthContext';
 import { arrayUnion, doc, setDoc } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 import Helmet from 'react-helmet';
+import { IoMdAddCircleOutline } from "react-icons/io";
 
 import AnimeRelations from '../../animeRelations/AnimeRelations';
 import AnimeRecommendations from '../../animeRecommendations/AnimeRecommendations';
@@ -107,6 +108,9 @@ const SingleAnime = () => {
       <div className="single-anime">
         <div>
           <img src={img} alt="anime-img" className="single-anime__img" />
+          <button
+            className=' button single-anime__list-button' 
+            onClick={handleListButtonClick}><IoMdAddCircleOutline /> Add to List</button>
           <div className="single-anime__info">
             <div className="single-anime__score">
               <div className="title_fz18fw600 single-anime__score-title">Score</div>
@@ -135,9 +139,6 @@ const SingleAnime = () => {
             <div className="single-anime__release">
               <div>{displaySeasonAndYear}</div>
               <div>{displayEpisodes} episodes</div>
-              <button
-                className=' button single-anime__list-button' 
-                onClick={handleListButtonClick}>Add to List</button>
             </div>
           </div>
           <div className="single-anime__descr">{synopsis}</div>
