@@ -1,6 +1,6 @@
 import fetchAnimeData from "./fetchAnimeData";
 
-const delayedFetchAnimeData = async (arr, setIsDataLoading, setAnimeData, delay = 1500) => {
+const delayedFetchAnimeData = async (arr, setIsDataLoading, setAnimeData, delay = 1600) => {
   if (arr.length > 0) {
     setIsDataLoading(true);
     const data = [];

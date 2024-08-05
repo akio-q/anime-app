@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from "../../../context/AuthContext";
-import { getDocs, collection, query, getDoc, doc } from 'firebase/firestore';
+import { getDoc, doc } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 
 import AnimeCard from '../../animeCard/AnimeCard';
