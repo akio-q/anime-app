@@ -4,8 +4,9 @@ import { useGetAnimeByIdQuery } from '../../../api/apiSlice';
 import { AuthContext } from '../../../context/AuthContext';
 import { arrayUnion, doc, setDoc } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
-import Helmet from 'react-helmet';
+import { toast, ToastContainer } from 'react-toastify';
 import { IoMdAddCircleOutline } from "react-icons/io";
+import Helmet from 'react-helmet';
 
 import AnimeRelations from '../../animeRelations/AnimeRelations';
 import AnimeRecommendations from '../../animeRecommendations/AnimeRecommendations';
@@ -72,7 +73,11 @@ const SingleAnime = () => {
     if (currentUser) {
       setIsModalOpen(true);
     } else {
-      navigate('/login');
+      toast.error('Please log in or sign up to add anime to your list', { 
+        position: "bottom-center",
+        className: "custom-toast",
+        autoClose: 3000
+      });
     }
   }
 
@@ -92,8 +97,17 @@ const SingleAnime = () => {
       }, { merge: true });
       
       setIsModalOpen(false);
+      toast.success(`Anime successfully added to '${listName}' list`, { 
+        position: "bottom-center",
+        className: "custom-toast",
+        autoClose: 3000,
+      });
     } catch (error) {
-      console.error('Error adding anime to list: ', error);
+      toast.error(error.message, { 
+        position: "bottom-center",
+        className: "custom-toast",
+        autoClose: 3000
+      });
     }
   };
 
@@ -152,6 +166,7 @@ const SingleAnime = () => {
           onClose={() => setIsModalOpen(false)}
           onChoose={handleAddToList}
         />
+        <ToastContainer />
       </div>
     </>
   )
