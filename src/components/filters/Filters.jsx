@@ -10,7 +10,7 @@ import {
   setFilterTrigger } from "./filtersSlice";
 
 import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import chopperSticker from '../../resources/img/chopper_sticker.png'

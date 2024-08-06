@@ -3,7 +3,7 @@ import { useGetAnimeRecommendationsQuery } from '../../api/apiSlice';
 import { delayedFetchAnimeData } from '../../utils/delayedFetchData';
 
 import AnimeCard from '../animeCard/AnimeCard';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './animeRecommendations.scss';

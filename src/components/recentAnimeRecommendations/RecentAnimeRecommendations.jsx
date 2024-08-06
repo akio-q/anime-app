@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useGetRecentAnimeRecommendationsQuery } from '../../api/apiSlice';
 
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import './recentAnimeRecommendations.scss';

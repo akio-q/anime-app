@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import AnimeCard from '../animeCard/AnimeCard';
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import 'swiper/css';

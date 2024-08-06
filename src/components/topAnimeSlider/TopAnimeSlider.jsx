@@ -4,7 +4,7 @@ import { Autoplay } from 'swiper/modules';
 import { useGetTopSeasonalAnimeQuery } from '../../api/apiSlice';
 import TopAnimeSliderSlide from './TopAnimeSliderSlide';
 
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
 import 'swiper/css';

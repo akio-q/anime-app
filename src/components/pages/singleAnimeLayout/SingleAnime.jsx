@@ -12,7 +12,7 @@ import Helmet from 'react-helmet';
 import AnimeRelations from '../../animeRelations/AnimeRelations';
 import AnimeRecommendations from '../../animeRecommendations/AnimeRecommendations';
 import ChooseListModal from '../../modals/ChooseListModal';
-import Spinner from '../../Spinner/Spinner';
+import Spinner from '../../spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
 
 import './singleAnime.scss';

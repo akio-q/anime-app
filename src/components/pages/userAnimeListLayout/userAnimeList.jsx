@@ -5,7 +5,7 @@ import { db } from '../../../config/firebase';
 
 import AnimeCard from '../../animeCard/AnimeCard';
 import Pagination from '../../pagination/Pagination';
-import Spinner from '../../Spinner/Spinner';
+import Spinner from '../../spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
 
 import './userAnimeList.scss';
@@ -22,7 +22,7 @@ const UserAnimeList = () => {
   const joinDate = currentUser?.metadata?.creationTime;
 
   const animeLists = ['watching', 'completed', 'planned', 'on-hold', 'dropped'];
-  const ITEMS_PER_PAGE = 7;
+  const ITEMS_PER_PAGE = 20;
 
   useEffect(() => {
     const fetchAnimeList = async () => {

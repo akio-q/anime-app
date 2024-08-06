@@ -4,7 +4,7 @@ import { useGetAnimeRelationsQuery } from '../../api/apiSlice';
 import { delayedFetchAnimeRelationsData } from '../../utils/delayedFetchData';
 
 import ErrorMessage from '../errorMessage/ErrorMessage';
-import Spinner from '../Spinner/Spinner';
+import Spinner from '../spinner/Spinner';
 
 import './animeRelations.scss';
 

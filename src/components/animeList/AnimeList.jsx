@@ -5,7 +5,7 @@ import { setData, incrementPage, setFilterTrigger } from "../filters/filtersSlic
 import filterData from "../../utils/filterData";
 
 import AnimeCard from "../animeCard/AnimeCard"
-import Spinner from "../Spinner/Spinner";
+import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import namiSticker from '../../resources/img/nami_sticker.png';
