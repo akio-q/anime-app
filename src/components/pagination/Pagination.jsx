@@ -2,8 +2,17 @@ import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
 
 import './pagination.scss'; 
+import { useEffect } from "react";
 
 const Pagination = ({ currentPage, totalPages, handlePageChange }) => {
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  }, [currentPage])
+
   const pageNumbers = [];
   for (let i = 1; i <= totalPages; i++) {
     pageNumbers.push(i);
