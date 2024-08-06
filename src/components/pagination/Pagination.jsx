@@ -17,16 +17,16 @@ const Pagination = ({ currentPage, totalPages, handlePageChange }) => {
         className="pagination__navigation">
           <GrPrevious />
       </button>
-      {pageNumbers.map(number => (
-        <ul className="pagination__list">
+      <ul className="pagination__list">
+        {pageNumbers.map(number => (
           <li
             key={number}
             onClick={() => handlePageChange(number)}
             className={`pagination__item ${number === currentPage ? 'active' : ''}`}>
             {number}
           </li>
-        </ul>
-      ))}
+        ))}
+      </ul>
       <button 
         onClick={() => handlePageChange(currentPage + 1)} 
         disabled={currentPage === totalPages} 

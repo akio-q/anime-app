@@ -11,8 +11,9 @@
   &__navigation {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 100%;
-    padding: 0 8px;
+    width: 35px;
     font-size: 18px;
     color: $secondary-text-color;
     background-color: $main-color;
@@ -33,14 +34,16 @@
     }
   }
   &__list {
+    display: flex;
     height: 100%;
     list-style-type: none;
   }
   &__item {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 100%;
-    padding: 0 12px;
+    width: 30px;
     font-size: 18px;
     color: $secondary-text-color;
     cursor: pointer;
