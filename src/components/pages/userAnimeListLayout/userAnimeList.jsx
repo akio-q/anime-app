@@ -4,6 +4,7 @@ import { getDoc, doc } from 'firebase/firestore';
 import { db } from '../../../config/firebase';
 
 import AnimeCard from '../../animeCard/AnimeCard';
+import Pagination from '../../pagination/Pagination';
 import Spinner from '../../Spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
 
@@ -14,9 +15,14 @@ const UserAnimeList = () => {
   const [animeList, setAnimeList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
 
   const { currentUser } = useContext(AuthContext);
   const joinDate = currentUser?.metadata?.creationTime;
+
+  const animeLists = ['watching', 'completed', 'planned', 'on-hold', 'dropped'];
+  const ITEMS_PER_PAGE = 7;
 
   useEffect(() => {
     const fetchAnimeList = async () => {
@@ -28,9 +34,13 @@ const UserAnimeList = () => {
         const querySnapshot = await getDoc(animeListRef);
 
         if (querySnapshot.exists()) {
-          setAnimeList(querySnapshot.data().anime);
+          const animeData = querySnapshot.data().anime || [];
+          
+          setAnimeList(animeData);
+          setTotalPages(Math.ceil(animeData.length / ITEMS_PER_PAGE));
         } else {
           setAnimeList([]);
+          setTotalPages(0);
         }
       } catch (err) {
         setError(true);
@@ -42,6 +52,11 @@ const UserAnimeList = () => {
     fetchAnimeList();
   }, [activeTab, currentUser.uid]);
 
+  const displayedAnimeList = animeList.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
   return (
     <div className='user-anime-list'>
       <div className="user-anime-list__user">
@@ -52,34 +67,21 @@ const UserAnimeList = () => {
       <div className="user-anime-list__content">
         <div className="title_fz30fw600 user-anime-list__title">{`${currentUser.displayName}'s Anime List`}</div>
         <div className="user-anime-list__tabs">
-          <button 
-            className={`user-anime-list__tab ${activeTab === 'watching' ? 'active' : ''}`} 
-            onClick={() => setActiveTab('watching')}>
-            Watching
-          </button>
-          <button 
-            className={`user-anime-list__tab ${activeTab === 'completed' ? 'active' : ''}`} 
-            onClick={() => setActiveTab('completed')}>
-            Completed
-          </button>
-          <button 
-            className={`user-anime-list__tab ${activeTab === 'planned' ? 'active' : ''}`} 
-            onClick={() => setActiveTab('planned')}>
-            Planned
-          </button>
-          <button 
-            className={`user-anime-list__tab ${activeTab === 'on-hold' ? 'active' : ''}`} 
-            onClick={() => setActiveTab('on-hold')}>
-            On Hold
-          </button>
-          <button 
-            className={`user-anime-list__tab ${activeTab === 'dropped' ? 'active' : ''}`} 
-            onClick={() => setActiveTab('dropped')}>
-            Dropped
-          </button>
+          {animeLists.map(list => {
+            return (
+              <button 
+                className={`user-anime-list__tab ${activeTab === list ? 'active' : ''}`} 
+                onClick={() => {
+                  setActiveTab(list);
+                  setCurrentPage(1);
+                }}>
+                  {list}
+              </button>
+            )
+          })}
         </div>
         <div className="user-anime-list__container">
-        {loading ? (
+          {loading ? (
             <div className="user-anime-list__wrapper">
               <Spinner />
             </div>
@@ -93,7 +95,7 @@ const UserAnimeList = () => {
             </div>
           ) : (
             <div className="anime__list">
-              {animeList.map((anime) => {
+              {displayedAnimeList.map((anime) => {
                 const { animeId, images, episodes, title_english, title } = anime; 
 
                 return (
@@ -109,6 +111,12 @@ const UserAnimeList = () => {
             </div>
           )}
         </div>
+        {animeList.length ? 
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            handlePageChange={setCurrentPage} /> 
+        : null}
       </div>
     </div>
   )

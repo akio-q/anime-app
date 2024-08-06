@@ -40,6 +40,7 @@
     color: $secondary-text-color;
     border: none;
     cursor: pointer;
+    text-transform: capitalize;
     transition: 0.3s all ease;
     &.active {
       font-weight: bold;
