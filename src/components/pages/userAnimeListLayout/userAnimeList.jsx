@@ -50,7 +50,7 @@ const UserAnimeList = () => {
         <div className='title_fz16fw500'>Join Date: {joinDate ? new Date(joinDate).toLocaleDateString() : 'N/A'}</div>
       </div>
       <div className="user-anime-list__content">
-        <div className="title_fz30fw600">{`${currentUser.displayName}'s Anime List`}</div>
+        <div className="title_fz30fw600 user-anime-list__title">{`${currentUser.displayName}'s Anime List`}</div>
         <div className="user-anime-list__tabs">
           <button 
             className={`user-anime-list__tab ${activeTab === 'watching' ? 'active' : ''}`} 

@@ -9,6 +9,7 @@
   &__user {
     display: flex;
     flex-direction: column;
+    height: fit-content;
     row-gap: 20px;
     align-items: center;
     background-color: $main-color;
