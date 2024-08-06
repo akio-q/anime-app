@@ -23,7 +23,7 @@ const UserAnimeList = () => {
   const { currentUser } = useContext(AuthContext);
 
   const animeLists = ['watching', 'completed', 'planned', 'on-hold', 'dropped'];
-  const ITEMS_PER_PAGE = 7;
+  const ITEMS_PER_PAGE = 20;
 
   useEffect(() => {
     const fetchAnimeList = async () => {

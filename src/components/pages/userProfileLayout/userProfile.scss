@@ -1,0 +1,56 @@
+@import '../../../style/variables.scss';
+
+.user-profile {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 30px;
+  margin-top: 30px;
+  padding: 0 100px;
+  &__content {
+    display: flex;
+    flex-direction: column;
+    row-gap: 40px;
+    width: 100%;
+    padding: 50px;
+    background-color: $main-color;
+  }
+  &__change {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 20px;
+    &-title {
+      width: 250px;
+    }
+    &-input {
+      width: 300px;
+      height: 40px;
+      padding: 0 20px;
+      background-color: $main-color-light;
+      border: none;
+      outline: none;
+      border-radius: 5px;
+      color: $secondary-text-color;
+      transition: .3s all;
+      &:focus {
+        outline: 1px solid $secondary-color-light;
+      }
+      &_file {
+        display: flex;
+        align-items: center;
+        column-gap: 10px;
+        background-color: transparent;
+        color: $secondary-text-color;
+        font-size: 18px;
+        cursor: pointer;
+        transition: .3s all;
+        .icon-user-circle {
+          font-size: 30px;
+        }
+        &:hover {
+          color: $main-text-color;
+        }
+      }
+    }
+  }
+}
