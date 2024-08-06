@@ -1,0 +1,15 @@
+@import '../../style/variables.scss';
+
+.user-card {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  row-gap: 20px;
+  align-items: center;
+  background-color: $main-color;
+  padding: 30px;
+  &__photo {
+    width: 100%;
+    border-radius: 50%;
+  }
+}

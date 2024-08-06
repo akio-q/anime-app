@@ -5,6 +5,7 @@ import { db } from '../../../config/firebase';
 
 import AnimeCard from '../../animeCard/AnimeCard';
 import Pagination from '../../pagination/Pagination';
+import UserCard from '../../userCard/UserCard';
 import Spinner from '../../spinner/Spinner';
 import ErrorMessage from '../../errorMessage/ErrorMessage';
 
@@ -19,10 +20,9 @@ const UserAnimeList = () => {
   const [totalPages, setTotalPages] = useState(0);
 
   const { currentUser } = useContext(AuthContext);
-  const joinDate = currentUser?.metadata?.creationTime;
 
   const animeLists = ['watching', 'completed', 'planned', 'on-hold', 'dropped'];
-  const ITEMS_PER_PAGE = 20;
+  const ITEMS_PER_PAGE = 7;
 
   useEffect(() => {
     const fetchAnimeList = async () => {
@@ -59,11 +59,7 @@ const UserAnimeList = () => {
 
   return (
     <div className='user-anime-list'>
-      <div className="user-anime-list__user">
-        <img src={currentUser.photoURL} alt="" className="user-anime-list__user-photo" />
-        <div className="title_fz25fw600 user-anime-list__user-name">{currentUser.displayName}</div>
-        <div className='title_fz16fw500'>Join Date: {joinDate ? new Date(joinDate).toLocaleDateString() : 'N/A'}</div>
-      </div>
+      <UserCard additionalClass={'user-card__list'} />
       <div className="user-anime-list__content">
         <div className="title_fz30fw600 user-anime-list__title">{`${currentUser.displayName}'s Anime List`}</div>
         <div className="user-anime-list__tabs">

@@ -452,8 +452,10 @@
   }
   .user-anime-list {
     grid-template-columns: 1fr;
-    &__user {
-      display: none;
+  }
+  .user-card {
+    &__list {
+      display: none !important;
     }
   }
   @keyframes slidein {
