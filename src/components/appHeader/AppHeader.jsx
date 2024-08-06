@@ -92,6 +92,12 @@ const AppHeader = () => {
               <nav className={`user-menu ${isUserMenuActive ? "active" : ""}`} ref={userMenuRef}>
                 <ul className="user-menu__list">
                   <li>
+                    <Link to='/user/profile' className="user-menu__list-item">
+                      <FaUser />
+                      Profile
+                    </Link>
+                  </li>
+                  <li>
                     <Link to='/user/anime-list' className="user-menu__list-item">
                       <FaBookmark className="user-menu__icon" />
                       My list

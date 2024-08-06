@@ -5,6 +5,7 @@ import Home from '../pages/Home';
 import SingleAnime from '../pages/singleAnimeLayout/SingleAnime';
 import SearchResults from '../pages/searchResultsLayout/SearchResults';
 import UserAnimeList from "../pages/userAnimeListLayout/userAnimeList";
+import UserProfile from '../pages/userProfileLayout/UserProfile';
 import Register from "../pages/Register";
 import Login from "../pages/Login";
 import AppFooter from '../appFooter/AppFooter';
@@ -35,6 +36,7 @@ const Inner = () => {
           <Route path='/anime/:animeId' element={<SingleAnime />} />
           <Route path='/search/:animeName' element={<SearchResults />} />
           <Route path='/user/anime-list' element={<UserAnimeList />} />
+          <Route path='/user/profile' element={<UserProfile />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
