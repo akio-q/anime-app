@@ -1,0 +1,57 @@
+@import '../../style/variables.scss';
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 35px;
+  margin: 20px auto 0 auto;
+  background-color: $main-color;
+  width: fit-content;
+  &__navigation {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 8px;
+    font-size: 18px;
+    color: $secondary-text-color;
+    background-color: $main-color;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s all;
+    &:hover {
+      background-color: $secondary-color;
+      color: $main-text-color;
+    }
+    &:disabled {
+      color: $main-color-light;
+      cursor: not-allowed;
+      &:hover {
+        background-color: $main-color;
+        color: $main-color-light;
+      }
+    }
+  }
+  &__list {
+    height: 100%;
+    list-style-type: none;
+  }
+  &__item {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 12px;
+    font-size: 18px;
+    color: $secondary-text-color;
+    cursor: pointer;
+    transition: 0.3s all;
+    &:hover {
+      background-color: $secondary-color;
+      color: $main-text-color;
+    }
+    &.active {
+      background-color: $secondary-color;
+      color: $main-text-color;
+    }
+  }
+}
