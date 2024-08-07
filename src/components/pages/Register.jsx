@@ -89,7 +89,7 @@ const Register = () => {
               avatar: Yup.mixed()
                         .required('A profile picture is required')
                         .test('fileSize', 'File size too large', value => {
-                          return value && value.size <= 5 * 1024 * 1024; // 5MB
+                          return value && value.size <= 5 * 1024 * 1024;
                         })
                         .test('fileType', 'Unsupported file format', value => {
                           return value && ['image/jpg', 'image/jpeg', 'image/png'].includes(value.type);

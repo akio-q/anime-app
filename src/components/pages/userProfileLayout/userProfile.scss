@@ -7,18 +7,23 @@
   margin-top: 30px;
   padding: 0 100px;
   &__content {
+    width: 100%;
+    padding: 40px 20px 20px 20px;
+    background-color: $main-color;
+  }
+  &__form {
     display: flex;
     flex-direction: column;
-    row-gap: 40px;
-    width: 100%;
-    padding: 50px;
-    background-color: $main-color;
+    align-items: center;
   }
   &__change {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    column-gap: 20px;
+    column-gap: 100px;
+    margin-top: 50px;
+    &:first-child {
+      margin-top: 0;
+    }
     &-title {
       width: 250px;
     }
@@ -39,6 +44,7 @@
         display: flex;
         align-items: center;
         column-gap: 10px;
+        width: 300px;
         background-color: transparent;
         color: $secondary-text-color;
         font-size: 18px;
@@ -52,5 +58,17 @@
         }
       }
     }
+  }
+  &__button {
+    margin-top: 60px !important;
+    padding: 10px 35px !important;
+    width: fit-content;
+    margin: 0 auto;
+  }
+  &__error {
+    text-align: center;
+    color: red;
+    font-size: 12px;
+    margin: 2px 0 -20px 0;
   }
 }
