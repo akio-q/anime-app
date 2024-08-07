@@ -122,6 +122,7 @@ const UserProfile = () => {
             </Form>
           )}
         </Formik>
+        <div className="title_fz14fw500 user-profile__message">Please refresh the page to see the updated changes.</div>
       </div>
       <ToastContainer />
     </div>
