@@ -7,6 +7,7 @@ import { updateProfile } from "firebase/auth";
 import { doc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { ToastContainer, toast } from 'react-toastify';
+import { Helmet } from 'react-helmet';
 
 import UserCard from '../../userCard/UserCard';
 
@@ -50,82 +51,88 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="user-profile">
-      <UserCard />
-      <div className="user-profile__content">
-        <Formik
-          initialValues={{
-            displayName: '',
-            avatar: null
-          }}
-          validationSchema={Yup.object({
-            displayName: Yup.string()
-                            .min(2, 'Minimum 2 symbols')
-                            .max(15, 'Maximum 15 symbols'),
-            avatar: Yup.mixed()
-                      .test('fileSize', 'File size too large', value => {
-                        return value ? value.size <= 5 * 1024 * 1024 : true; 
-                      })
-                      .test('fileType', 'Unsupported file format', value => {
-                        return value ? ['image/jpg', 'image/jpeg', 'image/png'].includes(value.type) : true;
-                      })
-                      .nullable()
-          })}
-          onSubmit={handleProfileUpdate}>
-          {({ setFieldValue, isSubmitting }) => (
-            <Form className='user-profile__form'>
-              <div className="user-profile__change">
-                <div className="title_fz18fw500 user-profile__change-title">Change Display Name</div>
-                <div>
-                  <Field 
-                    id="displayName"
-                    name="displayName"
-                    type="text" 
-                    placeholder='Enter Display Name'
-                    autoComplete="off"
-                    className='user-profile__change-input' />
-                  <ErrorMessage className='user-profile__error' name="displayName" component="div" />
+    <>
+      <Helmet>
+        <title>AniSurf | {currentUser.displayName}'s Profile - See and Update Your Info</title>
+        <meta name="description" content="See and update your profile details" />
+      </Helmet>
+      <div className="user-profile">
+        <UserCard />
+        <div className="user-profile__content">
+          <Formik
+            initialValues={{
+              displayName: '',
+              avatar: null
+            }}
+            validationSchema={Yup.object({
+              displayName: Yup.string()
+                              .min(2, 'Minimum 2 symbols')
+                              .max(15, 'Maximum 15 symbols'),
+              avatar: Yup.mixed()
+                        .test('fileSize', 'File size too large', value => {
+                          return value ? value.size <= 5 * 1024 * 1024 : true; 
+                        })
+                        .test('fileType', 'Unsupported file format', value => {
+                          return value ? ['image/jpg', 'image/jpeg', 'image/png'].includes(value.type) : true;
+                        })
+                        .nullable()
+            })}
+            onSubmit={handleProfileUpdate}>
+            {({ setFieldValue, isSubmitting }) => (
+              <Form className='user-profile__form'>
+                <div className="user-profile__change">
+                  <div className="title_fz18fw500 user-profile__change-title">Change Display Name</div>
+                  <div>
+                    <Field 
+                      id="displayName"
+                      name="displayName"
+                      type="text" 
+                      placeholder='Enter Display Name'
+                      autoComplete="off"
+                      className='user-profile__change-input' />
+                    <ErrorMessage className='user-profile__error' name="displayName" component="div" />
+                  </div>
                 </div>
-              </div>
-              <div className="user-profile__change">
-                <div className="title_fz18fw500 user-profile__change-title">Change Avatar</div>
-                <div>
-                  <input 
-                    id="avatar"
-                    name='avatar'
-                    type="file"
-                    accept="image/*"
-                    onChange={e => {
-                      const file = e.currentTarget.files[0];
-                      setFieldValue('avatar', file);
-                      setFileName(file ? file.name : '');
-                    }}
-                    style={{display: 'none'}}
-                  />
-                  <label htmlFor="avatar" className='user-profile__change-input_file'>
-                    <i className='icon-user-circle'></i>
-                    <span>
-                      { fileName && fileName.length > 15 ? `${fileName.slice(0, 15)}...`
-                      : fileName ? fileName
-                      : 'Add a profile picture' }
-                    </span>
-                  </label>
-                  <ErrorMessage className='user-profile__error' name="avatar" component="div" />
+                <div className="user-profile__change">
+                  <div className="title_fz18fw500 user-profile__change-title">Change Avatar</div>
+                  <div>
+                    <input 
+                      id="avatar"
+                      name='avatar'
+                      type="file"
+                      accept="image/*"
+                      onChange={e => {
+                        const file = e.currentTarget.files[0];
+                        setFieldValue('avatar', file);
+                        setFileName(file ? file.name : '');
+                      }}
+                      style={{display: 'none'}}
+                    />
+                    <label htmlFor="avatar" className='user-profile__change-input_file'>
+                      <i className='icon-user-circle'></i>
+                      <span>
+                        { fileName && fileName.length > 15 ? `${fileName.slice(0, 15)}...`
+                        : fileName ? fileName
+                        : 'Add a profile picture' }
+                      </span>
+                    </label>
+                    <ErrorMessage className='user-profile__error' name="avatar" component="div" />
+                  </div>
                 </div>
-              </div>
-              <button 
-                className='button user-profile__button'
-                type='submit'
-                disabled={isSubmitting}>
-                {isSubmitting ? 'Submitting...' : 'Submit changes'}
-              </button>
-            </Form>
-          )}
-        </Formik>
-        <div className="title_fz14fw500 user-profile__message">Please refresh the page to see the updated changes.</div>
+                <button 
+                  className='button user-profile__button'
+                  type='submit'
+                  disabled={isSubmitting}>
+                  {isSubmitting ? 'Submitting...' : 'Submit changes'}
+                </button>
+              </Form>
+            )}
+          </Formik>
+          <div className="title_fz14fw500 user-profile__message">Please refresh the page to see the updated changes.</div>
+        </div>
+        <ToastContainer />
       </div>
-      <ToastContainer />
-    </div>
+    </>
   )
 }
 
