@@ -53,7 +53,7 @@ const UserProfile = () => {
   return (
     <>
       <Helmet>
-        <title>AniSurf | {currentUser.displayName}'s Profile - See and Update Your Info</title>
+        <title>{`AniSurf | ${currentUser?.displayName}'s Profile - See and Update Your Info`}</title>
         <meta name="description" content="See and update your profile details" />
       </Helmet>
       <div className="user-profile">
