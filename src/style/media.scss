@@ -47,6 +47,9 @@
   .user-anime-list {
     grid-template-columns: 1fr 3fr;
   }
+  .user-profile {
+    padding: 0 60px;
+  }
   .error-message {
     &_small {
       .error-message {
@@ -179,6 +182,16 @@
   .search-results {
     grid-template-columns: 2fr 1fr;
   }
+  .user-profile {
+    padding: 0 20px;
+    gap: 20px;
+    &__content {
+      padding: 40px 20px;
+    }
+    &__change {
+      column-gap: 50px;
+    }
+  }
   .error-message {
     &_small {
       .error-message {
@@ -275,7 +288,21 @@
     }
   }
   .user-anime-list {
+    grid-template-columns: 1fr;
     padding: 0 10px;
+  }
+  .user-profile {
+    grid-template-columns: 1fr;
+    &__content {
+      padding: 30px 20px;
+    }
+    &__change {
+      column-gap: 50px;
+    }
+  }
+  .user-card {
+    width: 40%;
+    margin: 0 auto;
   }
 }
 
@@ -454,8 +481,24 @@
     grid-template-columns: 1fr;
   }
   .user-card {
+    width: 50%;
+    padding: 20px;
     &__list {
       display: none !important;
+    }
+  }
+  .user-profile {
+    &__change {
+      column-gap: 20px;
+      &-title {
+        width: 220px;
+      }
+      &-input {
+        width: 250px;
+        &_file {
+          width: 250px;
+        }
+      }
     }
   }
   @keyframes slidein {
@@ -635,6 +678,19 @@
       font-size: 25px;
     }
   }
+  .user-card {
+    width: 60%;
+  }
+  .user-profile {
+    &__content {
+      padding: 30px 10px;
+    }
+    &__change {
+      flex-direction: column;
+      align-items: start;
+      row-gap: 10px;
+    }
+  }
   .error-message {
     &_small {
       .error-message {
@@ -708,5 +764,8 @@
     &__title {
       font-size: 22px;
     }
+  }
+  .user-card {
+    width: 80%;
   }
 }
