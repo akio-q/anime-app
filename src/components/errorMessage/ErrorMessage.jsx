@@ -10,6 +10,10 @@ const ErrorMessage = ({ errorStatus, isSmall, isDirectionRow }) => {
       errorMessageText = 'Rate limiting error. Please try again in a moment'
       errorMessageClass = 'limit-error'
       break;
+    case 404: 
+      errorMessageText = '404 - Page Not Found.'
+      errorMessageClass = 'not-found-error'
+      break;
     default:
       errorMessageText = 'Oops, something went wrong...'
       errorMessageClass = '';

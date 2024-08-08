@@ -10,6 +10,7 @@ import UserAnimeList from "../pages/userAnimeListLayout/userAnimeList";
 import UserProfile from '../pages/userProfileLayout/UserProfile';
 import Register from "../pages/Register";
 import Login from "../pages/Login";
+import ErrorMessage from '../errorMessage/ErrorMessage';
 import AppFooter from '../appFooter/AppFooter';
 
 const ProtectedRoute = ({ element: Component }) => {
@@ -36,6 +37,7 @@ const Inner = () => {
           <Route path='/user/profile' element={<ProtectedRoute element={UserProfile} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="*" element={<ErrorMessage errorStatus={404} />} />
         </Routes>
       </main>
       {!isLoginOrRegister() && <AppFooter />}
