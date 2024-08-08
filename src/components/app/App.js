@@ -1,4 +1,6 @@
-import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
 
 import AppHeader from '../appHeader/AppHeader';
 import Home from '../pages/Home';
@@ -10,15 +12,10 @@ import Register from "../pages/Register";
 import Login from "../pages/Login";
 import AppFooter from '../appFooter/AppFooter';
 
-const App = () => {
-  return (
-    <Router>
-      <div className="app">
-        <Inner />
-      </div>
-    </Router>
-  );
-}
+const ProtectedRoute = ({ element: Component }) => {
+  const { currentUser } = useContext(AuthContext);
+  return currentUser ? <Component /> : <Navigate to="/login" />;
+};
 
 const Inner = () => {
   const { pathname } = useLocation();
@@ -35,8 +32,8 @@ const Inner = () => {
           <Route path="/" element={<Home />} />
           <Route path='/anime/:animeId' element={<SingleAnime />} />
           <Route path='/search/:animeName' element={<SearchResults />} />
-          <Route path='/user/anime-list' element={<UserAnimeList />} />
-          <Route path='/user/profile' element={<UserProfile />} />
+          <Route path='/user/anime-list' element={<ProtectedRoute element={UserAnimeList} />} />
+          <Route path='/user/profile' element={<ProtectedRoute element={UserProfile} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
@@ -45,5 +42,15 @@ const Inner = () => {
     </>
   )
 } 
+
+const App = () => {
+  return (
+    <Router>
+      <div className="app">
+        <Inner />
+      </div>
+    </Router>
+  );
+}
 
 export default App;
