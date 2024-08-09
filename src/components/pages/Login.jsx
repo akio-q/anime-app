@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { NavLink, useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
@@ -10,10 +11,12 @@ import luffySticker from '../../resources/img/luffy_sticker.png';
 import '../../style/form.scss';
 
 const Login = () => {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const signIn = async (values) => {
     const { email, password } = values;
+    setLoading(true);
 
     try {
       await signInWithEmailAndPassword(auth, email, password); 
@@ -30,6 +33,8 @@ const Login = () => {
         className: "custom-toast",
         autoClose: 3000
       });
+    } finally {
+      setLoading(false); 
     }
   }
 
@@ -77,7 +82,12 @@ const Login = () => {
                 className="form__form-input"
               />
               <ErrorMessage className='form__form-error' name="password" component="div" />
-              <button type="submit" className="button button__auth">Sign in</button>
+              <button 
+                type='submit' 
+                className='button button__auth' 
+                disabled={loading}>
+                  {loading ? 'Submitting...' : 'Sign in'}
+              </button>
             </Form>
           </Formik>
           <p className="form__redirect">

@@ -14,12 +14,15 @@ import '../../style/form.scss';
 
 const Register = () => {
   const [fileName, setFileName] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const signUp = async (values) => { 
     const { displayName, email, password, avatar } = values;
 
     if (!avatar) return;
+
+    setLoading(true);
     
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
@@ -53,6 +56,8 @@ const Register = () => {
         className: "custom-toast",
         autoClose: 3000
       });
+    } finally {
+      setLoading(false); 
     }
   }
 
@@ -145,7 +150,12 @@ const Register = () => {
                   </span>
                 </label>
                 <ErrorMessage className='form__form-error' name="avatar" component="div" />
-                <button type='submit' className='button button__auth'>Sign up</button>
+                <button 
+                  type='submit' 
+                  className='button button__auth' 
+                  disabled={loading}>
+                    {loading ? 'Submitting...' : 'Sign up'}
+                </button>
               </Form>
             )}
           </Formik>
