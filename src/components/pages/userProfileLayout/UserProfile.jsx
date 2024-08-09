@@ -81,7 +81,7 @@ const UserProfile = () => {
             {({ setFieldValue, isSubmitting }) => (
               <Form className='user-profile__form'>
                 <div className="user-profile__change">
-                  <div className="title_fz18fw500 user-profile__change-title">Change Display Name</div>
+                  <div className="title_fz18fw500 user-profile__change-title">Change Display Name:</div>
                   <div>
                     <Field 
                       id="displayName"
@@ -94,7 +94,7 @@ const UserProfile = () => {
                   </div>
                 </div>
                 <div className="user-profile__change">
-                  <div className="title_fz18fw500 user-profile__change-title">Change Avatar</div>
+                  <div className="title_fz18fw500 user-profile__change-title">Change Avatar:</div>
                   <div>
                     <input 
                       id="avatar"
