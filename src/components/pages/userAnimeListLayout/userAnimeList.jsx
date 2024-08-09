@@ -100,7 +100,7 @@ const UserAnimeList = () => {
                 No anime found in this list.
               </div>
             ) : (
-              <div className="anime__list">
+              <div className="anime__list anime__list_user">
                 {displayedAnimeList.map((anime) => {
                   const { animeId, images, episodes, title_english, title } = anime; 
 

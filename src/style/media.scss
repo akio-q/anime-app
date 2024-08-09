@@ -210,6 +210,10 @@
     }
     &__list {
       grid-template-columns: repeat(3, 1fr);
+      &_user {
+        padding: 0 40px;
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
     &__filters {
       &-item {
@@ -330,6 +334,10 @@
   .anime {
     &__list {
       grid-template-columns: repeat(4, 1fr);
+      &_user {
+        padding: 0 30px;
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
     &__filters {
       display: none;
@@ -563,6 +571,10 @@
     }
     &__list {
       grid-template-columns: repeat(3, 1fr);
+      &_user {
+        padding: 0 50px;
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
   }
   .top-anime-slider {
@@ -710,6 +722,9 @@
   .anime {
     &__list {
       grid-template-columns: repeat(2, 1fr);
+      &_user {
+        padding: 0;
+      }
     }
   }
   .app {
