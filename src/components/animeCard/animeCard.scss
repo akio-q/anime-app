@@ -38,6 +38,7 @@
     &-title {
       flex: 1;
       width: 100%;
+      overflow-y: hidden;
       padding: 7px 5px;
       transition: .4s all;
       cursor: pointer;
