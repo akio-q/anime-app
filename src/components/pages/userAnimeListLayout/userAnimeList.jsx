@@ -75,6 +75,7 @@ const UserAnimeList = () => {
             {animeLists.map(list => {
               return (
                 <button 
+                  key={list}
                   className={`user-anime-list__tab ${activeTab === list ? 'active' : ''}`} 
                   onClick={() => {
                     setActiveTab(list);
