@@ -28,7 +28,7 @@ const Inner = () => {
   return (
     <>
       {!isLoginOrRegister() && <AppHeader />}
-      <main>
+      <main className='content'>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path='/anime/:animeId' element={<SingleAnime />} />
