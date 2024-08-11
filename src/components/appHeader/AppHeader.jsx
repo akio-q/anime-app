@@ -12,6 +12,7 @@ import { FaUser } from "react-icons/fa";
 import AnimeSearchForm from "../animeSearchForm/AnimeSearchForm";
 import Filters from "../filters/Filters";
 
+import logo from '../../resources/img/logo.png'
 import './appHeader.scss';
 
 const AppHeader = () => {
@@ -72,7 +73,9 @@ const AppHeader = () => {
               <span></span>
             </div>
           )}
-          <Link to='/' className="app__header-logo">AniSurf</Link>
+          <Link to='/'>
+            <img src={logo} className="app__header-logo" alt="logo" />
+          </Link>
         </div>
         {!isMobileScreen && <AnimeSearchForm />}
         <div className="app__header-wrapper">

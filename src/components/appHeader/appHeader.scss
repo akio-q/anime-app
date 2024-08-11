@@ -10,13 +10,9 @@
     align-items: center;
     background-color: $main-color;
     &-logo {
-      color: $secondary-color;
-      text-shadow: $shadow-color;
-      font-weight: 600;
-      font-size: 35px;
-      &:hover {
-        color: $secondary-color;
-      }
+      height: 40px;
+      width: fit-content;
+      margin-top: 5px;
     }
     &-wrapper {
       display: flex;
