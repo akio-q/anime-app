@@ -43,7 +43,7 @@ const AppHeader = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [window.innerWidth]); 
+  }, []); 
 
   const onHamburgerClick = () => {
     setIsHamburgerActive(!isHamburgerActive);
@@ -126,7 +126,7 @@ const AppHeader = () => {
       )}
       {isMobileScreen && (
         <div className={`hamburger-menu ${isHamburgerActive ? "active" : ""}`} ref={hamburgerMenuRef}>
-          <Filters />
+          <Filters isMobileScreen={isMobileScreen} setIsHamburgerActive={setIsHamburgerActive} />
         </div>
       )}
     </>

@@ -16,7 +16,7 @@ import ErrorMessage from "../errorMessage/ErrorMessage";
 import chopperSticker from '../../resources/img/chopper_sticker.png'
 import './filters.scss';
 
-const Filters = () => {
+const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
   const { filters } = useSelector(state => state.filters);
   const dispatch = useDispatch();
 
@@ -53,7 +53,11 @@ const Filters = () => {
       left: 0,
       behavior: "smooth"
     });
+
     dispatch(setFilterTrigger(true));
+    if (isMobileScreen) {
+      setIsHamburgerActive(false);
+    }
   };
 
   return (
