@@ -5,6 +5,7 @@
     width: 100%;
     height: 150px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 250px;
@@ -12,6 +13,18 @@
     &-link {
       color: $secondary-text-color;
       transition: .3s all;
+      font-size: 16px; 
+      margin-bottom: 10px; 
+      text-decoration: underline;
+      &:hover {
+        color: $main-text-color;
+        text-decoration: underline;
+      }
+    }
+    &-copy {
+      color: $secondary-text-color;
+      font-size: 14px;
+      margin-top: 5px;
       &:hover {
         color: $main-text-color;
       }
