@@ -223,6 +223,9 @@
       }
     }
   }
+  .search {
+    width: 350px;
+  }
   .top-anime-slider {
     &__slide {
       height: 350px;
@@ -414,6 +417,7 @@
     display: block;
     transform:  translateY(-50%);
     width: 40px;
+    margin-top: 3px;
     height: 12.5px;
     flex-shrink: 0;
     span {
@@ -532,9 +536,6 @@
     &__header {
       justify-content: space-between;
       column-gap: 10px;
-      &-logo {
-        font-size: 30px;
-      }
       &-wrapper {
         column-gap: 10px;
       }
@@ -709,16 +710,16 @@
 }
 
 @media (max-width: 420px) {
-  .anime {
-    &__list {
-      padding: 0;
-    }
-  }
   .app {
     &__header {
       &-logo {
-        font-size: 25px;
+        height: 30px;
       }
+    }
+  }
+  .anime {
+    &__list {
+      padding: 0;
     }
   }
   .related-anime {
