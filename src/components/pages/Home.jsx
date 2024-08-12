@@ -43,10 +43,10 @@ const Home = () => {
         <title>Home | AniSurf | Discover your favorite anime</title>
         <meta 
           name="description" 
-          content="Discover your favorite anime, get the latest anime recommendations and more!" />
+          content="Discover your favorite anime, get the latest anime recommendations, create your own anime lists and more!" />
         <meta 
           name="keywords" 
-          content="anime, seasonal anime, popular anime, upcoming anime, anime recommendations, anime discovery" />
+          content="anime, seasonal anime, popular anime, upcoming anime, anime recommendations, anime discovery, anime list" />
       </Helmet>
       <div className="anime">
         <TopAnimeSlider />

@@ -4,7 +4,7 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: "API_KEY",
+  apiKey: "AIzaSyA3-UXCiSbnpsB6OboocdMObHQ6Y9WMcos",
   authDomain: "anime-surf.firebaseapp.com",
   projectId: "anime-surf",
   storageBucket: "anime-surf.appspot.com",
