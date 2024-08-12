@@ -43,7 +43,7 @@ const Home = () => {
         <title>Home | AniSurf | Discover your favorite anime</title>
         <meta 
           name="description" 
-          content="Discover your favorite anime, get the latest anime recommendations, create your own anime lists and more!" />
+          content="AniSurf is your go-to destination for discovering and exploring your favorite anime. Find your favorite anime, add them to your lists and much more! Join us and dive into the world of anime!" />
         <meta 
           name="keywords" 
           content="anime, seasonal anime, popular anime, upcoming anime, anime recommendations, anime discovery, anime list" />
