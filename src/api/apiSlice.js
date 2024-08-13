@@ -9,13 +9,16 @@ export const apiSlice = createApi({
       query: id => `anime/${id}`
     }),
     getTopSeasonalAnime: builder.query({
-      query: () => '/seasons/now'
+      query: () => '/seasons/now',
+      keepUnusedDataFor: 300
     }),
     getUpcomingAnime: builder.query({
-      query: () => '/seasons/upcoming'
+      query: () => '/seasons/upcoming',
+      keepUnusedDataFor: 600
     }),
     getTopAnime: builder.query({
-      query: () => '/top/anime'
+      query: () => '/top/anime',
+      keepUnusedDataFor: 1200 
     }),
     getAnimeRecommendations: builder.query({
       query: id => `/anime/${id}/recommendations`
@@ -27,13 +30,16 @@ export const apiSlice = createApi({
       query: ({ value, page = 1 }) => `/anime?q=${value}&page=${page}` 
     }),
     getAnimeGenres: builder.query({
-      query: () => '/genres/anime'
+      query: () => '/genres/anime',
+      keepUnusedDataFor: 1800 
     }),
     getAnimeSeasons: builder.query({
-      query: () => '/seasons'
+      query: () => '/seasons',
+      keepUnusedDataFor: 1800 
     }),
     getRecentAnimeRecommendations: builder.query({
-      query: () => '/recommendations/anime'
+      query: () => '/recommendations/anime',
+      keepUnusedDataFor: 300
     })
   })
 })
