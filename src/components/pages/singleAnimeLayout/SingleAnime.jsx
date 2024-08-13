@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetAnimeByIdQuery } from '../../../api/apiSlice';
 import { AuthContext } from '../../../context/AuthContext';
@@ -18,6 +18,7 @@ import ErrorMessage from '../../errorMessage/ErrorMessage';
 import './singleAnime.scss';
 
 const SingleAnime = () => {
+  const isMountedRef = useRef(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInList, setIsInList] = useState(false);
   const [currentList, setCurrentList] = useState('');
@@ -32,6 +33,8 @@ const SingleAnime = () => {
   } = useGetAnimeByIdQuery(animeId);
 
   useEffect(() => {
+    isMountedRef.current = true;
+
     if (currentUser) {
       checkIfAnimeInAnyList();
     }
@@ -41,6 +44,10 @@ const SingleAnime = () => {
       left: 0,
       behavior: "smooth"
     });
+
+    return () => {
+      isMountedRef.current = false;
+    }
   }, [animeId, currentUser]);
 
   const checkIfAnimeInAnyList = async () => {
@@ -237,9 +244,9 @@ const SingleAnime = () => {
           </div>
           <div className="single-anime__descr">{synopsis}</div>
           <div className="title_fz25fw500 related-anime__title">Anime Relations</div>
-          <AnimeRelations id={mal_id} />
+          <AnimeRelations id={mal_id} isSingleAnimePageMountedRef={isMountedRef} />
           <div className="title_fz25fw500 recommendations__title">Recommendations</div>
-          <AnimeRecommendations id={mal_id} />
+          <AnimeRecommendations id={mal_id} isSingleAnimePageMountedRef={isMountedRef} />
         </div>
         <ChooseListModal
           isOpen={isModalOpen}

@@ -8,7 +8,7 @@ import Spinner from '../spinner/Spinner';
 
 import './animeRelations.scss';
 
-const AnimeRelations = ({id}) => {
+const AnimeRelations = ({id, isSingleAnimePageMountedRef}) => {
   const {
     data: animeRelations = {},
     isLoading,
@@ -20,7 +20,13 @@ const AnimeRelations = ({id}) => {
 
   useEffect(() => {
     const animeRelationsData = animeRelations?.data ?? [];
-    delayedFetchAnimeRelationsData(animeRelationsData, setIsDataLoading, setAnimeData);
+    
+    delayedFetchAnimeRelationsData(
+      animeRelationsData, 
+      setIsDataLoading, 
+      setAnimeData, 
+      isSingleAnimePageMountedRef
+    );
   }, [animeRelations]);
 
   if (isLoading || isDataLoading) {
