@@ -17,11 +17,11 @@ const AnimeRelations = ({id}) => {
   } = useGetAnimeRelationsQuery(id);
   const [animeData, setAnimeData] = useState([]);
   const [isDataLoading, setIsDataLoading] = useState(true);
-  const animeRelationsData = animeRelations?.data ?? [];
 
   useEffect(() => {
+    const animeRelationsData = animeRelations?.data ?? [];
     delayedFetchAnimeRelationsData(animeRelationsData, setIsDataLoading, setAnimeData);
-  }, [animeRelationsData]);
+  }, [animeRelations]);
 
   if (isLoading || isDataLoading) {
     return <Spinner />

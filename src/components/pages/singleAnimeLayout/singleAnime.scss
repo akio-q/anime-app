@@ -4,7 +4,9 @@
   display: grid;
   grid-template-columns: 1fr 4fr;
   gap: 35px;
-  padding: 30px;
+  max-width: 1800px;
+  margin: 30px auto 0 auto;
+  padding: 0 30px;
   &__img {
     width: 100%;
     object-fit: contain;
