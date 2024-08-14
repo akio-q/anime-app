@@ -48,7 +48,7 @@ const Login = () => {
       </Helmet>
       <div className="form">
         <div className="form__wrapper">
-          <img src={luffySticker} className="form__decoration form__decoration_top-83px" alt="Rem" />
+          <img src={luffySticker} className="form__decoration form__decoration_login" alt="Rem" />
           <span className="title_fz25fw600 form__title">Login</span>
           <Formik
             initialValues={{

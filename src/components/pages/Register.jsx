@@ -9,7 +9,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { ToastContainer, toast } from 'react-toastify';
 import Helmet from 'react-helmet';
 
-import remSticker from '../../resources/img/rem_sticker.png';
+import zoroSticker from '../../resources/img/zoro_sticker.png';
 import '../../style/form.scss';
 
 const Register = () => {
@@ -71,7 +71,7 @@ const Register = () => {
       </Helmet>
       <div className="form">
         <div className="form__wrapper">
-          <img src={remSticker} className='form__decoration' alt="Rem" />
+          <img src={zoroSticker} className='form__decoration form__decoration_register' alt="Zoro_sticker" />
           <span className="title_fz25fw600 form__title">Register</span>
           <Formik
             initialValues={{

@@ -17,11 +17,16 @@
   }
   &__decoration {
     position: absolute;
-    top: -77px;
-    width: 100px;
-    height: 100px;
-    &_top-83px {
+    &_login {
+      width: 100px;
+      height: 100px;
       top: -83px;
+    }
+    &_register {
+      width: 120px;
+      height: 100px;
+      right: 20px;
+      top: -70px;
     }
   }
   &__title {
