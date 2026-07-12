@@ -2,10 +2,11 @@ import { NavLink } from "react-router-dom";
 
 const TopAnimeSliderSlide = ({id, data}) => {
   const { images, title_english, title, synopsis, genres} = data;
-  const img = images.webp.large_image_url;
+  const img = images?.webp?.large_image_url || '';
   const displayTitle = title_english ? title_english : title;
-  const descr = synopsis.length > 800 ? synopsis.slice(0, 800) + '...' : synopsis;
-  const genresString = genres.map(item => item.name).join(', ');
+  const safeSynopsis = synopsis || 'No synopsis available yet.';
+  const descr = safeSynopsis.length > 800 ? safeSynopsis.slice(0, 800) + '...' : safeSynopsis;
+  const genresString = (genres || []).map(item => item.name).join(', ');
 
   return (
     <>
