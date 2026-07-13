@@ -1,8 +1,53 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery, retry } from '@reduxjs/toolkit/query/react';
+
+class RequestQueue {
+  constructor(delayMs) {
+    this.delayMs = delayMs;
+    this.queue = [];
+    this.isProcessing = false;
+  }
+
+  enqueue(requestFn) {
+    return new Promise((resolve, reject) => {
+      this.queue.push({ requestFn, resolve, reject });
+      this.processNext();
+    });
+  }
+
+  async processNext() {
+    if (this.isProcessing || this.queue.length === 0) return;
+    
+    this.isProcessing = true;
+
+    const { requestFn, resolve, reject } = this.queue.shift();
+
+    try {
+      const result = await requestFn();
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+
+    setTimeout(() => {
+      this.isProcessing = false;
+      this.processNext();
+    }, this.delayMs);
+  }
+}
+
+const jikanQueue = new RequestQueue(500);
+
+const rateLimitedBaseQuery = async (args, api, extraOptions) => {
+  return jikanQueue.enqueue(() => 
+    fetchBaseQuery({ baseUrl: 'https://api.jikan.moe/v4' })(args, api, extraOptions)
+  );
+};
+
+const staggeredBaseQuery = retry(rateLimitedBaseQuery, { maxRetries: 3 });
 
 export const apiSlice = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({baseUrl: 'https://api.jikan.moe/v4'}),
+  baseQuery: staggeredBaseQuery,
   tagTypes: ['Anime'],
   endpoints: builder => ({
     getAnimeById: builder.query({
@@ -42,7 +87,7 @@ export const apiSlice = createApi({
       keepUnusedDataFor: 300
     })
   })
-})
+});
 
 export const {
   useGetAnimeByIdQuery,
@@ -58,4 +103,5 @@ export const {
   useGetAnimeSeasonsQuery,
   useGetRecentAnimeRecommendationsQuery
 } = apiSlice;
+
 export default apiSlice.reducer;

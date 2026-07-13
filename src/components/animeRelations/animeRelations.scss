@@ -32,6 +32,18 @@
       object-fit: cover;
       border-radius: 5px;
       flex-shrink: 0;
+      &_fallback {
+        width: 70px;
+        height: 90px;
+        min-width: 70px; 
+        background-color: $main-color-light;
+        border-radius: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 4px;
+      }
     }
     &-title {
       width: 100%;

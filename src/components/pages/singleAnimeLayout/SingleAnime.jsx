@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetAnimeByIdQuery } from '../../../api/apiSlice';
 import { AuthContext } from '../../../context/AuthContext';
@@ -18,7 +18,6 @@ import ErrorMessage from '../../errorMessage/ErrorMessage';
 import './singleAnime.scss';
 
 const SingleAnime = () => {
-  const isMountedRef = useRef(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isInList, setIsInList] = useState(false);
   const [currentList, setCurrentList] = useState('');
@@ -33,8 +32,6 @@ const SingleAnime = () => {
   } = useGetAnimeByIdQuery(animeId);
 
   useEffect(() => {
-    isMountedRef.current = true;
-
     if (currentUser) {
       checkIfAnimeInAnyList();
     }
@@ -44,10 +41,6 @@ const SingleAnime = () => {
       left: 0,
       behavior: "smooth"
     });
-
-    return () => {
-      isMountedRef.current = false;
-    }
   }, [animeId, currentUser]);
 
   const checkIfAnimeInAnyList = async () => {
@@ -91,7 +84,8 @@ const SingleAnime = () => {
     episodes,
     synopsis 
   } = anime.data;
-  const img = images.webp.large_image_url;
+  
+  const img = images?.webp?.large_image_url || '';
   const displayTitle = title_english || title;
   const displayEpisodes = episodes ? episodes : '?'; 
   const displaySeasonAndYear = season && year 
@@ -196,7 +190,7 @@ const SingleAnime = () => {
       </Helmet>
       <div className="single-anime">
         <div>
-          <img src={img} alt="anime-img" className="single-anime__img" />
+          <img src={img} alt={displayTitle || "anime-img"} className="single-anime__img" />
           <button
             className=' button single-anime__list-button' 
             onClick={handleListButtonClick}>
@@ -223,7 +217,7 @@ const SingleAnime = () => {
             <div className="single-anime__rating">{rating}</div>
             <div className="single-anime__status">{status}</div>
             <div className="single-anime__genre">
-              {genres.map((item, index) => (
+              {(genres || []).map((item, index) => (
                 <div key={index} className="single-anime__genre-item">
                   {item.name}
                 </div>
@@ -244,9 +238,9 @@ const SingleAnime = () => {
           </div>
           <div className="single-anime__descr">{synopsis}</div>
           <div className="title_fz25fw500 related-anime__title">Anime Relations</div>
-          <AnimeRelations id={mal_id} isSingleAnimePageMountedRef={isMountedRef} />
+          <AnimeRelations id={mal_id} />
           <div className="title_fz25fw500 recommendations__title">Recommendations</div>
-          <AnimeRecommendations id={mal_id} isSingleAnimePageMountedRef={isMountedRef} />
+          <AnimeRecommendations id={mal_id} />
         </div>
         <ChooseListModal
           isOpen={isModalOpen}
