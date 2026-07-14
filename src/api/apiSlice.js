@@ -72,7 +72,14 @@ export const apiSlice = createApi({
       query: id => `/anime/${id}/relations`
     }),
     getAnimeSearch: builder.query({
-      query: ({ value, page = 1 }) => `/anime?q=${value}&page=${page}` 
+      query: ({ value, page = 1 }) => ({
+        url: '/anime',
+        params: {
+          q: value,
+          page: page,
+          sfw: true 
+        }
+      })
     }),
     getAnimeGenres: builder.query({
       query: () => '/genres/anime',
