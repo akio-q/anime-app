@@ -16,35 +16,38 @@ const RecentAnimeRecommendations = () => {
   } = useGetRecentAnimeRecommendationsQuery();
 
   const data = useMemo(() => {
-    if (!recentRecommendations || !recentRecommendations.data || !recentRecommendations.data.length) {
-      return [];
-    }
-
-    const data = recentRecommendations.data.slice();
-    return data.slice(0, 10);
+    const recs = recentRecommendations?.data?.Page?.recommendations || [];
+    
+    return recs;
   }, [recentRecommendations])
 
   if (isLoading) {
     return <Spinner />
   } else if (isError) {
-    return <ErrorMessage errorStatus={error.status} />
+    return <ErrorMessage errorStatus={error?.status} />
   }
 
   const renderRecentAnimeRecommendations = (arr) => {
     return arr.map((item, i) => {
-      const { mal_id, images, title } = item.entry[0];
-      const img = images.webp.large_image_url;
-      const displayTitle = title.length > 70 ? title.slice(0, 70) + '...' : title;
+      const animeData = item.media;
+      
+      if (!animeData) return null;
+
+      const { id, coverImage, title } = animeData;
+      const img = coverImage?.large;
+      
+      const rawTitle = title?.english || title?.romaji || 'Unknown Title';
+      const displayTitle = rawTitle.length > 70 ? rawTitle.slice(0, 70) + '...' : rawTitle;
 
       return (
-        <div className="recent-recommendations__card" key={mal_id}>
+        <div className="recent-recommendations__card" key={`${id}-${i}`}>
           <NavLink 
             className="recent-recommendations__info" 
             end
-            to={`/anime/${mal_id}`}>
+            to={`/anime/${id}`}>
             <img 
               src={img} 
-              alt={title}
+              alt={displayTitle}
               className="recent-recommendations__img" />
             <div className="title_fz14fw500 recent-recommendations__title">{displayTitle}</div>
           </NavLink>

@@ -16,26 +16,30 @@ const AnimeRecommendations = ({ id }) => {
   if (isLoading) return <Spinner />;
   if (isError) return <ErrorMessage errorStatus={error?.status} />;
 
-  const recommendations = animeRecommendations?.data || [];
-  const top10 = recommendations.slice(0, 10);
+  const recommendations = animeRecommendations?.data?.Media?.recommendations?.nodes || [];
 
   return (
     <div className="recommendations">
-      {top10.length === 0 ? (
+      {recommendations.length === 0 ? (
         <div className='title title_fz16fw300' style={{textAlign: 'center'}}>
           There are no recommendations for this anime
         </div>
       ) : (
         <div className="recommendations__wrapper">
-          {top10.map(item => {
-            const { mal_id, images, title } = item.entry;
+          {recommendations.map((item, index) => {
+            const animeData = item.mediaRecommendation;
+            
+            if (!animeData) return null;
+
+            const { id, coverImage, title, episodes } = animeData;
             
             return (
               <AnimeCard 
-                key={mal_id}
-                id={mal_id}
-                images={images}
+                key={`${id}-${index}`}
+                id={id}
+                coverImage={coverImage}
                 title={title} 
+                episodes={episodes}
               />
             )
           })}

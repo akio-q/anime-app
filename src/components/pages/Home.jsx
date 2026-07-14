@@ -1,6 +1,7 @@
-import { useEffect } from "react";
-import { useLazyGetTopSeasonalAnimeQuery, useLazyGetUpcomingAnimeQuery, useLazyGetTopAnimeQuery } from "../../api/apiSlice";
-import { useThrottle } from "../../hooks/useThrottle";
+import { 
+  useGetTopSeasonalAnimeQuery, 
+  useGetUpcomingAnimeQuery, 
+  useGetTopAnimeQuery } from "../../api/apiSlice";
 import Helmet from 'react-helmet';
 
 import TopAnimeSlider from "../topAnimeSlider/TopAnimeSlider";
@@ -10,33 +11,27 @@ import RecentAnimeRecommendations from "../recentAnimeRecommendations/RecentAnim
 import '../animeList/animeList.scss';
 
 const Home = () => {
-  const [fetchTopSeasonalAnime, { 
+  const { 
     data: topSeasonalAnime, 
     isLoading: isTopSeasonalAnimeLoading, 
     isError: isTopSeasonalAnimeError, 
-    error: TopSeasonalAnimeError }] = useLazyGetTopSeasonalAnimeQuery();
-  const [fetchTopAnime, { 
+    error: TopSeasonalAnimeError 
+  } = useGetTopSeasonalAnimeQuery();
+  
+  const { 
     data: topAnime, 
-    isLoading: 
-    isTopAnimeLoading, 
+    isLoading: isTopAnimeLoading, 
     isError: isTopAnimeError, 
-    error: topAnimeError }] = useLazyGetTopAnimeQuery();
-  const [fetchUpcomingAnime, { 
+    error: topAnimeError 
+  } = useGetTopAnimeQuery();
+  
+  const { 
     data: upcomingAnime, 
     isLoading: isUpcomingAnimeLoading, 
     isError: isUpcomingAnimeError, 
-    error: upcomingAnimeError }] = useLazyGetUpcomingAnimeQuery();  
+    error: upcomingAnimeError 
+  } = useGetUpcomingAnimeQuery();  
 
-  const throttledFetchTopSeasonalAnime = useThrottle(fetchTopSeasonalAnime, 1000);
-  const throttledFetchTopAnime = useThrottle(fetchTopAnime, 1000); 
-  const throttledFetchUpcomingAnime = useThrottle(fetchUpcomingAnime, 1000); 
-
-  useEffect(() => {
-    throttledFetchTopSeasonalAnime();
-    throttledFetchTopAnime();
-    throttledFetchUpcomingAnime();
-  }, []);
-  
   return (
     <>
       <Helmet>
@@ -54,19 +49,19 @@ const Home = () => {
           <div className="anime__wrapper-container">
             <CategoryAnimeSlider 
               title='Top Seasonal Anime' 
-              data={topSeasonalAnime?.data} 
+              data={topSeasonalAnime?.data?.Page?.media}
               isLoading={isTopSeasonalAnimeLoading} 
               isError={isTopSeasonalAnimeError}
               error={TopSeasonalAnimeError} />
             <CategoryAnimeSlider 
               title='Popular Anime' 
-              data={topAnime?.data} 
+              data={topAnime?.data?.Page?.media} 
               isLoading={isTopAnimeLoading} 
               isError={isTopAnimeError}
               error={topAnimeError} />
             <CategoryAnimeSlider 
               title='Upcoming Anime' 
-              data={upcomingAnime?.data} 
+              data={upcomingAnime?.data?.Page?.media}
               isLoading={isUpcomingAnimeLoading} 
               isError={isUpcomingAnimeError}
               error={upcomingAnimeError} />

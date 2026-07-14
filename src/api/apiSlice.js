@@ -16,9 +16,7 @@ class RequestQueue {
 
   async processNext() {
     if (this.isProcessing || this.queue.length === 0) return;
-    
     this.isProcessing = true;
-
     const { requestFn, resolve, reject } = this.queue.shift();
 
     try {
@@ -35,11 +33,11 @@ class RequestQueue {
   }
 }
 
-const jikanQueue = new RequestQueue(500);
+const anilistQueue = new RequestQueue(670);
 
 const rateLimitedBaseQuery = async (args, api, extraOptions) => {
-  return jikanQueue.enqueue(() => 
-    fetchBaseQuery({ baseUrl: 'https://api.jikan.moe/v4' })(args, api, extraOptions)
+  return anilistQueue.enqueue(() => 
+    fetchBaseQuery({ baseUrl: 'https://graphql.anilist.co' })(args, api, extraOptions)
   );
 };
 
@@ -51,46 +49,209 @@ export const apiSlice = createApi({
   tagTypes: ['Anime'],
   endpoints: builder => ({
     getAnimeById: builder.query({
-      query: id => `anime/${id}`
+      query: (id) => ({
+        url: '/',
+        method: 'POST',
+        body: {
+          query: `
+            query ($id: Int) {
+              Media(id: $id, type: ANIME) {
+                id
+                title { english romaji }
+                coverImage { large }
+                averageScore
+                stats { scoreDistribution { amount } }
+                status
+                genres
+                season
+                seasonYear
+                episodes
+                description
+              }
+            }
+          `,
+          variables: { id }
+        }
+      })
     }),
     getTopSeasonalAnime: builder.query({
-      query: () => '/seasons/now',
+      query: () => ({
+        url: '/',
+        method: 'POST',
+        body: {
+          query: `
+            query {
+              Page(page: 1, perPage: 25) {
+                media(type: ANIME, status: RELEASING, sort: POPULARITY_DESC) {
+                  id
+                  title { english romaji }
+                  coverImage { large }
+                  episodes
+                }
+              }
+            }
+          `
+        }
+      }),
       keepUnusedDataFor: 300
     }),
     getUpcomingAnime: builder.query({
-      query: () => '/seasons/upcoming',
+      query: () => ({
+        url: '/',
+        method: 'POST',
+        body: {
+          query: `
+            query {
+              Page(page: 1, perPage: 25) {
+                media(type: ANIME, status: NOT_YET_RELEASED, sort: POPULARITY_DESC) {
+                  id
+                  title { english romaji }
+                  coverImage { large }
+                  episodes
+                }
+              }
+            }
+          `
+        }
+      }),
       keepUnusedDataFor: 600
     }),
     getTopAnime: builder.query({
-      query: () => '/top/anime',
+      query: () => ({
+        url: '/',
+        method: 'POST',
+        body: {
+          query: `
+            query {
+              Page(page: 1, perPage: 25) {
+                media(type: ANIME, sort: SCORE_DESC) {
+                  id
+                  title { english romaji }
+                  coverImage { large }
+                  episodes
+                }
+              }
+            }
+          `
+        }
+      }),
       keepUnusedDataFor: 1200 
     }),
     getAnimeRecommendations: builder.query({
-      query: id => `/anime/${id}/recommendations`
+      query: (id) => ({
+        url: '/',
+        method: 'POST',
+        body: {
+          query: `
+            query ($id: Int) {
+              Media(id: $id, type: ANIME) {
+                recommendations(page: 1, perPage: 10, sort: RATING_DESC) {
+                  nodes {
+                    mediaRecommendation {
+                      id
+                      title { english romaji }
+                      coverImage { large }
+                      episodes
+                    }
+                  }
+                }
+              }
+            }
+          `,
+          variables: { id }
+        }
+      })
     }),
     getAnimeRelations: builder.query({
-      query: id => `/anime/${id}/relations`
+      query: (id) => ({
+        url: '/',
+        method: 'POST',
+        body: {
+          query: `
+            query ($id: Int) {
+              Media(id: $id, type: ANIME) {
+                relations {
+                  edges {
+                    relationType
+                    node {
+                      id
+                      title { english romaji }
+                      type
+                      coverImage { large }
+                    }
+                  }
+                }
+              }
+            }
+          `,
+          variables: { id }
+        }
+      })
     }),
     getAnimeSearch: builder.query({
       query: ({ value, page = 1 }) => ({
-        url: '/anime',
-        params: {
-          q: value,
-          page: page,
-          sfw: true 
+        url: '/',
+        method: 'POST',
+        body: {
+          query: `
+            query ($search: String, $page: Int) {
+              Page(page: $page, perPage: 25) {
+                pageInfo { hasNextPage }
+                media(search: $search, type: ANIME, sort: POPULARITY_DESC, isAdult: false) {
+                  id
+                  title { english romaji }
+                  coverImage { large }
+                  episodes
+                }
+              }
+            }
+          `,
+          variables: { search: value, page: page }
         }
       })
     }),
     getAnimeGenres: builder.query({
-      query: () => '/genres/anime',
+      query: () => ({
+        url: '/',
+        method: 'POST',
+        body: {
+          query: `query { GenreCollection }`
+        }
+      }),
       keepUnusedDataFor: 1800 
     }),
     getAnimeSeasons: builder.query({
-      query: () => '/seasons',
+      queryFn: () => {
+        return { 
+          data: [
+            { year: 2024, seasons: ["WINTER", "SPRING", "SUMMER", "FALL"] },
+            { year: 2023, seasons: ["WINTER", "SPRING", "SUMMER", "FALL"] }
+          ] 
+        };
+      },
       keepUnusedDataFor: 1800 
     }),
     getRecentAnimeRecommendations: builder.query({
-      query: () => '/recommendations/anime',
+      query: () => ({
+        url: '/',
+        method: 'POST',
+        body: {
+          query: `
+            query {
+              Page(page: 1, perPage: 10) {
+                recommendations(sort: ID_DESC) {
+                  media {
+                    id
+                    title { english romaji }
+                    coverImage { large }
+                    episodes
+                  }
+                }
+              }
+            }
+          `
+        }
+      }),
       keepUnusedDataFor: 300
     })
   })
@@ -100,6 +261,8 @@ export const {
   useGetAnimeByIdQuery,
   useGetTopSeasonalAnimeQuery,
   useLazyGetTopSeasonalAnimeQuery,
+  useGetUpcomingAnimeQuery, 
+  useGetTopAnimeQuery,
   useLazyGetUpcomingAnimeQuery, 
   useLazyGetTopAnimeQuery,
   useGetAnimeRecommendationsQuery,

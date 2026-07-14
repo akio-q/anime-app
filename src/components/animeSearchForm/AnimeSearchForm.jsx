@@ -28,13 +28,14 @@ const AnimeSearchForm = () => {
       dispatch(setLoading());
     } else if (isError) {
       dispatch(setLoadingFailed());
-    } else if (anime && anime.data) {
-      dispatch(setData(anime));
     } 
-  }, [anime, isFetching, isError]);
+    else if (anime && anime.data && anime.data.Page) {
+      dispatch(setData(anime.data));
+    } 
+  }, [anime, isFetching, isError, dispatch]);
 
   const onSubmit = ({animeName}) => {
-    if (animeName.trim() === '' || animeName === prevSearch && isSearchPage) {
+    if (animeName.trim() === '' || (animeName === prevSearch && isSearchPage)) {
       return; 
     }
 

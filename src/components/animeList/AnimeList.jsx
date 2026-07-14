@@ -18,32 +18,35 @@ const AnimeList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (data && data.data) {
-      const filteredData = filterData(data.data, filters);
+    if (data && data.Page) {
+      const filteredData = filterData(data.Page.media, filters);
       setFilteredAnimeList(filteredData);
-      setHasNextPage(data.pagination.has_next_page);
+      setHasNextPage(data.Page.pageInfo.hasNextPage);
     }
-  }, [data]);
+  }, [data, filters]);
   
   useEffect(() => {
-    if (animeSearchData && animeSearchData.data) {
+    if (animeSearchData && animeSearchData.Page) {
       const updatedData = {
         ...data,
-        data: [...data.data, ...animeSearchData.data],
-        pagination: animeSearchData.pagination
+        Page: {
+          ...data.Page,
+          media: [...data.Page.media, ...animeSearchData.Page.media],
+          pageInfo: animeSearchData.Page.pageInfo
+        }
       }
 
       dispatch(setData(updatedData));
     }
-  }, [animeSearchData]);
+  }, [animeSearchData, data, dispatch]);
 
   useEffect(() => {
     if (filterTrigger) {
-      const filteredData = filterData(data.data, filters);
+      const filteredData = filterData(data.Page.media, filters);
       setFilteredAnimeList(filteredData);
       dispatch(setFilterTrigger(false));  
     }
-  }, [filterTrigger]);
+  }, [filterTrigger, data, filters, dispatch]);
 
   if (loadingStatus === 'loading') {
     return <Spinner />
@@ -66,16 +69,16 @@ const AnimeList = () => {
       )
     } else {
       const items = arr.map(item => {
-        const { mal_id, images, episodes, title_english, title } = item;
+        const { id, coverImage, episodes, title } = item;
       
         return (
           <AnimeCard 
-            key={mal_id} 
-            id={mal_id} 
-            images={images}
+            key={id} 
+            id={id} 
+            coverImage={coverImage}
             episodes={episodes}
-            title_english={title_english}
-            title={title} />
+            title={title} 
+          />
         )
       })
       

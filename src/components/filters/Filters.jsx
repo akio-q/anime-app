@@ -21,14 +21,15 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
   const dispatch = useDispatch();
 
   const { 
-    data: animeGenres = {}, 
-    loading: isGenresLoading, 
-    error: isGenresError 
+    data: animeGenres, 
+    isLoading: isGenresLoading, 
+    isError: isGenresError 
   } = useGetAnimeGenresQuery();
+  
   const {
-    data: animeSeasons = {},
-    loading: isSeasonsLoading,
-    error: isSeasonsError
+    data: animeSeasons,
+    isLoading: isSeasonsLoading,
+    isError: isSeasonsError
   } = useGetAnimeSeasonsQuery();
 
   if (isGenresLoading || isSeasonsLoading) {
@@ -37,14 +38,16 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
     return <ErrorMessage errorStatus={429} />
   }
 
-  const genreOptions = animeGenres.data ? animeGenres.data.map(item => {
-    const nameLowerCase = item.name.toLowerCase(); 
-    return { value: nameLowerCase, label: item.name }
-  }) : [];
-  const yearOptions = animeSeasons.data ? animeSeasons.data.map(({year}) => {
+  const genresArray = animeGenres?.data?.GenreCollection || [];
+  const genreOptions = genresArray.map(genre => {
+    return { value: genre.toLowerCase(), label: genre }
+  });
+
+  const seasonsArray = Array.isArray(animeSeasons) ? animeSeasons : [];
+  const yearOptions = seasonsArray.map(({year}) => {
     const yearString = year.toString();
     return { value: yearString, label: yearString }
-  }) : [];
+  });
 
   const handleFilterClick = (e) => {
     e.preventDefault();
@@ -65,16 +68,17 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
       <div className="anime__filters-title title title_fz25fw500">Filter Anime</div>
       <form onSubmit={handleFilterClick}>
         <div className="anime__filters-section">
+          
           <div className="anime__filters-item">
             <div className="title_fz18fw600">Season:</div>
             <ReactMultiSelectCheckboxes 
               className="react-select-container"
               options={[
                 { value: '?', label: '?' },
-                { value: 'fall', label: 'Fall' },
-                { value: 'winter', label: 'Winter' },
-                { value: 'spring', label: 'Spring' },
-                { value: 'summer', label: 'Summer' },
+                { value: 'FALL', label: 'Fall' },
+                { value: 'WINTER', label: 'Winter' },
+                { value: 'SPRING', label: 'Spring' },
+                { value: 'SUMMER', label: 'Summer' },
               ]}
               hideSearch={true}
               rightAligned={true}
@@ -83,6 +87,7 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
               onChange={(selected) => dispatch(setSeason(selected))}
             />
           </div>
+
           <div className="anime__filters-item">
             <div className="title_fz18fw600">Year:</div>
             <ReactMultiSelectCheckboxes 
@@ -95,6 +100,7 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
               onChange={(selected) => dispatch(setYear(selected))}
             />
           </div>
+
           <div className="anime__filters-item">
             <div className="title_fz18fw600">Genre:</div>
             <ReactMultiSelectCheckboxes 
@@ -107,22 +113,22 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
               onChange={(selected) => dispatch(setGenre(selected))}
             />
           </div>
+
           <div className="anime__filters-item">
             <div className="title_fz18fw600">Rating:</div>
             <ReactMultiSelectCheckboxes 
               className="react-select-container"
               options={[
                 { value: '?', label: '?' },
-                { value: '1', label: '1' },
-                { value: '2', label: '2' },
-                { value: '3', label: '3' },
-                { value: '4', label: '4' },
-                { value: '5', label: '5' },
-                { value: '6', label: '6' },
-                { value: '7', label: '7' },
-                { value: '8', label: '8' },
-                { value: '9', label: '9' },
-                { value: '10', label: '10' }
+                { value: '10', label: '10+' },
+                { value: '20', label: '20+' },
+                { value: '30', label: '30+' },
+                { value: '40', label: '40+' },
+                { value: '50', label: '50+' },
+                { value: '60', label: '60+' },
+                { value: '70', label: '70+' },
+                { value: '80', label: '80+' },
+                { value: '90', label: '90+' }
               ]}
               hideSearch={true}
               rightAligned={true}
@@ -131,15 +137,16 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
               onChange={(selected) => dispatch(setRating(selected))}
             />
           </div>
+
           <div className="anime__filters-item">
             <div className="title_fz18fw600">Status:</div>
             <ReactMultiSelectCheckboxes 
               className="react-select-container"
               options={[
-                { value: 'currently airing', label: 'Currently Airing' },
-                { value: 'finished airing', label: 'Finished Airing' },
-                { value: 'upcoming', label: 'Upcoming' },
-                { value: 'not yet aired', label: 'Not Yet Aired' },
+                { value: 'RELEASING', label: 'Currently Airing' },
+                { value: 'FINISHED', label: 'Finished Airing' },
+                { value: 'NOT_YET_RELEASED', label: 'Upcoming' },
+                { value: 'CANCELLED', label: 'Cancelled' },
               ]}
               hideSearch={true}
               rightAligned={true}
@@ -148,6 +155,7 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
               onChange={(selected) => dispatch(setStatus(selected))}
             />
           </div>
+
           <div className="anime__filters-item">
             <div className="title_fz18fw600">Episodes:</div>
             <ReactMultiSelectCheckboxes 
@@ -166,6 +174,7 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
               onChange={(selected) => dispatch(setEpisodes(selected))}
             />
           </div>
+
         </div>
         <img className="anime__filters-sticker" src={chopperSticker} alt="chopper-sticker" />
         <button type="submit" className="button button__filter">Filter</button>

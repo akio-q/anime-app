@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetAnimeByIdQuery } from '../../../api/apiSlice';
 import { AuthContext } from '../../../context/AuthContext';
@@ -31,19 +31,7 @@ const SingleAnime = () => {
     error
   } = useGetAnimeByIdQuery(animeId);
 
-  useEffect(() => {
-    if (currentUser) {
-      checkIfAnimeInAnyList();
-    }
-
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth"
-    });
-  }, [animeId, currentUser]);
-
-  const checkIfAnimeInAnyList = async () => {
+  const checkIfAnimeInAnyList = useCallback(async () => {
     if (!animeId || !currentUser || !currentUser.uid) return;
 
     const lists = ['watching', 'completed', 'planned', 'on-hold', 'dropped'];
@@ -61,40 +49,51 @@ const SingleAnime = () => {
         setCurrentList('');
       }
     }
-  };
+  }, [animeId, currentUser]);
+  
+  useEffect(() => {
+    if (currentUser) {
+      checkIfAnimeInAnyList();
+    }
+
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth"
+    });
+  }, [animeId, currentUser, checkIfAnimeInAnyList]);
 
   if (isLoading) {
     return <Spinner />
   } else if (isError) {
-    return <ErrorMessage errorStatus={error.status} />
+    return <ErrorMessage errorStatus={error?.status} />
   }
 
   const { 
-    mal_id,
-    images, 
-    score, 
-    scored_by, 
-    rating, 
+    id,
+    coverImage, 
+    averageScore, 
     status, 
     genres, 
-    title_english, 
     title, 
     season, 
-    year,
+    seasonYear,
     episodes,
-    synopsis 
-  } = anime.data;
+    description 
+  } = anime?.data?.Media || {};
   
-  const img = images?.webp?.large_image_url || '';
-  const displayTitle = title_english || title;
+  const img = coverImage?.large || '';
+  const displayTitle = title?.english || title?.romaji || 'Unknown Title';
   const displayEpisodes = episodes ? episodes : '?'; 
-  const displaySeasonAndYear = season && year 
-                                ? `${season} ${year}` 
+  const displaySeasonAndYear = season && seasonYear 
+                                ? `${season} ${seasonYear}` 
                                 : season 
                                 ? `${season}, (year unknown)` 
-                                : year 
-                                ? `${year}, (season unknown)` 
+                                : seasonYear 
+                                ? `${seasonYear}, (season unknown)` 
                                 : 'Season and year unknown';
+
+  const cleanSynopsis = description ? description.replace(/<[^>]*>?/gm, '') : 'No synopsis available.';
 
   const handleListButtonClick = () => {
     if (currentUser) {
@@ -111,12 +110,12 @@ const SingleAnime = () => {
   const handleAddToList = async (listName) => {
     try {
       const animeListDocRef = doc(db, 'users', currentUser.uid, 'animeLists', listName);
+      
       const animeDataToAdd = {
-        animeId: mal_id,
-        images,
+        animeId: id,         
+        coverImage,          
         episodes,
-        title_english,
-        title
+        title               
       };
 
       if (isInList) {
@@ -151,11 +150,11 @@ const SingleAnime = () => {
   const handleRemoveFromList = async () => {
     try {
       const animeListDocRef = doc(db, 'users', currentUser.uid, 'animeLists', currentList);
+      
       const animeDataToRemove = {
-        animeId: mal_id,
-        images,
+        animeId: id,
+        coverImage,
         episodes,
-        title_english,
         title
       };
 
@@ -190,7 +189,7 @@ const SingleAnime = () => {
       </Helmet>
       <div className="single-anime">
         <div>
-          <img src={img} alt={displayTitle || "anime-img"} className="single-anime__img" />
+          <img src={img} alt={displayTitle} className="single-anime__img" />
           <button
             className=' button single-anime__list-button' 
             onClick={handleListButtonClick}>
@@ -210,16 +209,18 @@ const SingleAnime = () => {
             <div className="single-anime__score">
               <div className="title_fz18fw600 single-anime__score-title">Score</div>
               <p className="single-anime__score-text">
-                <span className='single-anime__score-text single-anime__score-text_bold'>{score}</span> 
-                by {scored_by} users
+                <span className='single-anime__score-text single-anime__score-text_bold'>
+                  {averageScore ? `${averageScore}%` : 'N/A'}
+                </span> 
               </p>
             </div>
-            <div className="single-anime__rating">{rating}</div>
+            
             <div className="single-anime__status">{status}</div>
+            
             <div className="single-anime__genre">
-              {(genres || []).map((item, index) => (
+              {(genres || []).map((genre, index) => (
                 <div key={index} className="single-anime__genre-item">
-                  {item.name}
+                  {genre}
                 </div>
               ))}
             </div>
@@ -229,19 +230,22 @@ const SingleAnime = () => {
           <div className="single-anime__about">
             <div>
               <div className="title_fz30fw700 single-anime__main-title">{displayTitle}</div>
-              <div className="title_fz18fw500 single-anime__secondary-title">{title}</div>
+              <div className="title_fz18fw500 single-anime__secondary-title">{title?.romaji}</div>
             </div>
             <div className="single-anime__release">
               <div>{displaySeasonAndYear}</div>
               <div>{displayEpisodes} episodes</div>
             </div>
           </div>
-          <div className="single-anime__descr">{synopsis}</div>
+          <div className="single-anime__descr">{cleanSynopsis}</div>
+          
           <div className="title_fz25fw500 related-anime__title">Anime Relations</div>
-          <AnimeRelations id={mal_id} />
+          <AnimeRelations id={id} />
+          
           <div className="title_fz25fw500 recommendations__title">Recommendations</div>
-          <AnimeRecommendations id={mal_id} />
+          <AnimeRecommendations id={id} />
         </div>
+        
         <ChooseListModal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}

@@ -16,16 +16,16 @@ const CategoryAnimeSlider = ({title, data = [], isLoading, isError, error}) => {
 
   const renderCategoryAnimeSlider = (arr) => {
     return arr.map(item => {
-      const { mal_id, images, episodes, title_english, title } = item;
+      const { id, coverImage, episodes, title } = item;
 
       return (
-        <SwiperSlide key={mal_id} className="category-anime-slider__slide">
+        <SwiperSlide key={id} className="category-anime-slider__slide">
           <AnimeCard 
-            id={mal_id}
-            images={images}
+            id={id}
+            coverImage={coverImage}
             episodes={episodes}
-            title_english={title_english}
-            title={title} />
+            title={title} 
+          />
         </SwiperSlide>
       )
     })
