@@ -87,6 +87,8 @@ export const apiSlice = createApi({
                   title { english romaji }
                   coverImage { large }
                   episodes
+                  description     # <--- ADD THIS
+                  genres          # <--- ADD THIS
                 }
               }
             }
