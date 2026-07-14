@@ -12,7 +12,9 @@ import namiSticker from '../../resources/img/nami_sticker.png';
 
 const AnimeList = () => {
   const { data, filters, page, filterTrigger, loadingStatus } = useSelector(state => state.filters);
-  const [fetchAnimeSearch, { data: animeSearchData, isFetching }] = useLazyGetAnimeSearchQuery();
+  
+  const [fetchAnimeSearch, { isFetching }] = useLazyGetAnimeSearchQuery();
+  
   const [filteredAnimeList, setFilteredAnimeList] = useState([]);
   const [hasNextPage, setHasNextPage] = useState(false);
   const dispatch = useDispatch();
@@ -25,21 +27,6 @@ const AnimeList = () => {
     }
   }, [data, filters]);
   
-  useEffect(() => {
-    if (animeSearchData && animeSearchData.Page) {
-      const updatedData = {
-        ...data,
-        Page: {
-          ...data.Page,
-          media: [...data.Page.media, ...animeSearchData.Page.media],
-          pageInfo: animeSearchData.Page.pageInfo
-        }
-      }
-
-      dispatch(setData(updatedData));
-    }
-  }, [animeSearchData, data, dispatch]);
-
   useEffect(() => {
     if (filterTrigger) {
       const filteredData = filterData(data.Page.media, filters);
@@ -54,9 +41,26 @@ const AnimeList = () => {
     return <ErrorMessage />
   }
 
-  const onLoadMore = () => {
+  const onLoadMore = async () => {
     dispatch(incrementPage());
-    fetchAnimeSearch({ value: filters.search, page: page + 1 }); 
+    
+    try {
+      const response = await fetchAnimeSearch({ value: filters.search, page: page + 1 }).unwrap();
+      
+      if (response && response.data && response.data.Page) {
+        const updatedData = {
+          ...data,
+          Page: {
+            ...data.Page,
+            media: [...data.Page.media, ...response.data.Page.media],
+            pageInfo: response.data.Page.pageInfo
+          }
+        }
+        dispatch(setData(updatedData));
+      }
+    } catch (error) {
+      console.error("Failed to load more anime: ", error);
+    }
   }
 
   const renderAnimeList = (arr) => {
