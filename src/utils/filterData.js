@@ -5,8 +5,8 @@ const checkEpisodesMatch = (episodes, episodesSet) => {
 
   const episodeNumber = parseInt(episodes);
 
-  if (episodesSet.has('12+') && episodeNumber >= 12 & episodeNumber < 24) return true;
-  if (episodesSet.has('24+') && episodeNumber >= 24 & episodeNumber < 100) return true;
+  if (episodesSet.has('12+') && episodeNumber >= 12 && episodeNumber < 24) return true;
+  if (episodesSet.has('24+') && episodeNumber >= 24 && episodeNumber < 100) return true;
   if (episodesSet.has('100+') && episodeNumber >= 100) return true;
 
   return false;
@@ -23,11 +23,16 @@ const filterData = (data, filters) => {
   const episodesSet = new Set(episodes.map(filter => filter.value));
 
   return data.filter(item => {
-    const matchesSeason = seasonSet.size === 0 || (item.season === null ? seasonSet.has('?') : seasonSet.has(item.season.toLowerCase()));
-    const matchesYear = yearSet.size === 0 || (item.year === null ? yearSet.has('?') : yearSet.has(item.year.toString()));
-    const matchesGenre = genreSet.size === 0 || item.genres.some(genre => genreSet.has(genre.name.toLowerCase()));
-    const matchesRating = ratingSet.size === 0 || (item.score === null ? ratingSet.has('?') : ratingSet.has(Math.round(item.score).toString()));
-    const matchesStatus = statusSet.size === 0 || statusSet.has(item.status.toLowerCase());
+    const matchesSeason = seasonSet.size === 0 || (item.season == null ? seasonSet.has('?') : seasonSet.has(item.season));
+    
+    const matchesYear = yearSet.size === 0 || (item.seasonYear == null ? yearSet.has('?') : yearSet.has(item.seasonYear.toString()));
+    
+    const matchesGenre = genreSet.size === 0 || (item.genres || []).some(g => genreSet.has(g.toLowerCase()));
+    
+    const matchesRating = ratingSet.size === 0 || (item.averageScore == null ? ratingSet.has('?') : ratingSet.has((Math.floor(item.averageScore / 10) * 10).toString()));
+    
+    const matchesStatus = statusSet.size === 0 || (item.status == null ? statusSet.has('?') : statusSet.has(item.status));
+    
     const matchesEpisodes = episodesSet.size === 0 || checkEpisodesMatch(item.episodes, episodesSet);
 
     return matchesSeason && matchesYear && matchesGenre && matchesRating && matchesStatus && matchesEpisodes;

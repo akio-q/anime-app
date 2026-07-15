@@ -87,8 +87,8 @@ export const apiSlice = createApi({
                   title { english romaji }
                   coverImage { large }
                   episodes
-                  description     # <--- ADD THIS
-                  genres          # <--- ADD THIS
+                  description    
+                  genres          
                 }
               }
             }
@@ -204,6 +204,11 @@ export const apiSlice = createApi({
                   title { english romaji }
                   coverImage { large }
                   episodes
+                  season
+                  seasonYear
+                  genres
+                  averageScore
+                  status
                 }
               }
             }
@@ -224,14 +229,16 @@ export const apiSlice = createApi({
     }),
     getAnimeSeasons: builder.query({
       queryFn: () => {
-        return { 
-          data: [
-            { year: 2024, seasons: ["WINTER", "SPRING", "SUMMER", "FALL"] },
-            { year: 2023, seasons: ["WINTER", "SPRING", "SUMMER", "FALL"] }
-          ] 
-        };
+        const currentYear = new Date().getFullYear();
+        const yearsArray = [];
+        
+        for (let y = currentYear + 1; y >= 1950; y--) {
+          yearsArray.push({ year: y });
+        }
+        
+        return { data: yearsArray };
       },
-      keepUnusedDataFor: 1800 
+      keepUnusedDataFor: 86400 
     }),
     getRecentAnimeRecommendations: builder.query({
       query: () => ({
