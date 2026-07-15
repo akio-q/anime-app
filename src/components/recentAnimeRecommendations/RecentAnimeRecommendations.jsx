@@ -17,7 +17,6 @@ const RecentAnimeRecommendations = () => {
 
   const data = useMemo(() => {
     const recs = recentRecommendations?.data?.Page?.recommendations || [];
-    
     return recs;
   }, [recentRecommendations])
 
@@ -35,9 +34,7 @@ const RecentAnimeRecommendations = () => {
 
       const { id, coverImage, title } = animeData;
       const img = coverImage?.extraLarge || coverImage?.large || '';
-      
-      const rawTitle = title?.english || title?.romaji || 'Unknown Title';
-      const displayTitle = rawTitle.length > 70 ? rawTitle.slice(0, 70) + '...' : rawTitle;
+      const displayTitle = title?.english || title?.romaji || 'Unknown Title';
 
       return (
         <div className="recent-recommendations__card" key={`${id}-${i}`}>
