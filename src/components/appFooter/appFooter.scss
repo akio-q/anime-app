@@ -10,8 +10,8 @@
     align-items: center;
     margin-top: 250px;
     background-color: $main-color;
+    color: $secondary-text-color;
     &-link {
-      color: $secondary-text-color;
       transition: .3s all;
       font-size: 16px; 
       margin-bottom: 10px; 
@@ -22,9 +22,12 @@
       }
     }
     &-copy {
-      color: $secondary-text-color;
-      font-size: 14px;
-      margin-top: 5px;
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 14px; 
+      cursor: pointer;
+      color: inherit; 
       &:hover {
         color: $main-text-color;
       }

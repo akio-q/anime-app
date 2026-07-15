@@ -17,7 +17,7 @@ const SearchResults = () => {
     if (animeName) {
       dispatch(setSearch(animeName));
     }
-  }, [animeName]);
+  }, [animeName, dispatch]);
 
   return (
     <>
