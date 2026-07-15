@@ -26,6 +26,8 @@ const UserAnimeList = () => {
   const ITEMS_PER_PAGE = 20;
 
   useEffect(() => {
+    if (!currentUser?.uid) return;
+
     const fetchAnimeList = async () => {
       setLoading(true);
       setError(null);
@@ -51,7 +53,7 @@ const UserAnimeList = () => {
     };
 
     fetchAnimeList();
-  }, [activeTab, currentUser.uid]);
+  }, [activeTab, currentUser?.uid]);
 
   const displayedAnimeList = animeList.slice(
     (currentPage - 1) * ITEMS_PER_PAGE,
@@ -61,7 +63,7 @@ const UserAnimeList = () => {
   return (
     <>
       <Helmet>
-        <title>{`AniSurf | ${currentUser.displayName}'s Anime List`}</title>
+        <title>{`AniSurf | ${currentUser?.displayName}'s Anime List`}</title>
         <meta
           name="description"
           content={`Explore and manage your anime list, including watching, completed, planned, on-hold, and dropped titles. View details and pagination for each list.`}
@@ -70,7 +72,7 @@ const UserAnimeList = () => {
       <div className='user-anime-list'>
         <UserCard additionalClass={'user-card__list'} />
         <div className="user-anime-list__content">
-          <div className="title_fz30fw600 user-anime-list__title">{`${currentUser.displayName}'s Anime List`}</div>
+          <div className="title_fz30fw600 user-anime-list__title">{`${currentUser?.displayName}'s Anime List`}</div>
           <div className="user-anime-list__tabs">
             {animeLists.map(list => {
               return (
@@ -102,16 +104,16 @@ const UserAnimeList = () => {
             ) : (
               <div className="anime__list anime__list_user">
                 {displayedAnimeList.map((anime) => {
-                  const { animeId, images, episodes, title_english, title } = anime; 
+                  const { animeId, coverImage, episodes, title } = anime; 
 
                   return (
                     <AnimeCard 
                       key={animeId} 
                       id={animeId}
-                      images={images}
+                      coverImage={coverImage}
                       episodes={episodes}
-                      title_english={title_english}
-                      title={title} />
+                      title={title} 
+                    />
                   )
                 })}
               </div>
