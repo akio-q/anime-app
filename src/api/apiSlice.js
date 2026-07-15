@@ -192,31 +192,84 @@ export const apiSlice = createApi({
       })
     }),
     getAnimeSearch: builder.query({
-      query: ({ value, page = 1 }) => ({
-        url: '/',
-        method: 'POST',
-        body: {
-          query: `
-            query ($search: String, $page: Int) {
-              Page(page: $page, perPage: 25) {
-                pageInfo { hasNextPage }
-                media(search: $search, type: ANIME, sort: POPULARITY_DESC, isAdult: false) {
-                  id
-                  title { english romaji }
-                  coverImage { extraLarge large }
-                  episodes
-                  season
-                  seasonYear
-                  genres
-                  averageScore
-                  status
+      query: ({ search, season, year, genre, status, rating, episodes, page = 1 }) => {
+        const variables = { page: page };
+
+        if (search) variables.search = search;
+        
+        if (season && season.length > 0 && season[0].value !== '?') variables.season = season[0].value;
+        if (year && year.length > 0 && year[0].value !== '?') variables.seasonYear = parseInt(year[0].value);
+        if (status && status.length > 0 && status[0].value !== '?') variables.status = status[0].value;
+        
+        if (genre && genre.length > 0) {
+          variables.genre_in = genre.map(g => g.label);
+        }
+
+        if (rating && rating.length > 0 && rating[0].value !== '?') {
+          const ratingNum = parseInt(rating[0].value.replace('+', ''));
+          variables.averageScore_greater = ratingNum - 1; 
+        }
+
+        if (episodes && episodes.length > 0 && episodes[0].value !== '?') {
+          const epValue = episodes[0].value;
+          
+          if (epValue === '1') {
+            variables.episodes = 1;
+          } else {
+            const epNum = parseInt(epValue.replace('+', ''));
+            variables.episodes_greater = epNum - 1;
+          }
+        }
+
+        return {
+          url: '/',
+          method: 'POST',
+          body: {
+            query: `
+              query (
+                $page: Int, 
+                $search: String, 
+                $season: MediaSeason, 
+                $seasonYear: Int, 
+                $genre_in: [String],
+                $status: MediaStatus,
+                $averageScore_greater: Int,
+                $episodes: Int,
+                $episodes_greater: Int
+              ) {
+                Page(page: $page, perPage: 25) {
+                  pageInfo { hasNextPage }
+                  
+                  media(
+                    search: $search, 
+                    season: $season, 
+                    seasonYear: $seasonYear, 
+                    genre_in: $genre_in,
+                    status: $status,
+                    averageScore_greater: $averageScore_greater,
+                    episodes: $episodes,
+                    episodes_greater: $episodes_greater,
+                    type: ANIME, 
+                    sort: POPULARITY_DESC, 
+                    isAdult: false
+                  ) {
+                    id
+                    title { english romaji }
+                    coverImage { extraLarge large }
+                    episodes
+                    season
+                    seasonYear
+                    genres
+                    averageScore
+                    status
+                  }
                 }
               }
-            }
-          `,
-          variables: { search: value, page: page }
+            `,
+            variables: variables
+          }
         }
-      })
+      }
     }),
     getAnimeGenres: builder.query({
       query: () => ({

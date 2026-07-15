@@ -1,20 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from 'react';
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field } from 'formik';
-import { useGetAnimeSearchQuery } from '../../api/apiSlice';
-import { 
-  setData, 
-  resetPage, 
-  resetFilters,
-  setLoading, 
-  setLoadingFailed } from '../filters/filtersSlice';
+import { resetPage, resetFilters } from '../filters/filtersSlice';
 
 import './animeSearchForm.scss';
 
 const AnimeSearchForm = () => {
-  const { filters } = useSelector(state => state.filters);
-  const { data: anime = {}, isError, isFetching } = useGetAnimeSearchQuery({ value: filters.search }, { skip: !filters.search });
   const [prevSearch, setPrevSearch] = useState('');
 
   const location = useLocation();
@@ -23,18 +15,7 @@ const AnimeSearchForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (isFetching) {
-      dispatch(setLoading());
-    } else if (isError) {
-      dispatch(setLoadingFailed());
-    } 
-    else if (anime && anime.data && anime.data.Page) {
-      dispatch(setData(anime.data));
-    } 
-  }, [anime, isFetching, isError, dispatch]);
-
-  const onSubmit = ({animeName}) => {
+  const onSubmit = ({ animeName }) => {
     if (animeName.trim() === '' || (animeName === prevSearch && isSearchPage)) {
       return; 
     }
@@ -42,6 +23,7 @@ const AnimeSearchForm = () => {
     dispatch(resetPage());
     dispatch(resetFilters());
     setPrevSearch(animeName);
+    
     navigate(`/search/${animeName}`);  
   }
 

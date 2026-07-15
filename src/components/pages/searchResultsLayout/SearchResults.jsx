@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setSearch } from "../../filters/filtersSlice";
+import { setSearch, setFilterTrigger } from "../../filters/filtersSlice"; 
 import { Helmet } from "react-helmet";
 
 import AnimeList from "../../animeList/AnimeList";
@@ -16,6 +16,7 @@ const SearchResults = () => {
   useEffect(() => {
     if (animeName) {
       dispatch(setSearch(animeName));
+      dispatch(setFilterTrigger(true));
     }
   }, [animeName, dispatch]);
 

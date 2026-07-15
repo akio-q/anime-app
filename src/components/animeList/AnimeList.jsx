@@ -1,8 +1,13 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLazyGetAnimeSearchQuery } from '../../api/apiSlice';
-import { setData, incrementPage, setFilterTrigger } from "../filters/filtersSlice";
-import filterData from "../../utils/filterData";
+import { 
+  setData, 
+  incrementPage, 
+  setFilterTrigger, 
+  resetPage,
+  setLoading,          
+  setLoadingFailed } from "../filters/filtersSlice";
 
 import AnimeCard from "../animeCard/AnimeCard"
 import Spinner from "../spinner/Spinner";
@@ -12,28 +17,33 @@ import namiSticker from '../../resources/img/nami_sticker.png';
 
 const AnimeList = () => {
   const { data, filters, page, filterTrigger, loadingStatus } = useSelector(state => state.filters);
+  const dispatch = useDispatch();
   
   const [fetchAnimeSearch, { isFetching }] = useLazyGetAnimeSearchQuery();
-  
-  const [filteredAnimeList, setFilteredAnimeList] = useState([]);
-  const [hasNextPage, setHasNextPage] = useState(false);
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (data && data.Page) {
-      const filteredData = filterData(data.Page.media, filters);
-      setFilteredAnimeList(filteredData);
-      setHasNextPage(data.Page.pageInfo.hasNextPage);
-    }
-  }, [data, filters]);
-  
-  useEffect(() => {
     if (filterTrigger) {
-      const filteredData = filterData(data.Page.media, filters);
-      setFilteredAnimeList(filteredData);
-      dispatch(setFilterTrigger(false));  
+      const fetchNewFilters = async () => {
+        dispatch(setLoading());
+
+        try {
+          const response = await fetchAnimeSearch({ ...filters, page: 1 }).unwrap();
+          
+          if (response?.data) {
+            dispatch(resetPage()); 
+            dispatch(setData(response.data));
+          }
+        } catch (error) {
+          console.error("Failed to fetch filtered anime: ", error);
+          dispatch(setLoadingFailed());
+        } finally {
+          dispatch(setFilterTrigger(false));  
+        }
+      };
+
+      fetchNewFilters();
     }
-  }, [filterTrigger, data, filters, dispatch]);
+  }, [filterTrigger, filters, dispatch, fetchAnimeSearch]);
 
   if (loadingStatus === 'loading') {
     return <Spinner />
@@ -42,17 +52,18 @@ const AnimeList = () => {
   }
 
   const onLoadMore = async () => {
+    const nextPage = page + 1;
     dispatch(incrementPage());
     
     try {
-      const response = await fetchAnimeSearch({ value: filters.search, page: page + 1 }).unwrap();
+      const response = await fetchAnimeSearch({ ...filters, page: nextPage }).unwrap();
       
-      if (response && response.data && response.data.Page) {
+      if (response?.data?.Page) {
         const updatedData = {
           ...data,
           Page: {
             ...data.Page,
-            media: [...data.Page.media, ...response.data.Page.media],
+            media: [...(data?.Page?.media || []), ...response.data.Page.media],
             pageInfo: response.data.Page.pageInfo
           }
         }
@@ -64,11 +75,13 @@ const AnimeList = () => {
   }
 
   const renderAnimeList = (arr) => {
-    if (arr.length === 0) {       
+    if (!arr || arr.length === 0) {       
       return (
         <div className='error-message limit-error anime__list-error '>
           <img src={namiSticker} className='error-message__img' alt="nami-error" />
-          <div className="title_fz18fw600 error-message__text">Oops! No anime matches your search or filter criteria.  <br /> Please try adjusting your filters or search terms.</div>
+          <div className="title_fz18fw600 error-message__text">
+            Oops! No anime matches your search or filter criteria.  <br /> Please try adjusting your filters or search terms.
+          </div>
         </div>
       )
     } else {
@@ -94,7 +107,11 @@ const AnimeList = () => {
     }
   }
 
-  const animeList = renderAnimeList(filteredAnimeList);
+  const mediaArray = data?.Page?.media || [];
+  const hasNextPage = data?.Page?.pageInfo?.hasNextPage || false;
+  
+  const animeList = renderAnimeList(mediaArray);
+
   return (
     <>
       {animeList}
@@ -102,7 +119,7 @@ const AnimeList = () => {
         <button 
           className="button anime__list-button" 
           onClick={onLoadMore}
-          style={{'display': hasNextPage ? 'block' : 'none'}}
+          style={{ 'display': hasNextPage ? 'block' : 'none' }}
           disabled={isFetching}>
             {isFetching ? 'Loading...' : 'Load More'}
         </button>
