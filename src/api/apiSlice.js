@@ -58,7 +58,7 @@ export const apiSlice = createApi({
               Media(id: $id, type: ANIME) {
                 id
                 title { english romaji }
-                coverImage { large }
+                coverImage { extraLarge large }
                 averageScore
                 stats { scoreDistribution { amount } }
                 status
@@ -85,12 +85,11 @@ export const apiSlice = createApi({
                 media(type: ANIME, status: RELEASING, sort: POPULARITY_DESC) {
                   id
                   title { english romaji }
-                  coverImage { large }
-                  coverImage { extraLarge large color }   
-                  bannerImage                            
+                  coverImage { extraLarge large }
+                  bannerImage
                   episodes
-                  description    
-                  genres          
+                  description
+                  genres
                 }
               }
             }
@@ -110,7 +109,7 @@ export const apiSlice = createApi({
                 media(type: ANIME, status: NOT_YET_RELEASED, sort: POPULARITY_DESC) {
                   id
                   title { english romaji }
-                  coverImage { large }
+                  coverImage { extraLarge large }
                   episodes
                 }
               }
@@ -131,7 +130,7 @@ export const apiSlice = createApi({
                 media(type: ANIME, sort: SCORE_DESC) {
                   id
                   title { english romaji }
-                  coverImage { large }
+                  coverImage { extraLarge large }
                   episodes
                 }
               }
@@ -154,7 +153,7 @@ export const apiSlice = createApi({
                     mediaRecommendation {
                       id
                       title { english romaji }
-                      coverImage { large }
+                      coverImage { extraLarge large }
                       episodes
                     }
                   }
@@ -181,7 +180,7 @@ export const apiSlice = createApi({
                       id
                       title { english romaji }
                       type
-                      coverImage { large }
+                      coverImage { extraLarge large }
                     }
                   }
                 }
@@ -204,7 +203,7 @@ export const apiSlice = createApi({
                 media(search: $search, type: ANIME, sort: POPULARITY_DESC, isAdult: false) {
                   id
                   title { english romaji }
-                  coverImage { large }
+                  coverImage { extraLarge large }
                   episodes
                   season
                   seasonYear
@@ -233,11 +232,9 @@ export const apiSlice = createApi({
       queryFn: () => {
         const currentYear = new Date().getFullYear();
         const yearsArray = [];
-        
         for (let y = currentYear + 1; y >= 1950; y--) {
           yearsArray.push({ year: y });
         }
-        
         return { data: yearsArray };
       },
       keepUnusedDataFor: 86400 
@@ -254,7 +251,7 @@ export const apiSlice = createApi({
                   media {
                     id
                     title { english romaji }
-                    coverImage { large }
+                    coverImage { extraLarge large }
                     episodes
                   }
                 }

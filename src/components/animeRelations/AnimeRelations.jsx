@@ -6,7 +6,7 @@ import './animeRelations.scss';
 
 const AnimeRelationItem = ({ id, title, coverImage }) => {
   const displayTitle = title?.english || title?.romaji || 'Unknown Title';
-  const img = coverImage?.large;
+  const img = coverImage?.extraLarge || coverImage?.large || '';
 
   return (
     <NavLink className="related-anime__item" end to={`/anime/${id}`}>

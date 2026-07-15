@@ -34,7 +34,7 @@ const RecentAnimeRecommendations = () => {
       if (!animeData) return null;
 
       const { id, coverImage, title } = animeData;
-      const img = coverImage?.large;
+      const img = coverImage?.extraLarge || coverImage?.large || '';
       
       const rawTitle = title?.english || title?.romaji || 'Unknown Title';
       const displayTitle = rawTitle.length > 70 ? rawTitle.slice(0, 70) + '...' : rawTitle;

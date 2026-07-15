@@ -1,9 +1,8 @@
 import { NavLink } from 'react-router-dom';
-
 import './animeCard.scss';
 
 const AnimeCard = ({ id, coverImage, episodes, title }) => {
-  const img = coverImage?.large || '';
+  const img = coverImage?.extraLarge || coverImage?.large || '';
   
   const displayEpisodes = episodes ? episodes : '?'; 
   

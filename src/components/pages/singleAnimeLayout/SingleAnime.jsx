@@ -82,7 +82,7 @@ const SingleAnime = () => {
     description 
   } = anime?.data?.Media || {};
   
-  const img = coverImage?.large || '';
+  const img = coverImage?.extraLarge || coverImage?.large || '';
   const displayTitle = title?.english || title?.romaji || 'Unknown Title';
   const displayEpisodes = episodes ? episodes : '?'; 
   const displaySeasonAndYear = season && seasonYear 
