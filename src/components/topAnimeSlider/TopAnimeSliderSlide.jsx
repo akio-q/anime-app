@@ -1,15 +1,13 @@
 import { NavLink } from "react-router-dom";
 
 const TopAnimeSliderSlide = ({id, data}) => {
-  const { coverImage, title, description, genres } = data;
+  const { bannerImage, coverImage, title, description, genres } = data;
   
-  const img = coverImage?.large || '';
+  const img = bannerImage || coverImage?.extraLarge || coverImage?.large || '';
   
   const displayTitle = title?.english || title?.romaji || 'Unknown Title';
-  
   const cleanSynopsis = description ? description.replace(/<[^>]*>?/gm, '') : 'No synopsis available yet.';
   const descr = cleanSynopsis.length > 800 ? cleanSynopsis.slice(0, 800) + '...' : cleanSynopsis;
-  
   const genresString = genres ? genres.join(', ') : 'No genres listed';
 
   return (
