@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux"; 
 import { setSearch, setFilterTrigger } from "../../filters/filtersSlice"; 
 import { Helmet } from "react-helmet";
 
@@ -12,13 +12,15 @@ import './searchResults.scss';
 const SearchResults = () => {
   const { animeName } = useParams();
   const dispatch = useDispatch();
+  
+  const currentSearch = useSelector(state => state.filters.filters.search);
 
   useEffect(() => {
-    if (animeName) {
+    if (animeName && animeName !== currentSearch) {
       dispatch(setSearch(animeName));
       dispatch(setFilterTrigger(true));
     }
-  }, [animeName, dispatch]);
+  }, [animeName, currentSearch, dispatch]);
 
   return (
     <>
