@@ -1,19 +1,13 @@
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetAnimeGenresQuery, useGetAnimeSeasonsQuery } from "../../api/apiSlice";
-import { 
-  setSeason, 
-  setYear, 
-  setGenre, 
-  setRating, 
-  setStatus, 
-  setEpisodes, 
-  setFilterTrigger } from "./filtersSlice";
+import { setAllFilters, setFilterTrigger } from "./filtersSlice";
 
 import Select, { components } from "react-select"; 
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 
-import chopperSticker from '../../resources/img/chopper_sticker.png'
+import chopperSticker from '../../resources/img/chopper_sticker.png';
 import './filters.scss';
 
 const CheckboxOption = (props) => {
@@ -49,6 +43,11 @@ const CustomValueContainer = ({ children, ...props }) => {
 const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
   const { filters } = useSelector(state => state.filters);
   const dispatch = useDispatch();
+  const [pendingFilters, setPendingFilters] = useState(filters);
+
+  useEffect(() => {
+    setPendingFilters(filters);
+  }, [filters]);
 
   const { 
     data: animeGenres, 
@@ -87,7 +86,9 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
       behavior: "smooth"
     });
 
+    dispatch(setAllFilters(pendingFilters));
     dispatch(setFilterTrigger(true));
+    
     if (isMobileScreen) {
       setIsHamburgerActive(false);
     }
@@ -125,8 +126,8 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
                 { value: 'SUMMER', label: 'Summer' },
               ]}
               placeholder="Select Season"
-              value={filters.season}
-              onChange={(selected) => dispatch(setSeason(selected))}
+              value={pendingFilters.season}
+              onChange={(selected) => setPendingFilters({ ...pendingFilters, season: selected })}
             />
           </div>
 
@@ -136,8 +137,8 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
               {...selectConfig}
               options={[{ value: '?', label: '?' }, ...yearOptions]}
               placeholder="Select Year"
-              value={filters.year}
-              onChange={(selected) => dispatch(setYear(selected))}
+              value={pendingFilters.year}
+              onChange={(selected) => setPendingFilters({ ...pendingFilters, year: selected })}
             />
           </div>
 
@@ -147,8 +148,8 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
               {...selectConfig}
               options={genreOptions}
               placeholder="Select Genre"
-              value={filters.genre}
-              onChange={(selected) => dispatch(setGenre(selected))}
+              value={pendingFilters.genre}
+              onChange={(selected) => setPendingFilters({ ...pendingFilters, genre: selected })}
             />
           </div>
 
@@ -169,8 +170,8 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
                 { value: '90', label: '90+' }
               ]}
               placeholder="Select Rating"
-              value={filters.rating}
-              onChange={(selected) => dispatch(setRating(selected))}
+              value={pendingFilters.rating}
+              onChange={(selected) => setPendingFilters({ ...pendingFilters, rating: selected })}
             />
           </div>
 
@@ -185,8 +186,8 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
                 { value: 'CANCELLED', label: 'Cancelled' },
               ]}
               placeholder="Select Status"
-              value={filters.status}
-              onChange={(selected) => dispatch(setStatus(selected))}
+              value={pendingFilters.status}
+              onChange={(selected) => setPendingFilters({ ...pendingFilters, status: selected })}
             />
           </div>
 
@@ -202,8 +203,8 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
                 { value: '100+', label: '100+' }
               ]}
               placeholder="Select Episodes"
-              value={filters.episodes}
-              onChange={(selected) => dispatch(setEpisodes(selected))}
+              value={pendingFilters.episodes}
+              onChange={(selected) => setPendingFilters({ ...pendingFilters, episodes: selected })}
             />
           </div>
 
