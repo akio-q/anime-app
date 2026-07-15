@@ -17,8 +17,21 @@ const RecentAnimeRecommendations = () => {
 
   const data = useMemo(() => {
     const recs = recentRecommendations?.data?.Page?.recommendations || [];
-    return recs;
-  }, [recentRecommendations])
+    const seenIds = new Set();
+
+    const uniqueRecs = recs.filter((item) => {
+      const animeId = item?.media?.id;
+      
+      if (!animeId || seenIds.has(animeId)) {
+        return false;
+      }
+      
+      seenIds.add(animeId);
+      return true;
+    });
+
+    return uniqueRecs.slice(0, 10);
+  }, [recentRecommendations]);
 
   if (isLoading) {
     return <Spinner />

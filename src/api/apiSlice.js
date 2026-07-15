@@ -246,7 +246,7 @@ export const apiSlice = createApi({
         body: {
           query: `
             query {
-              Page(page: 1, perPage: 10) {
+              Page(page: 1, perPage: 30) {
                 recommendations(sort: ID_DESC) {
                   media {
                     id
