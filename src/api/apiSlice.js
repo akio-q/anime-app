@@ -148,7 +148,7 @@ export const apiSlice = createApi({
           query: `
             query ($id: Int) {
               Media(id: $id, type: ANIME) {
-                recommendations(page: 1, perPage: 10, sort: RATING_DESC) {
+                recommendations(page: 1, perPage: 25, sort: RATING_DESC) {
                   nodes {
                     mediaRecommendation {
                       id
