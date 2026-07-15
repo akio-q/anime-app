@@ -25,6 +25,7 @@
       display: flex;
       flex-direction: column;
       row-gap: 5px;
+      width: 155px; 
     }
     &-form {
       width: 100%;
@@ -40,62 +41,71 @@
   }
 }
 
-.css {
-  &-1r4vtzz, &-48ayfv {
-    width: 155px !important;
-    height: 35px !important;
-    padding: 6px 10px !important;
-    background-color: $main-color-light !important;
-    border: none !important;
-    outline: none !important;
-    border-radius: 5px !important;
-    color: $secondary-text-color !important;
-    font-size: 15px !important;
-    cursor: pointer !important;
-  }
-  &-11unzgr {
-    min-width: 165px !important;
-    background-color: $main-color-light !important;
-    color: $main-text-color !important;
+.react-select-container {
+  .rs__control {
+    background-color: $main-color-light;
+    border: none;
+    box-shadow: none; 
     border-radius: 5px;
-    border-color: transparent;
-    z-index: 2 ; 
+    min-height: 35px;
+    cursor: pointer;
+    &:hover {
+      border: none;
+    }
+  }
+
+  .rs__placeholder {
+    color: $secondary-text-color;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    max-width: 90%;
+  }
+
+  .rs__multi-value {
+    display: none;
+  }
+
+  .rs__menu {
+    background-color: $main-color-light;
+    border-radius: 5px;
+    z-index: 5;
+  }
+
+  .rs__option {
+    background-color: transparent;
+    color: $secondary-text-color;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s all;
+    .custom-select-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    &:hover, &--is-focused {
+      background-color: rgba(0, 0, 0, 0.1);
+      color: $secondary-color-light;
+    }
+    &--is-selected {
+      background-color: transparent;
+    }
+  }
+
+  .rs__menu-list {
+    overflow-x: hidden;
     &::-webkit-scrollbar {
       width: 8px;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: $secondary-text-color;
+      background-color: $secondary-text-color; 
       border-radius: 15px;
     }
     &::-webkit-scrollbar-track {
       margin: 5px 0;
       background-color: transparent;
     }
-  }
-  &-1vr111p-option {
-    min-width: 165px !important;
-    display: flex !important;
-    align-items: center;
-    padding: 2px 12px !important;
-    color: $secondary-text-color !important;
-    font-size: 15px !important;
-    transition: 0.3s all;
-    cursor: pointer !important;
-    &:hover {
-      background-color: $main-color-light !important;
-      color: $secondary-color-light !important;
-    }
-  }
-  &-1qprcsu-option {
-    display: flex !important;
-    align-items: center;
-    min-width: 165px !important;
-    padding: 2px 12px !important;
-    background-color: $main-color-light !important;
-    color: $secondary-color-light !important;
-    font-size: 15px !important; 
-    font-weight: 400 !important;
-    cursor: pointer !important;
   }
 }
 
@@ -107,6 +117,7 @@ input[type=checkbox] {
   background-color: $secondary-text-color;
   border-radius: 3px;
   cursor: pointer;
+  flex-shrink: 0;
   &:checked {
     background-color: $secondary-color-light;
     &::before {
@@ -120,8 +131,4 @@ input[type=checkbox] {
       font-size: 12px;
     }
   }
-}
-
-div[style="background-color: white; border-radius: 4px; margin-top: 8px; position: absolute; z-index: 2; right: 0px;"] {
-  background-color: transparent !important;
 }

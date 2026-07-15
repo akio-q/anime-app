@@ -9,12 +9,42 @@ import {
   setEpisodes, 
   setFilterTrigger } from "./filtersSlice";
 
-import ReactMultiSelectCheckboxes from "react-multiselect-checkboxes";
+import Select, { components } from "react-select"; 
 import Spinner from "../spinner/Spinner";
 import ErrorMessage from "../errorMessage/ErrorMessage";
 
 import chopperSticker from '../../resources/img/chopper_sticker.png'
 import './filters.scss';
+
+const CheckboxOption = (props) => {
+  return (
+    <components.Option {...props}>
+      <div className="custom-select-option">
+        <input 
+          type="checkbox" 
+          checked={props.isSelected} 
+          onChange={() => null} 
+        />
+        <label>{props.label}</label>
+      </div>
+    </components.Option>
+  );
+};
+
+const CustomValueContainer = ({ children, ...props }) => {
+  const selectedCount = props.getValue().length;
+  
+  return (
+    <components.ValueContainer {...props}>
+      {selectedCount > 0 && (
+        <div className="rs__placeholder" style={{ position: 'absolute' }}>
+          {selectedCount} selected
+        </div>
+      )}
+      {children}
+    </components.ValueContainer>
+  );
+};
 
 const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
   const { filters } = useSelector(state => state.filters);
@@ -63,6 +93,20 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
     }
   };
 
+  const selectConfig = {
+    isMulti: true,
+    isSearchable: false, 
+    closeMenuOnSelect: false, 
+    hideSelectedOptions: false, 
+    className: "react-select-container",
+    classNamePrefix: "rs", 
+    components: { 
+      Option: CheckboxOption,
+      ValueContainer: CustomValueContainer, 
+      IndicatorSeparator: () => null 
+    } 
+  };
+
   return (
     <div className="anime__filters">
       <div className="anime__filters-title title title_fz25fw500">Filter Anime</div>
@@ -71,8 +115,8 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
           
           <div className="anime__filters-item">
             <div className="title_fz18fw600">Season:</div>
-            <ReactMultiSelectCheckboxes 
-              className="react-select-container"
+            <Select 
+              {...selectConfig}
               options={[
                 { value: '?', label: '?' },
                 { value: 'FALL', label: 'Fall' },
@@ -80,9 +124,7 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
                 { value: 'SPRING', label: 'Spring' },
                 { value: 'SUMMER', label: 'Summer' },
               ]}
-              hideSearch={true}
-              rightAligned={true}
-              placeholderButtonLabel="Select Season"
+              placeholder="Select Season"
               value={filters.season}
               onChange={(selected) => dispatch(setSeason(selected))}
             />
@@ -90,12 +132,10 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
 
           <div className="anime__filters-item">
             <div className="title_fz18fw600">Year:</div>
-            <ReactMultiSelectCheckboxes 
-              className="react-select-container"
+            <Select 
+              {...selectConfig}
               options={[{ value: '?', label: '?' }, ...yearOptions]}
-              hideSearch={true}
-              rightAligned={true}
-              placeholderButtonLabel="Select Year"
+              placeholder="Select Year"
               value={filters.year}
               onChange={(selected) => dispatch(setYear(selected))}
             />
@@ -103,12 +143,10 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
 
           <div className="anime__filters-item">
             <div className="title_fz18fw600">Genre:</div>
-            <ReactMultiSelectCheckboxes 
-              className="react-select-container"
+            <Select 
+              {...selectConfig}
               options={genreOptions}
-              hideSearch={true}
-              rightAligned={true}
-              placeholderButtonLabel="Select Genre"
+              placeholder="Select Genre"
               value={filters.genre}
               onChange={(selected) => dispatch(setGenre(selected))}
             />
@@ -116,8 +154,8 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
 
           <div className="anime__filters-item">
             <div className="title_fz18fw600">Rating:</div>
-            <ReactMultiSelectCheckboxes 
-              className="react-select-container"
+            <Select 
+              {...selectConfig}
               options={[
                 { value: '?', label: '?' },
                 { value: '10', label: '10+' },
@@ -130,9 +168,7 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
                 { value: '80', label: '80+' },
                 { value: '90', label: '90+' }
               ]}
-              hideSearch={true}
-              rightAligned={true}
-              placeholderButtonLabel="Select Rating"
+              placeholder="Select Rating"
               value={filters.rating}
               onChange={(selected) => dispatch(setRating(selected))}
             />
@@ -140,17 +176,15 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
 
           <div className="anime__filters-item">
             <div className="title_fz18fw600">Status:</div>
-            <ReactMultiSelectCheckboxes 
-              className="react-select-container"
+            <Select 
+              {...selectConfig}
               options={[
                 { value: 'RELEASING', label: 'Currently Airing' },
                 { value: 'FINISHED', label: 'Finished Airing' },
                 { value: 'NOT_YET_RELEASED', label: 'Upcoming' },
                 { value: 'CANCELLED', label: 'Cancelled' },
               ]}
-              hideSearch={true}
-              rightAligned={true}
-              placeholderButtonLabel="Select Status"
+              placeholder="Select Status"
               value={filters.status}
               onChange={(selected) => dispatch(setStatus(selected))}
             />
@@ -158,8 +192,8 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
 
           <div className="anime__filters-item">
             <div className="title_fz18fw600">Episodes:</div>
-            <ReactMultiSelectCheckboxes 
-              className="react-select-container"
+            <Select 
+              {...selectConfig}
               options={[
                 { value: '?', label: '?' },
                 { value: '1', label: '1' },
@@ -167,9 +201,7 @@ const Filters = ({ isMobileScreen, setIsHamburgerActive }) => {
                 { value: '24+', label: '24+' },
                 { value: '100+', label: '100+' }
               ]}
-              hideSearch={true}
-              rightAligned={true}
-              placeholderButtonLabel="Select Episodes"
+              placeholder="Select Episodes"
               value={filters.episodes}
               onChange={(selected) => dispatch(setEpisodes(selected))}
             />
