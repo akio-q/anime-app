@@ -20,10 +20,13 @@
   }
   .top-anime-slider {
     &__slide {
-      height: 430px;
+      height: 480px;
+    }
+    &__info {
+      width: 75%; 
     }
     &__title {
-      font-size: 33px !important;
+      font-size: 40px !important;
     }
     &__descr {
       font-size: 16px;
@@ -81,27 +84,24 @@
   }
   .top-anime-slider {
     &__slide {
-      height: 400px;
-    }
-    &__title {
-      font-size: 30px !important;
+      height: 420px;
     }
     &__info {
-      overflow-y: auto;
-      padding: 20px ;
+      width: 85%;
+      padding: 0 30px;
+    }
+    &__title {
+      font-size: 34px !important;
     }
     &__descr {
       font-size: 15px;
+      -webkit-line-clamp: 3; 
     }
-    &__genre {
-      flex-shrink: 1;
-      font-size: 13px;
+    &__footer {
+      gap: 25px;
     }
     &__button {
-      flex-shrink: 0;
-      padding: 20px !important;
-      margin-left: 10px;
-      font-size: 14px !important;
+      padding: 12px 25px !important;
     }
   }
   .recent-recommendations {
@@ -228,10 +228,19 @@
   }
   .top-anime-slider {
     &__slide {
-      height: 350px;
+      height: 380px;
+    }
+    &__info {
+      width: 100%; 
     }
     &__title {
-      font-size: 22px !important;
+      font-size: 28px !important;
+    }
+    &__footer {
+      gap: 20px;
+    }
+    &__genre {
+      font-size: 14px;
     }
   }
   .single-anime {
@@ -348,10 +357,30 @@
   }
   .top-anime-slider {
     &__slide {
-      height: 260px;
+      height: 320px;
+    }
+    &__info {
+      padding: 0 20px;
     }
     &__title {
-      font-size: 20px !important;
+      font-size: 24px !important;
+      margin-bottom: 15px;
+    }
+    &__descr {
+      font-size: 14px;
+      margin: 0 0 20px 0;
+    }
+    &__footer {
+      gap: 15px;
+      margin-top: 15px;
+      flex-wrap: wrap; 
+      align-items: center; 
+    }
+    
+    &__button {
+      padding: 10px 20px !important;
+      font-size: 14px !important;
+      flex-shrink: 0; 
     }
   }
   .category-anime-slider {
@@ -569,7 +598,30 @@
     }
   }
   .top-anime-slider {
-    display: none;
+    &__slide {
+      height: 280px;
+    }
+    &__info {
+      padding: 0 15px;
+    }
+    &__title {
+      font-size: 20px !important;
+      margin-bottom: 10px;
+    }
+    &__descr {
+      font-size: 13px;
+      -webkit-line-clamp: 2; 
+      margin: 0 0 15px 0;
+    }
+    &__footer {
+      flex-direction: column; 
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    &__genre {
+      font-size: 12px;
+    }
   }
   .category-anime-slider {
     height: 280px;
@@ -720,6 +772,17 @@
   .anime {
     &__list {
       padding: 0;
+    }
+  }
+  .top-anime-slider {
+    &__slide {
+      height: 250px;
+    }
+    &__title {
+      font-size: 18px !important;
+    }
+    &__descr {
+      display: none; 
     }
   }
   .related-anime {
