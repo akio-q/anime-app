@@ -2,15 +2,14 @@ import { useState, useContext } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { AuthContext } from "../../../context/AuthContext";
-import { db, storage } from '../../../config/firebase';
+import { db } from '../../../config/firebase'; 
 import { updateProfile } from "firebase/auth";
 import { doc, updateDoc } from 'firebase/firestore';
-import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { uploadImageToCloudinary } from '../../../utils/uploadImageToCloudinary';
 import { ToastContainer, toast } from 'react-toastify';
 import { Helmet } from 'react-helmet';
 
 import UserCard from '../../userCard/UserCard';
-
 import './userProfile.scss';
 
 const UserProfile = () => {
@@ -25,11 +24,9 @@ const UserProfile = () => {
         await updateProfile(currentUser, { displayName });
         await updateDoc(doc(db, 'users', currentUser.uid), { displayName });
       }
+      
       if (avatar) {
-        const userAvatarsFolderRef = ref(storage, `userAvatars/${avatar.name}`);
-        await uploadBytes(userAvatarsFolderRef, avatar);
-
-        const photoURL = await getDownloadURL(userAvatarsFolderRef);
+        const photoURL = await uploadImageToCloudinary(avatar);
         await updateProfile(currentUser, { photoURL });
         await updateDoc(doc(db, 'users', currentUser.uid), { photoURL });
       }

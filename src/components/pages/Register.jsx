@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { auth, db, storage } from '../../config/firebase';
+import { auth, db } from '../../config/firebase'; // Removed storage
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore'; 
-import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { uploadImageToCloudinary } from '../../utils/uploadImageToCloudinary';
 import { ToastContainer, toast } from 'react-toastify';
 import Helmet from 'react-helmet';
 
@@ -25,31 +25,28 @@ const Register = () => {
     setLoading(true);
     
     try {
+      const photoURL = await uploadImageToCloudinary(avatar);
       const res = await createUserWithEmailAndPassword(auth, email, password);
-      const userAvatarsFolderRef = ref(storage, `userAvatars/${avatar.name}`);
 
-      await uploadBytes(userAvatarsFolderRef, avatar).then(snapshot => {
-        getDownloadURL(snapshot.ref).then(async downloadURL => {
-          await updateProfile(res.user, { 
-            displayName, 
-            photoURL: downloadURL 
-          });
-
-          await setDoc(doc(db, "users", res.user.uid), { 
-            uid: res.user.uid,
-            displayName,
-            email,
-            photoURL: downloadURL
-          });
-
-          toast.success("Success! Redirecting...", { 
-            position: "bottom-center",
-            className: "custom-toast",
-            autoClose: 3000,
-            onClose: () => navigate('/')
-          });
-        })
+      await updateProfile(res.user, { 
+        displayName, 
+        photoURL 
       });
+
+      await setDoc(doc(db, "users", res.user.uid), { 
+        uid: res.user.uid,
+        displayName,
+        email,
+        photoURL
+      });
+
+      toast.success("Success! Redirecting...", { 
+        position: "bottom-center",
+        className: "custom-toast",
+        autoClose: 3000,
+        onClose: () => navigate('/')
+      });
+      
     } catch (err) {
       toast.error(err.message, { 
         position: "bottom-center",
