@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { auth, db } from '../../config/firebase'; // Removed storage
+import { auth, db } from '../../config/firebase'; 
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore'; 
 import { uploadImageToCloudinary } from '../../utils/uploadImageToCloudinary';
@@ -20,12 +20,15 @@ const Register = () => {
   const signUp = async (values) => { 
     const { displayName, email, password, avatar } = values;
 
-    if (!avatar) return;
-
     setLoading(true);
     
     try {
-      const photoURL = await uploadImageToCloudinary(avatar);
+      let photoURL = `https://ui-avatars.com/api/?name=${displayName}&background=random&color=fff&size=200`;
+
+      if (avatar) {
+        photoURL = await uploadImageToCloudinary(avatar);
+      }
+
       const res = await createUserWithEmailAndPassword(auth, email, password);
 
       await updateProfile(res.user, { 
@@ -89,12 +92,12 @@ const Register = () => {
                           .min(8, 'Password is too short, minimum 8 symbols')
                           .required('Required field'),
               avatar: Yup.mixed()
-                        .required('A profile picture is required')
+                        .nullable()
                         .test('fileSize', 'File size too large', value => {
-                          return value && value.size <= 5 * 1024 * 1024;
+                          return !value || (value && value.size <= 5 * 1024 * 1024);
                         })
                         .test('fileType', 'Unsupported file format', value => {
-                          return value && ['image/jpg', 'image/jpeg', 'image/png'].includes(value.type);
+                          return !value || (value && ['image/jpg', 'image/jpeg', 'image/png'].includes(value.type));
                         })
             })}
             onSubmit={signUp}>
@@ -143,7 +146,7 @@ const Register = () => {
                   <span>
                     { fileName && fileName.length > 15 ? `${fileName.slice(0, 15)}...`
                     : fileName ? fileName
-                    : 'Add a profile picture' }
+                    : 'Add a profile picture (Optional)' }
                   </span>
                 </label>
                 <ErrorMessage className='form__form-error' name="avatar" component="div" />
