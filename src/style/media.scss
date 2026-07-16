@@ -1,9 +1,4 @@
 @media (max-width: 1460px) {
-  .css {
-    &-1r4vtzz, &-48ayfv {
-      width: 140px !important;
-    }
-  }
   .user-anime-list {
     grid-template-columns: 1fr 4fr;
   }
@@ -41,11 +36,6 @@
   }
   .search-results {
     grid-template-columns: 2.5fr 1fr;
-  }
-  .css {
-    &-1r4vtzz, &-48ayfv {
-      width: 140px !important;
-    }
   }
   .user-anime-list {
     grid-template-columns: 1fr 3fr;
@@ -174,11 +164,6 @@
       font-size: 20px;
     }
   }
-  .css {
-    &-1r4vtzz, &-48ayfv {
-      width: 130px !important;
-    }
-  }
   .search-results {
     grid-template-columns: 2fr 1fr;
   }
@@ -216,10 +201,12 @@
       }
     }
     &__filters {
+      &-section {
+        grid-template-columns: 1fr;
+        padding: 15px 30px; 
+      }
       &-item {
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
+        width: 100%; 
       }
     }
   }
@@ -298,10 +285,8 @@
       font-size: 18px;
     }
   }
-  .css {
-    &-1r4vtzz, &-48ayfv {
-      width: 120px !important;
-    }
+  .react-select-container {
+    width: 100%; 
   }
   .user-anime-list {
     grid-template-columns: 1fr;
@@ -500,12 +485,14 @@
         display: block;
         margin-bottom: 0;
         &-section {
-          margin-top: 0;
-          padding: 15px 20px 0 20px;
+          grid-template-columns: 1fr;
+          padding: 15px 20px;
         }
         &-item {
           flex-direction: column;
-          width: fit-content;
+          align-items: flex-start;
+          width: 100%; 
+          margin-bottom: 10px;
         }
         &-title {
           display: none;
@@ -513,10 +500,8 @@
       }
     }
   }
-  .css {
-    &-1r4vtzz, &-48ayfv {
-      width: 140px !important;
-    }
+  .react-select-container {
+    width: 100%; 
   }
   .user-anime-list {
     grid-template-columns: 1fr;
@@ -713,17 +698,21 @@
     .anime {
       &__filters {
         display: block;
+        &-section {
+          grid-template-columns: 1fr; 
+          padding: 15px 20px;
+        }
         &-item {
-          width: 100%;
-          flex-direction: row;
+          flex-direction: column;
+          align-items: flex-start;
+          width: 100%; 
+          margin-bottom: 10px;
         }
       }
     }
   }
-  .css {
-    &-1r4vtzz, &-48ayfv {
-      width: 145px !important;
-    }
+  .react-select-container {
+    width: 100%; 
   }
   .user-anime-list {
     &__tab {
@@ -818,10 +807,8 @@
       }
     }
   }
-  .css {
-    &-1r4vtzz, &-48ayfv {
-      width: 120px !important;
-    }
+  .react-select-container {
+    width: 100%;
   }
   .user-anime-list {
     &__tab {
