@@ -203,7 +203,6 @@
     &__filters {
       &-section {
         grid-template-columns: 1fr;
-        padding: 15px 30px; 
       }
       &-item {
         width: 100%; 
@@ -284,9 +283,6 @@
     &__title {
       font-size: 18px;
     }
-  }
-  .react-select-container {
-    width: 100%; 
   }
   .user-anime-list {
     grid-template-columns: 1fr;
@@ -465,7 +461,7 @@
     position: absolute;
     top: 70px;
     left: 10px;
-    width: 60%;
+    width: 70%;
     height: 100vh;
     padding-right: 20px;
     z-index: 100;
@@ -485,7 +481,7 @@
         display: block;
         margin-bottom: 0;
         &-section {
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(2, 1fr);
           padding: 15px 20px;
         }
         &-item {
@@ -499,9 +495,6 @@
         }
       }
     }
-  }
-  .react-select-container {
-    width: 100%; 
   }
   .user-anime-list {
     grid-template-columns: 1fr;
@@ -692,14 +685,12 @@
     }             
   }  
   .hamburger-menu {
-    width: 70%;
+    width: 80%;
     right: 50px;
     padding-right: 10px;
     .anime {
       &__filters {
-        display: block;
         &-section {
-          grid-template-columns: 1fr; 
           padding: 15px 20px;
         }
         &-item {
@@ -710,9 +701,6 @@
         }
       }
     }
-  }
-  .react-select-container {
-    width: 100%; 
   }
   .user-anime-list {
     &__tab {
@@ -797,18 +785,14 @@
   }  
   .hamburger-menu {
     right: 45px;
-    width: 80%;
+    width: 90%;
     .anime {
       &__filters {
-        display: block;
         &-section {
           padding: 15px 15px 0 15px;
         }
       }
     }
-  }
-  .react-select-container {
-    width: 100%;
   }
   .user-anime-list {
     &__tab {
