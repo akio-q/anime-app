@@ -62,6 +62,7 @@
   .anime {
     &__wrapper {
       grid-template-columns: 1fr;
+      gap: 40px;
     }
     &__list {
       grid-template-columns: repeat(4, 1fr);
@@ -562,9 +563,6 @@
     flex-shrink: 1;
   }
   .anime {
-    &__wrapper {
-      margin-top: 0;
-    }
     &__category {
       &-title {
         font-size: 20px;
